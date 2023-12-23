@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test1/data/repositories/auth_repository/login_repository.dart';
+import 'package:test1/data/repositories/auth_repositories/login_repository.dart';
 
 class SocialMediaAuth {
   SocialMediaAuth._();

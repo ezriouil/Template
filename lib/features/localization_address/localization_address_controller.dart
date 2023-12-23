@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
 import 'package:test1/data/models/location_address.dart';
-import 'package:test1/data/repositories/local_repository/location_address_repository.dart';
+import 'package:test1/data/repositories/local_repositories/location_address_repository.dart';
 import 'package:test1/utils/local/database/app_database.dart';
 
 class LocalizationAddressController extends GetxController {
@@ -267,44 +267,44 @@ class LocalizationAddressController extends GetxController {
   }
 
   // - - - - - - - - - - - - - - - - - - DELETE ALL ADDRESSES - - - - - - - - - - - - - - - - - -  //
-  Future<void> onDeleteAllAddresses() async {
-    try {
-      /// START LOADER
-      Get.to(const CustomAnimationScreen(text: "We are saving your info ..."));
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// DELETE ALL ADDRESSES
-      final int resultCode = await _repository!.deleteLocationAddresses();
-
-      if (resultCode == LocationAddressRepository.CODE_ERROR) {
-        await Future.delayed(const Duration(milliseconds: 500));
-        Get.back();
-        await Future.delayed(const Duration(milliseconds: 500));
-
-        /// SHOW THE ERROR SNACK BAR
-        CustomSnackBars.error(
-            title: "We can't delete your location addresses",
-            message: "Try again.");
-        return;
-      }
-
-      /// STOP THE LOADER
-      Get.back();
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// FINISHED
-      Get.back();
-    } catch (_) {
-      /// STOP THE LOADER
-      await Future.delayed(const Duration(milliseconds: 500));
-      Get.back();
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// SHOW THE ERROR SNACK BAR
-      CustomSnackBars.error(
-          title: "Error 404", message: "please try again next time!");
-    }
-  }
+  // Future<void> onDeleteAllAddresses() async {
+  //   try {
+  //     /// START LOADER
+  //     Get.to(const CustomAnimationScreen(text: "We are saving your info ..."));
+  //     await Future.delayed(const Duration(milliseconds: 500));
+  //
+  //     /// DELETE ALL ADDRESSES
+  //     final int resultCode = await _repository!.deleteLocationAddresses();
+  //
+  //     if (resultCode == LocationAddressRepository.CODE_ERROR) {
+  //       await Future.delayed(const Duration(milliseconds: 500));
+  //       Get.back();
+  //       await Future.delayed(const Duration(milliseconds: 500));
+  //
+  //       /// SHOW THE ERROR SNACK BAR
+  //       CustomSnackBars.error(
+  //           title: "We can't delete your location addresses",
+  //           message: "Try again.");
+  //       return;
+  //     }
+  //
+  //     /// STOP THE LOADER
+  //     Get.back();
+  //     await Future.delayed(const Duration(milliseconds: 500));
+  //
+  //     /// FINISHED
+  //     Get.back();
+  //   } catch (_) {
+  //     /// STOP THE LOADER
+  //     await Future.delayed(const Duration(milliseconds: 500));
+  //     Get.back();
+  //     await Future.delayed(const Duration(milliseconds: 500));
+  //
+  //     /// SHOW THE ERROR SNACK BAR
+  //     CustomSnackBars.error(
+  //         title: "Error 404", message: "please try again next time!");
+  //   }
+  // }
 
   @override
   void dispose() {

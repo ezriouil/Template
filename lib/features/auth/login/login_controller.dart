@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
-import 'package:test1/data/repositories/auth_repository/login_repository.dart';
+import 'package:test1/data/repositories/auth_repositories/login_repository.dart';
 import 'package:test1/features/auth/common/soical_media_auth.dart';
 import 'package:test1/features/auth/forget_password/screens/mobile_forget_password.dart';
 import 'package:test1/features/auth/forget_password/screens/tablet_forget_password.dart';
@@ -12,8 +13,10 @@ import 'package:test1/features/auth/forget_password/screens/web_forget_password.
 import 'package:test1/features/auth/sing_up/screens/mobile_sign_up.dart';
 import 'package:test1/features/auth/sing_up/screens/tablet_sign_up.dart';
 import 'package:test1/features/auth/sing_up/screens/web_sign_up.dart';
+import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/helpers/network.dart';
+import 'package:test1/utils/local/storage/local_storage.dart';
 
 class LoginController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
@@ -23,6 +26,7 @@ class LoginController extends GetxController {
 
   late final GlobalKey<FormState> formState;
   late final UserCredential? _userCredential;
+  late final GetStorage _storage;
   late final RxBool checkbox;
   late final RxBool passwordObscure;
 
@@ -33,9 +37,21 @@ class LoginController extends GetxController {
     super.onInit();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    _storage = GetStorage();
     passwordObscure = true.obs;
     passwordObscure = true.obs;
     formState = GlobalKey<FormState>();
+    init();
+  }
+
+  // - - - - - - - - - - - - - - - - - - INIT DEPENDENCIES - - - - - - - - - - - - - - - - - -  //
+
+  init() async {
+    /// READ EMAIL AND PASSWORD FROM LOCAL STORAGE
+    emailController.text = await LocalStorage.read(
+        key: CustomTextStrings.EMAIL, storage: _storage);
+    passwordController.text = await LocalStorage.read(
+        key: CustomTextStrings.PASSWORD, storage: _storage);
   }
 
   // - - - - - - - - - - - - - - - - - - LOGIN TO ACCOUNT WITH EMAIL AND PASSWORD - - - - - - - - - - - - - - - - - -  //
@@ -68,6 +84,18 @@ class LoginController extends GetxController {
                 "if you forget your password click on forget password below.");
         await Future.delayed(const Duration(milliseconds: 500));
         return;
+      }
+
+      /// SAVE EMAIL AND PASSWORD INTO LOCAL STORAGE
+      if (checkbox.isTrue) {
+        await LocalStorage.upsert(
+            key: CustomTextStrings.EMAIL,
+            value: emailController.text,
+            storage: _storage);
+        await LocalStorage.upsert(
+            key: CustomTextStrings.PASSWORD,
+            value: passwordController.text,
+            storage: _storage);
       }
 
       /// STOP THE LOADER

@@ -41,8 +41,9 @@ class WebWishListScreen extends Responsive {
                       ? SizedBox(
                           height: getHeight(context),
                           width: getWidth(context),
-                          child: const CustomEmpty(text: "Error 404 !", icon: Iconsax.message_remove)
-                        )
+                          child: const CustomEmpty(
+                              text: "Error 404 !",
+                              icon: Iconsax.message_remove))
                       : controller.wishLists.isEmpty
 
                           // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
@@ -50,7 +51,9 @@ class WebWishListScreen extends Responsive {
                           ? SizedBox(
                               height: getHeight(context),
                               width: getWidth(context),
-                              child: const CustomEmpty(text: "No Wish Lists !", icon: Iconsax.message_remove),
+                              child: const CustomEmpty(
+                                  text: "No Wish Lists !",
+                                  icon: Iconsax.message_remove),
                             )
 
                           // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //

@@ -8,8 +8,10 @@ import 'package:test1/common/footer/news_letter.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
 import 'package:test1/features/auth/sing_up/screens/mobile_sign_up.dart';
 import 'package:test1/features/localization_address/screens/mobile_localization_address.dart';
+import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
 import 'package:test1/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:test1/features/review/screens/mobile_review_screen.dart';
+import 'package:test1/features/wish_list/screens/mobile_wish_list_screen.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/responsive/responsive.dart';
@@ -90,6 +92,24 @@ class MobileHomeScreen extends Responsive {
                         Get.to(() => const MobileOnboardingScreen());
                       },
                       child: const Text("onBoarding")),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: getWidth(context),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => const MobileNotificationScreen());
+                      },
+                      child: const Text("notifications")),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: getWidth(context),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Get.to(() => const MobileWishListScreen());
+                      },
+                      child: const Text("wishList")),
                 ),
                 const SizedBox(height: 16),
               ],

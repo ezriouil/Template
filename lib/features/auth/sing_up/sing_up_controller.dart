@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
-import 'package:test1/data/repositories/auth_repository/sign_up_repository.dart';
+import 'package:test1/data/repositories/auth_repositories/sign_up_repository.dart';
 import 'package:test1/features/auth/common/soical_media_auth.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
 import 'package:test1/features/auth/login/screens/tablet_login_screen.dart';

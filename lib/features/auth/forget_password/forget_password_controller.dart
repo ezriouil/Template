@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
-import 'package:test1/data/repositories/auth_repository/reset_the_password_repository.dart';
+import 'package:test1/data/repositories/auth_repositories/reset_the_password_repository.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
 import 'package:test1/features/auth/login/screens/tablet_login_screen.dart';
 import 'package:test1/features/auth/login/screens/web_login_screen.dart';

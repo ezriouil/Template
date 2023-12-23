@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'package:get/get.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
 import 'package:test1/data/models/product.dart';
-import 'package:test1/data/repositories/local_repository/wish_list_repository.dart';
+import 'package:test1/data/repositories/local_repositories/wish_list_repository.dart';
 import 'package:test1/features/product/screens/mobile_product_screen.dart';
 import 'package:test1/features/product/screens/tablet_product_screen.dart';
 import 'package:test1/features/product/screens/web_product_screen.dart';
@@ -35,6 +33,7 @@ class WishListController extends GetxController {
     final instance = await _database!.database;
     _repository = WishListRepository(instance);
     await onGetWishLists();
+
   }
 
   // - - - - - - - - - - - - - - - - - - GET WISHLISTS FROM LOCAL DATABASE - - - - - - - - - - - - - - - - - -  //
@@ -65,7 +64,6 @@ class WishListController extends GetxController {
       wishLists.addAll(getWishLists);
 
       /// STOP THE LOADER
-      Get.back();
     } catch (_) {
       /// STOP THE LOADER
       isLoading.value = false;
