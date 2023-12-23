@@ -1,0 +1,97 @@
+name: test1
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ICONS
+  cupertino_icons: ^1.0.2
+  iconsax: ^0.0.8
+
+  # STATE MANAGEMENT
+  get: ^4.6.6
+
+  # UTILITY
+  http: ^1.1.2
+  readmore: ^2.2.0
+  flutter_native_splash: ^2.3.8
+  connectivity_plus: ^5.0.2
+  lottie: ^2.7.0
+  smooth_page_indicator: ^1.1.0
+
+  # FIREBASE
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  firebase_storage: ^11.5.6
+  google_sign_in: ^6.2.1
+  flutter_facebook_auth: ^6.0.3
+
+  # LOCAL STORAGE
+  get_storage: ^2.1.1
+  sqflite: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/logos/
+    - assets/icons/
+    - assets/icons/social_media/
+    - assets/icons/payments_methods/
+    - assets/icons/security/
+    - assets/icons/phone_stores/
+    - assets/icons/shipping/
+    - assets/images/
+    - assets/images/store_history/
+    - assets/animations/
+    - assets/animations/onboarding/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
