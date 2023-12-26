@@ -15,6 +15,8 @@ class ReviewController extends GetxController {
   late final RxDouble reviewsRating;
   late final RxList<Review> reviews;
   late final String _productName;
+  late RxBool showFloatingActionButton;
+  late final ScrollController scrollController;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
 
@@ -25,6 +27,9 @@ class ReviewController extends GetxController {
     formState = GlobalKey<FormState>();
     reviews = RxList();
     reviewsRating = 0.0.obs;
+    scrollController = ScrollController();
+    showFloatingActionButton = false.obs;
+    manageScrollController();
     _init();
     _productName = Get.arguments[0];
   }
@@ -87,6 +92,19 @@ class ReviewController extends GetxController {
       sum += review.userRating;
     }
     reviewsRating.value = (sum / reviews.length).toPrecision(1);
+  }
+
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      //scroll listener
+      double showOffset = 5.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
   }
 
   void postReview() async {

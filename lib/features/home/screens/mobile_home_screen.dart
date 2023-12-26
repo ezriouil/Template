@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/footer/about_us.dart';
 import 'package:test1/common/footer/conditions.dart';
 import 'package:test1/common/footer/contact_us.dart';
 import 'package:test1/common/footer/news_letter.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
 import 'package:test1/features/auth/sing_up/screens/mobile_sign_up_screen.dart';
-import 'package:test1/features/localization_address/screens/mobile/mobile_add_new_localization_address_screen.dart';
+import 'package:test1/features/home/home_controller.dart';
+import 'package:test1/features/localization_address/screens/mobile/mobile_location_screen.dart';
 import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
 import 'package:test1/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:test1/features/review/screens/mobile_review_screen.dart';
 import 'package:test1/features/wish_list/screens/mobile_wish_list_screen.dart';
+import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/responsive/responsive.dart';
@@ -21,6 +24,7 @@ class MobileHomeScreen extends Responsive {
 
   @override
   Widget execute(BuildContext context) {
+    final HomeController controller = Get.put(HomeController());
     return Scaffold(
         appBar: AppBar(
           title: const Text("Home"),
@@ -32,6 +36,7 @@ class MobileHomeScreen extends Responsive {
                   style: TextStyle(color: darkLightColor(context)))),
         ),
         body: SingleChildScrollView(
+        controller: controller.scrollController,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -80,7 +85,7 @@ class MobileHomeScreen extends Responsive {
                   width: getWidth(context),
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => const MobileLocalizationAddress());
+                        Get.to(() => const MobileLocationScreen());
                       },
                       child: const Text("address location")),
                 ),
@@ -115,6 +120,23 @@ class MobileHomeScreen extends Responsive {
               ],
             ),
           ),
-        ));
+        ),
+      floatingActionButton: Obx(
+            () => AnimatedOpacity(
+          duration: const Duration(milliseconds: 500),
+          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
+          child: FloatingActionButton(
+            onPressed: () {
+              controller.scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.fastOutSlowIn);
+            },
+            elevation: 16.0,
+            backgroundColor: primaryColor(context),
+            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
+          ),
+        ),
+      ),
+    );
   }
 }

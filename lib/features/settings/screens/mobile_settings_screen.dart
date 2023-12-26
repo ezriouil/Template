@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_outlined_button.dart';
@@ -23,6 +24,7 @@ class MobileSettingsScreen extends Responsive {
     // - - - - - - - - - - - - - - - - - - SCAFFOLD - - - - - - - - - - - - - - - - - -  //
     return Scaffold(
       body: NestedScrollView(
+        controller: controller.scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             // - - - - - - - - - - - - - - - - - - APP BAR - - - - - - - - - - - - - - - - - -  //
@@ -38,6 +40,10 @@ class MobileSettingsScreen extends Responsive {
                 ),
                 centerTitle: false,
                 backgroundColor: primaryColor(context),
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: primaryColor(context),
+                    statusBarIconBrightness:
+                        isDark(context) ? Brightness.light : Brightness.light),
                 leading: null)
           ];
         },
@@ -166,8 +172,9 @@ class MobileSettingsScreen extends Responsive {
                         icon: Iconsax.security_card,
                         title: "Account Privacy",
                         subTitle: "Mango data usage and connected account",
-                        onClick: () => controller.navigateToAccountPrivacyScreen(
-                            deviceType: DeviceType.MOBILE),
+                        onClick: () =>
+                            controller.navigateToAccountPrivacyScreen(
+                                deviceType: DeviceType.MOBILE),
                       ),
 
                       // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
@@ -182,7 +189,7 @@ class MobileSettingsScreen extends Responsive {
 
                       // - - - - - - - - - - - - - - - - - - ACCOUNT PRIVACY TILE - - - - - - - - - - - - - - - - - -  //
                       Obx(
-                        ()=> CustomSettingTile(
+                        () => CustomSettingTile(
                           icon: Iconsax.security_safe,
                           title: "Account Privacy",
                           subTitle: "Mango data usage and connected account",
@@ -235,14 +242,13 @@ class MobileSettingsScreen extends Responsive {
 
                       // - - - - - - - - - - - - - - - - - - THEME TILE - - - - - - - - - - - - - - - - - -  //
                       Obx(
-                            () => CustomSettingTile(
+                        () => CustomSettingTile(
                           icon: Iconsax.colorfilter,
                           title: "Change Theme Color",
                           subTitle: "We have dark and light theme for you",
                           trailing: Switch(
                               value: controller.theme.value,
-                              onChanged:
-                              controller.onUpdateThemeApp),
+                              onChanged: controller.onUpdateThemeApp),
                           onClick: () => controller.navigateToProfileScreen(
                               deviceType: DeviceType.MOBILE),
                         ),
@@ -261,6 +267,22 @@ class MobileSettingsScreen extends Responsive {
                 )
               ],
             ),
+          ),
+        ),
+      ),
+      floatingActionButton: Obx(
+        () => AnimatedOpacity(
+          duration: const Duration(milliseconds: 500),
+          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
+          child: FloatingActionButton(
+            onPressed: () {
+              controller.scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.fastOutSlowIn);
+            },
+            elevation: 16.0,
+            backgroundColor: primaryColor(context),
+            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
           ),
         ),
       ),

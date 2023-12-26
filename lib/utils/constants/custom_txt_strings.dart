@@ -27,6 +27,7 @@ class CustomTextStrings {
   static const String FISRT_NAME = "First name";
   static const String LAST_NAME = "Last name";
   static const String USER_NAME = "User name";
+  static const String ADDRESS_TITILE = "Address title";
   static const String EMAIL = "E-Mail";
   static const String PHONE = "Phone";
   static const String CITY = "City";

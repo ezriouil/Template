@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
@@ -14,8 +15,9 @@ class WishListController extends GetxController {
   late final AppDatabase? _database;
   late final WishListRepository? _repository;
   late final RxList<Product> wishLists;
-  late RxBool isLoading;
   late Rx<String?> errorMsg;
+  late RxBool isLoading, showFloatingActionButton;
+  late final ScrollController scrollController;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -26,6 +28,9 @@ class WishListController extends GetxController {
     _database = AppDatabase();
     wishLists = RxList.empty();
     _init();
+    scrollController = ScrollController();
+    showFloatingActionButton = false.obs;
+    manageScrollController();
   }
 
   // - - - - - - - - - - - - - - - - - - INJECT DEPENDENCIES - - - - - - - - - - - - - - - - - -  //
@@ -68,6 +73,19 @@ class WishListController extends GetxController {
       isLoading.value = false;
       errorMsg.value = "Try again..";
     }
+  }
+
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      //scroll listener
+      double showOffset = 5.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
   }
 
   // - - - - - - - - - - - - - - - - - - DELETE WISHLIST BY ID - - - - - - - - - - - - - - - - - -  //

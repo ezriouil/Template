@@ -1,7 +1,7 @@
 class LocationAddress {
   // - - - - - - - - - - - - - - - - - - STATES - - - - - - - - - - - - - - - - - -  //
   final int id;
-  final String fullName,
+  final String? title, fullName,
       fullAddress,
       nearby,
       city,
@@ -13,6 +13,7 @@ class LocationAddress {
   // - - - - - - - - - - - - - - - - - - CONSTRUCTOR- - - - - - - - - - - - - - - - - -  //
   LocationAddress(
       {this.id = 0,
+      this.title = "",
       this.fullName = "",
       this.fullAddress = "",
       this.nearby = "",
@@ -24,6 +25,7 @@ class LocationAddress {
 
   // - - - - - - - - - - - - - - - - - - TO JSON - - - - - - - - - - - - - - - - - -  //
   Map<String, dynamic> toJson() => {
+        COLUMN_TITILE: title,
         COLUMN_FULL_NAME: fullName,
         COLUMN_FULL_ADDRESS: fullAddress,
         COLUMN_NEARBY: nearby,
@@ -38,6 +40,7 @@ class LocationAddress {
   static LocationAddress fromJson(Map<String,dynamic> json) {
     return LocationAddress(
         id: json[COLUMN_ID],
+        title: json[COLUMN_TITILE],
         fullName: json[COLUMN_FULL_NAME],
         fullAddress: json[COLUMN_FULL_ADDRESS],
         nearby: json[COLUMN_NEARBY],
@@ -50,6 +53,7 @@ class LocationAddress {
 
   // - - - - - - - - - - - - - - - - - - TABLE COLUMNS - - - - - - - - - - - - - - - - - -  //
   static const String COLUMN_ID = "id";
+  static const String COLUMN_TITILE = "title";
   static const String COLUMN_FULL_NAME = "fullName";
   static const String COLUMN_FULL_ADDRESS = "fullAddress";
   static const String COLUMN_NEARBY = "nearby";
@@ -61,8 +65,9 @@ class LocationAddress {
 
   static const String TABLE_NAME = "LocalizationAddresses";
 
-  static const String CREATE_TABLE = "CREATE TABLE $TABLE_NAME ( "
+  static const String CREATE_LOCATION_TABLE = "CREATE TABLE $TABLE_NAME ( "
       "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "$COLUMN_TITILE TEXT ,"
       "$COLUMN_FULL_NAME TEXT ,"
       "$COLUMN_FULL_ADDRESS TEXT ,"
       "$COLUMN_NEARBY TEXT ,"

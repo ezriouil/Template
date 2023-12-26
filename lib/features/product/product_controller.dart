@@ -3,8 +3,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
 import 'package:test1/data/models/product.dart';
+import 'package:test1/data/repositories/local_repositories/cart_repository.dart';
 import 'package:test1/data/repositories/local_repositories/wish_list_repository.dart';
 import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
+import 'package:test1/features/cart/screens/mobile_cart_screen.dart';
+import 'package:test1/features/cart/screens/tablet_cart_screen.dart';
+import 'package:test1/features/cart/screens/web_cart_screen.dart';
 import 'package:test1/features/review/screens/mobile_review_screen.dart';
 import 'package:test1/features/review/screens/tablet_review_screen.dart';
 import 'package:test1/features/review/screens/web_review_screen.dart';
@@ -16,6 +20,7 @@ class ProductController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
   late final AppDatabase? _database;
   late final WishListRepository? _wishListRepository;
+  late final CartRepository? _cartRepository;
   late final Rx<Product?> product;
   late Rx<String?> errorMsg, mainThumbnail, sizeSelected;
   late RxList<String> productSizes;
@@ -43,6 +48,7 @@ class ProductController extends GetxController {
   Future<void> _init() async {
     final instance = await _database!.database;
     _wishListRepository = WishListRepository(instance);
+    _cartRepository = CartRepository(instance);
     // const int productId = 1 /*Get.arguments as int*/;
     // await onGetProductInfo(productId);
     // await onGetProductWishListById(productId);
@@ -87,6 +93,24 @@ class ProductController extends GetxController {
     }
   }
 
+  // - - - - - - - - - - - - - - - - - - GET PRODUCT WISHLIST FROM LOCAL DATABASE BY ID - - - - - - - - - - - - - - - - - -  //
+  Future<void> onGetProductWishListById(id) async {
+    try {
+      /// GET WISHLIST BY ID
+      final Product? productWishList =
+          await _wishListRepository!.getWishListById(id: id);
+
+      if (productWishList == null) {
+        heart.value = false;
+        return;
+      }
+
+      heart.value = true;
+    } catch (_) {
+      heart.value = false;
+    }
+  }
+
   // - - - - - - - - - - - - - - - - - - INSERT PRODUCT INTO WISHLIST TABLE LOCAL DATABASE - - - - - - - - - - - - - - - - - -  //
   Future<void> onInsertProductIntoWishList(Product product) async {
     try {
@@ -128,24 +152,6 @@ class ProductController extends GetxController {
     }
   }
 
-  // - - - - - - - - - - - - - - - - - - GET PRODUCT WISHLIST FROM LOCAL DATABASE BY ID - - - - - - - - - - - - - - - - - -  //
-  Future<void> onGetProductWishListById(id) async {
-    try {
-      /// GET WISHLIST BY ID
-      final Product? productWishList =
-          await _wishListRepository!.getWishListById(id: id);
-
-      if (productWishList == null) {
-        heart.value = false;
-        return;
-      }
-
-      heart.value = true;
-    } catch (_) {
-      heart.value = false;
-    }
-  }
-
   // - - - - - - - - - - - - - - - - - - UPDATE MAIN THUMBNAIL - - - - - - - - - - - - - - - - - -  //
   void updateMainThumbnail(String? thumbnail) {
     if (mainThumbnail.value != thumbnail) mainThumbnail.value = thumbnail!;
@@ -165,6 +171,44 @@ class ProductController extends GetxController {
   void decrementTheCounter() {
     if (counter.value > 0) {
       counter.value--;
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - ICON SHARE - - - - - - - - - - - - - - - - - -  //
+  void onShareIcon() {}
+
+  // - - - - - - - - - - - - - - - - - - BUTTON CHECKOUT - - - - - - - - - - - - - - - - - -  //
+  onCheckOut({required int id, required DeviceType deviceType}) async {
+    await onAddToBag(id: id, deviceType: deviceType);
+  }
+
+  // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
+  onAddToBag({required int id, required DeviceType deviceType}) async {
+    try {
+      /// GET WISHLIST BY ID
+      final Product? productCart =
+          await _cartRepository!.getProductFromCartById(id: id);
+
+      if (productCart == null) {
+        /// SHOW THE ERROR SNACK BAR
+        CustomSnackBars.error(
+            title: "We can't insert this product to cart",
+            message: "Try again.");
+        return;
+      }
+
+      switch (deviceType) {
+        case DeviceType.MOBILE:
+          Get.off(() => const MobileCartScreen());
+        case DeviceType.TABLE:
+          Get.off(() => const TabletCartScreen());
+        case DeviceType.WEB:
+          Get.off(() => const WebCartScreen());
+      }
+    } catch (_) {
+      /// SHOW THE ERROR SNACK BAR
+      CustomSnackBars.error(
+          title: "Error 404", message: "please try again next time!");
     }
   }
 
@@ -205,13 +249,13 @@ class ProductController extends GetxController {
       id: 1,
       title: "Jacket cot noir color",
       thumbnail1:
-          "https://media.istockphoto.com/id/1342121693/photo/blue-sport-winter-jacket-isolated-on-white-warm-clothes.jpg?s=1024x1024&w=is&k=20&c=4FXMnl-VJmnVp99QAXPfxwKtni8J1weKYO6rvuOg5zs=",
+          "https://www.marwa.com/media/catalog/product/cache/ea8393ab089fbcfdc2d5454cda4cf9fa/v/1/v1090h24_black_devant_1.jpg",
       thumbnail2:
-          "https://hips.hearstapps.com/hmg-prod/images/tentree-cloud-shell-puffer-jacket-020-1675265725.jpg?crop=0.752xw:1.00xh;0.126xw,0&resize=640:*",
+          "https://www.marwa.com/media/catalog/product/cache/ea8393ab089fbcfdc2d5454cda4cf9fa/v/1/v1090h24_black_dos.jpg",
       thumbnail3:
-          "https://www.montbell.us/products/prod_img/zoom/z_2301368_bric.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLxKBisanIO3zZ1XTm_oxcZrAMWG89SACmFg&usqp=CAU",
       thumbnail4:
-          "https://marksandspencer.com.ph/cdn/shop/products/SD_01_T59_1408J_Y0_X_EC_90.jpg?v=1671089721",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsG0R_oBHRvL6WLQezjdbbNpSZcrilOPD0lQ&usqp=CAU",
       description:
           "Jacket cot noir color Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cot noir color Jacket cot noir color",
       inStock: true,
@@ -231,15 +275,7 @@ class ProductController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - UPDATE PRODUCT SIZES LIST - - - - - - - - - - - - - - - - - -  //
   updateProductSizesList(Product product) {
-    final List<String> listSizes = [];
-    product.sizeSmall! ? listSizes.add("S") : null;
-    product.sizeMedium! ? listSizes.add("M") : null;
-    product.sizeLarge! ? listSizes.add("L") : null;
-    product.sizeXLarge! ? listSizes.add("XL") : null;
-    product.sizeXXLarge! ? listSizes.add("2XL") : null;
-    product.sizeXXXLarge! ? listSizes.add("3XL") : null;
-    product.sizeXXXXLarge! ? listSizes.add("4XL") : null;
-    productSizes.value = listSizes;
+    productSizes.value = product.productSizesAvailable();
   }
 
   // - - - - - - - - - - - - - - - - - - NAVIGATION TO REVIEW SCREEN - - - - - - - - - - - - - - - - - -  //
@@ -253,13 +289,4 @@ class ProductController extends GetxController {
         Get.to(() => const WebReviewScreen(), arguments: [testProduct.id]);
     }
   }
-
-  // - - - - - - - - - - - - - - - - - - ICON SHARE - - - - - - - - - - - - - - - - - -  //
-  void onShareIcon() {}
-
-  // - - - - - - - - - - - - - - - - - - BUTTON CHECKOUT - - - - - - - - - - - - - - - - - -  //
-  void onCheckOut() {}
-
-  // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
-  void onAddToBag() {}
 }

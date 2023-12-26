@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
@@ -12,9 +13,15 @@ import 'package:test1/utils/theme/theme_app.dart';
 class SettingsController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
 
-  late final GetStorage _storage;
-  late final RxBool accountPrivacy, theme, hdImagesQuality, upgradeUi;
+  late final RxBool accountPrivacy,
+      theme,
+      hdImagesQuality,
+      upgradeUi,
+      showFloatingActionButton;
   late final RxString profileImgUrl, fullName, email;
+
+  late final GetStorage _storage;
+  late final ScrollController scrollController;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
 
@@ -29,6 +36,22 @@ class SettingsController extends GetxController {
     profileImgUrl = "".obs;
     fullName = "".obs;
     email = "".obs;
+    scrollController = ScrollController();
+    showFloatingActionButton = false.obs;
+    manageScrollController();
+  }
+
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      //scroll listener
+      double showOffset = 5.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
   }
 
   // - - - - - - - - - - - - - - - - - - NAVIGATION TO PROFILE SCREEN - - - - - - - - - - - - - - - - - -  //

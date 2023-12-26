@@ -41,7 +41,7 @@ class CustomProductVertical extends Responsive {
               CustomImageNetwork(
                 width: getWidth(context),
                 src: product.thumbnail1,
-                discount: product.discount,
+                hasDiscountBadge: product.discount!>0,
                 product: product,
                 onHeartClick: onHeartClick,
               ),

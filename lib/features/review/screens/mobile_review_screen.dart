@@ -6,6 +6,7 @@ import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/features/review/review_controller.dart';
 import 'package:test1/features/review/widgets/custom_linear_progress_bar.dart';
 import 'package:test1/features/review/widgets/custom_review.dart';
+import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/extensions/validator.dart';
@@ -24,6 +25,7 @@ class MobileReviewScreen extends Responsive {
         title: const Text("Review"),
       ),
       body: SingleChildScrollView(
+        controller: controller.scrollController,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child:
@@ -108,6 +110,22 @@ class MobileReviewScreen extends Responsive {
                         itemBuilder: (BuildContext context, int index) =>
                             CustomReview(review: controller.reviews[index])))),
           ]),
+        ),
+      ),
+      floatingActionButton: Obx(
+            () => AnimatedOpacity(
+          duration: const Duration(milliseconds: 500),
+          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
+          child: FloatingActionButton(
+            onPressed: () {
+              controller.scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.fastOutSlowIn);
+            },
+            elevation: 16.0,
+            backgroundColor: primaryColor(context),
+            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
+          ),
         ),
       ),
     );

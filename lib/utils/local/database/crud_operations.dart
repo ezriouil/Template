@@ -67,7 +67,7 @@ class CrudOperations {
         tableName,
         newData,
         where: "$columnWhere = ?",
-        whereArgs: [whereIndex],
+        whereArgs: [whereIndex.toString()],
       );
       return resultCode;
     } catch (_) {

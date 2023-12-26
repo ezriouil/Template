@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/features/notification/notification_controller.dart';
 import 'package:test1/features/notification/widgets/custom_notification.dart';
+import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class MobileNotificationScreen extends Responsive {
@@ -65,7 +66,7 @@ class MobileNotificationScreen extends Responsive {
                                 )
 
                               // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
-                              : ListView.builder(
+                              : ListView.builder(controller: controller.scrollController,
                                   itemCount: controller.notifications.length,
                                   itemBuilder: (BuildContext context,
                                           int index) =>
@@ -74,6 +75,23 @@ class MobileNotificationScreen extends Responsive {
                                               controller.notifications[index],
                                           onClick: controller
                                               .onDeleteNotificationById)),
-            )));
+            )),
+      floatingActionButton: Obx(
+            () => AnimatedOpacity(
+          duration: const Duration(milliseconds: 500),
+          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
+          child: FloatingActionButton(
+            onPressed: () {
+              controller.scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.fastOutSlowIn);
+            },
+            elevation: 16.0,
+            backgroundColor: primaryColor(context),
+            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
+          ),
+        ),
+      ),
+    );
   }
 }

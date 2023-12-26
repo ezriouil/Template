@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
@@ -8,8 +9,9 @@ class NotificationController extends GetxController {
 // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
 
   late final RxList<LocalNotification> notifications;
-  late RxBool isLoading;
   late Rx<String?> errorMsg;
+  late RxBool isLoading, showFloatingActionButton;
+  late final ScrollController scrollController;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
 
@@ -20,6 +22,9 @@ class NotificationController extends GetxController {
     errorMsg = null.obs;
     notifications = RxList.empty();
     init();
+    scrollController = ScrollController();
+    showFloatingActionButton = false.obs;
+    manageScrollController();
   }
 
   init() async {
@@ -99,6 +104,20 @@ class NotificationController extends GetxController {
           title: "Error 404", message: "please try again next time!");
     }
   }
+
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      //scroll listener
+      double showOffset = 5.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
+  }
+
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {

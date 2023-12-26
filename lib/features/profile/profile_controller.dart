@@ -15,6 +15,10 @@ class ProfileController extends GetxController {
   late final TextEditingController emailController;
   late final TextEditingController phoneController;
 
+  late final RxInt ordersConfirmed, ordersWaiting, ordersCanceled;
+  late final RxBool showFloatingActionButton;
+
+  late final ScrollController scrollController;
   late final GlobalKey<FormState> formState;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
@@ -27,26 +31,39 @@ class ProfileController extends GetxController {
     userNameController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
+    scrollController = ScrollController();
+    ordersConfirmed = 0.obs;
+    ordersWaiting = 0.obs;
+    ordersCanceled = 0.obs;
+    showFloatingActionButton = false.obs;
     formState = GlobalKey<FormState>();
+    init();
+    manageScrollController();
   }
 
-  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
-  @override
-  void dispose() {
-    super.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    userNameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
-    formState.currentState?.dispose();
+  // - - - - - - - - - - - - - - - - - - INIT - - - - - - - - - - - - - - - - - -  //
+  init() async {}
+
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      double showOffset = 3.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
   }
 
   // - - - - - - - - - - - - - - - - - - UPDATE PROFILE INFO - - - - - - - - - - - - - - - - - -  //
-  onUpdateProfile() {}
+  onUpdateProfile() async {}
 
   // - - - - - - - - - - - - - - - - - - UPDATE PROFILE INFO - - - - - - - - - - - - - - - - - -  //
-  onDeleteProfile() {}
+  onDeleteProfile() async {}
+
+  // - - - - - - - - - - - - - - - - - - GET ORDERS STATISTICS - - - - - - - - - - - - - - - - - -  //
+  getOrdersStatistics() async {}
 
   // - - - - - - - - - - - - - - - - - - CHECK THE NETWORK - - - - - - - - - - - - - - - - - -  //
   Future<bool> _checkTheNetwork() async {
@@ -71,5 +88,20 @@ class ProfileController extends GetxController {
       CustomSnackBars.error(
           icon: Iconsax.wifi, title: "Error 404", message: "please try again");
     }
+  }
+
+  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
+  @override
+  void dispose() {
+    super.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    ordersConfirmed.close();
+    ordersWaiting.close();
+    ordersCanceled.close();
+    formState.currentState?.dispose();
   }
 }

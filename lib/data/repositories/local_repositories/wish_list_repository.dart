@@ -12,18 +12,20 @@ class WishListRepository {
   Future<int> insertWishList(Product product) async {
     final resultCode = await CrudOperations.insert(
         database: _database,
-        data: product.toJsonLocal(),
-        tableName: Product.TABLE_NAME);
+        data: product.toJsonProductWishListLocal(),
+        tableName: Product.TABLE_WISHLIST_NAME);
     return resultCode;
   }
 
 // - - - - - - - - - - - - - - - - - - GET WISHLISTS - - - - - - - - - - - - - - - - - -  //
   Future<List<Product>?> getWishLists() async {
     final products = await CrudOperations.getAll(
-        database: _database, tableName: Product.TABLE_NAME, orderByDesc: true);
+        database: _database,
+        tableName: Product.TABLE_WISHLIST_NAME,
+        orderByDesc: true);
     if (products == null) return null;
     return products
-        .map((product) => Product.fromJsonLocal(product))
+        .map((product) => Product.fromJsonProductWishListLocal(product))
         .toList();
   }
 
@@ -31,21 +33,20 @@ class WishListRepository {
   Future<Product?> getWishListById({required int id}) async {
     final product = await CrudOperations.get(
         database: _database,
-        tableName: Product.TABLE_NAME,
+        tableName: Product.TABLE_WISHLIST_NAME,
         columnName: Product.COLUMN_ID,
         whereIndex: id);
     if (product == null) return null;
-    return Product.fromJson(product);
+    return Product.fromJsonProductWishListLocal(product);
   }
 
 // - - - - - - - - - - - - - - - - - - UPDATE WISHLIST BY ID - - - - - - - - - - - - - - - - - -  //
-  Future<int> updateWishListById(
-      {required int id, required Product product}) async {
+  Future<int> updateWishListById({required Product product}) async {
     final codeResult = await CrudOperations.update(
         database: _database,
-        tableName: Product.TABLE_NAME,
-        whereIndex: id,
-        newData: product.toJsonLocal(),
+        tableName: Product.TABLE_WISHLIST_NAME,
+        whereIndex: product.id,
+        newData: product.toJsonProductWishListLocal(),
         columnWhere: Product.COLUMN_ID);
     return codeResult;
   }
@@ -54,7 +55,7 @@ class WishListRepository {
   Future<int> deleteWishListById({required int id}) async {
     final codeResult = await CrudOperations.delete(
         database: _database,
-        tableName: Product.TABLE_NAME,
+        tableName: Product.TABLE_WISHLIST_NAME,
         whereIndex: id,
         columnWhere: Product.COLUMN_ID);
     return codeResult;

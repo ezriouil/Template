@@ -21,7 +21,7 @@ class CustomBrand extends Responsive {
               .of(context)
               .textTheme
               .bodyLarge
-              ?.copyWith(color: brandColor ?? grayColor(context), fontSize: 12),
+              ?.copyWith(color: brandColor ?? grayColor(context).withOpacity(isDark(context)? 1:0.5), fontSize: 12),
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 4),

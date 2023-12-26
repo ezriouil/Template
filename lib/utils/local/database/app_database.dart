@@ -21,8 +21,9 @@ class AppDatabase {
       _dbName,
       onCreate: (db, version) {
         /*  YOUR ENTITIES */
-        db.execute(LocationAddress.CREATE_TABLE);
-        db.execute(Product.CREATE_TABLE);
+        db.execute(LocationAddress.CREATE_LOCATION_TABLE);
+        db.execute(Product.CREATE_WISHLIST_TABLE);
+        db.execute(Product.CREATE_CART_TABLE);
       },
       version: CustomTextStrings.APP_NAME_VERSION,
     );
