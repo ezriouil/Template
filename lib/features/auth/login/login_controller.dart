@@ -10,9 +10,9 @@ import 'package:test1/features/auth/common/soical_media_auth.dart';
 import 'package:test1/features/auth/forget_password/screens/mobile_forget_password.dart';
 import 'package:test1/features/auth/forget_password/screens/tablet_forget_password.dart';
 import 'package:test1/features/auth/forget_password/screens/web_forget_password.dart';
-import 'package:test1/features/auth/sing_up/screens/mobile_sign_up.dart';
-import 'package:test1/features/auth/sing_up/screens/tablet_sign_up.dart';
-import 'package:test1/features/auth/sing_up/screens/web_sign_up.dart';
+import 'package:test1/features/auth/sing_up/screens/mobile_sign_up_screen.dart';
+import 'package:test1/features/auth/sing_up/screens/tablet_sign_up_screen.dart';
+import 'package:test1/features/auth/sing_up/screens/web_sign_up_screen.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/helpers/network.dart';
@@ -205,11 +205,11 @@ class LoginController extends GetxController {
   void onNavigateToSingUpScreen({required DeviceType deviceType}) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.to(() => const MobileSignUp());
+        Get.to(() => const MobileSignUpScreen());
       case DeviceType.TABLE:
-        Get.to(() => const TabletSignUp());
+        Get.to(() => const TabletSignUpScreen());
       case DeviceType.WEB:
-        Get.to(() => const WebSignUp());
+        Get.to(() => const WebSignUpScreen());
     }
   }
 

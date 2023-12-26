@@ -9,13 +9,12 @@ import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
-class MobileLocalizationAddress extends Responsive {
-  const MobileLocalizationAddress({super.key});
+class MobileAddNewLocalizationAddressScreen extends Responsive {
+  const MobileAddNewLocalizationAddressScreen({super.key});
 
   @override
   Widget execute(BuildContext context) {
-    final LocalizationAddressController controller =
-        Get.put(LocalizationAddressController());
+    final LocalizationAddressController controller = Get.put(LocalizationAddressController());
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(onTap: ()=>Get.back(),

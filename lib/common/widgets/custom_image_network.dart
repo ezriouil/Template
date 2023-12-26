@@ -9,7 +9,7 @@ import 'package:test1/utils/responsive/responsive.dart';
 class CustomImageNetwork extends Responsive {
   final String? src;
   final int? discount;
-  final Product product;
+  final Product? product;
   final double height, width;
   final BorderRadius? radius;
   final BoxFit fit;
@@ -26,8 +26,7 @@ class CustomImageNetwork extends Responsive {
       this.borderColor = CustomColors.TRANSPARENT,
       this.fit = BoxFit.cover,
       this.onHeartClick,
-      this.onSelected,
-      required this.product});
+      this.onSelected, this.product});
 
   @override
   Widget execute(BuildContext context) {
@@ -44,7 +43,7 @@ class CustomImageNetwork extends Responsive {
             borderRadius: radius ?? borderRadius8,
             // - - - - - - - - - - - - - - - - - - IMAGE - - - - - - - - - - - - - - - - - -  //
             child: GestureDetector(
-              onTap: onSelected == null ? null : () => onSelected!(product),
+              onTap: onSelected == null ? null : () => onSelected!(product!),
               child: Image.network(
                   loadingBuilder: (BuildContext context, Widget child,
                           ImageChunkEvent? loadingProgress) =>
@@ -66,7 +65,7 @@ class CustomImageNetwork extends Responsive {
         if (discount != 0)
           Padding(
             padding: const EdgeInsets.only(top: 4, left: 4),
-            child: CustomTextBox(oldPrice: product.oldPrice!, price: product.price!),
+            child: CustomTextBox(oldPrice: product!.oldPrice!, price: product!.price!),
           ),
         // - - - - - - - - - - - - - - - - - - ICON HEART - - - - - - - - - - - - - - - - - -  //
         if (onHeartClick != null)
@@ -75,7 +74,7 @@ class CustomImageNetwork extends Responsive {
             top: 4,
             child: CustomIconButton(
               onHeartClick: onHeartClick!,
-              product: product,
+              product: product!,
             ),
           )
       ],

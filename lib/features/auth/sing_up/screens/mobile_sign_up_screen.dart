@@ -13,8 +13,8 @@ import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
-class MobileSignUp extends Responsive {
-  const MobileSignUp({super.key});
+class MobileSignUpScreen extends Responsive {
+  const MobileSignUpScreen({super.key});
 
   @override
   Widget execute(BuildContext context) {

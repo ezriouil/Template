@@ -6,8 +6,8 @@ import 'package:test1/common/footer/conditions.dart';
 import 'package:test1/common/footer/contact_us.dart';
 import 'package:test1/common/footer/news_letter.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
-import 'package:test1/features/auth/sing_up/screens/mobile_sign_up.dart';
-import 'package:test1/features/localization_address/screens/mobile_localization_address.dart';
+import 'package:test1/features/auth/sing_up/screens/mobile_sign_up_screen.dart';
+import 'package:test1/features/localization_address/screens/mobile/mobile_add_new_localization_address_screen.dart';
 import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
 import 'package:test1/features/onboarding/screens/mobile_onboarding_screen.dart';
 import 'package:test1/features/review/screens/mobile_review_screen.dart';
@@ -62,7 +62,7 @@ class MobileHomeScreen extends Responsive {
                   width: getWidth(context),
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => const MobileSignUp());
+                        Get.to(() => const MobileSignUpScreen());
                       },
                       child: const Text("Sign up")),
                 ),

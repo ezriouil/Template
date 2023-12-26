@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'index.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
  void main() async{
   //await GetStorage.init();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const Index());
+  FlutterNativeSplash.remove();
 }
 
 // rename file : shift +  fn + F2

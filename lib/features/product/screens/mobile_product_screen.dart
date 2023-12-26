@@ -230,444 +230,420 @@ class MobileProductScreen extends Responsive {
                                   borderRadius: const BorderRadius.only(
                                       topLeft: radius12, topRight: radius12)),
                               width: getWidth(context),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: CustomSizes.SPACE_DEFAULT,
-                                    horizontal:
-                                        CustomSizes.SPACE_BETWEEN_ITEMS),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        // - - - - - - - - - - - - - - - - - - RATING ICON - - - - - - - - - - - - - - - - - -  //
-                                        Icon(
-                                          Iconsax.star5,
-                                          size: 20,
-                                          color: yellowColor(context),
-                                        ),
-
-                                        // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                        const SizedBox(
-                                            width: CustomSizes
-                                                    .SPACE_BETWEEN_ITEMS /
-                                                4),
-
-                                        // - - - - - - - - - - - - - - - - - - RATING - - - - - - - - - - - - - - - - - -  //
-                                        Text("5.0 (+100)",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge
-                                                ?.copyWith(
-                                                    color:
-                                                        darkLightColor(context)
-                                                            .withOpacity(0.8))),
-
-                                        // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                        const Spacer(),
-
-                                        // - - - - - - - - - - - - - - - - - - SHARE ICON - - - - - - - - - - - - - - - - - -  //
-                                        InkWell(
-                                          onTap: controller.onShareIcon,
-                                          child: Icon(
-                                            Iconsax.share,
-                                            color: darkLightColor(context),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
-
-                                    Row(children: [
-                                      // - - - - - - - - - - - - - - - - - - DISCOUNT - - - - - - - - - - - - - - - - - -  //
-                                      CustomTextBox(
-                                          oldPrice:
-                                              controller.testProduct.oldPrice!,
-                                          price: controller.testProduct.price!),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: CustomSizes.SPACE_DEFAULT,
+                                  horizontal: CustomSizes.SPACE_BETWEEN_ITEMS),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      // - - - - - - - - - - - - - - - - - - RATING ICON - - - - - - - - - - - - - - - - - -  //
+                                      Icon(
+                                        Iconsax.star5,
+                                        size: 20,
+                                        color: yellowColor(context),
+                                      ),
 
                                       // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
                                       const SizedBox(
                                           width:
-                                              CustomSizes.SPACE_BETWEEN_ITEMS),
+                                              CustomSizes.SPACE_BETWEEN_ITEMS /
+                                                  4),
 
-                                      // - - - - - - - - - - - - - - - - - - PRICES - - - - - - - - - - - - - - - - - -  //
-                                      CustomPrices(
-                                        oldPrice:
-                                            controller.testProduct.oldPrice!,
-                                        price: controller.testProduct.price!,
-                                        displayPricesVertical: false,
-                                      ),
-                                    ]),
+                                      // - - - - - - - - - - - - - - - - - - RATING - - - - - - - - - - - - - - - - - -  //
+                                      Text("5.0 (+100)",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                  color: darkLightColor(context)
+                                                      .withOpacity(0.8))),
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
+                                      // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                      const Spacer(),
 
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
-
-                                    // - - - - - - - - - - - - - - - - - - TITLE - - - - - - - - - - - - - - - - - -  //
-                                    Text("${controller.testProduct.title} .",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall
-                                            ?.copyWith(
-                                                color:
-                                                    darkLightColor(context))),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
-
-                                    // - - - - - - - - - - - - - - - - - - STOCK ROW - - - - - - - - - - - - - - - - - -  //
-                                    Row(
-                                      children: [
-                                        // - - - - - - - - - - - - - - - - - - STOCK TITLE - - - - - - - - - - - - - - - - - -  //
-                                        Text("Stock : ",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall),
-
-                                        // - - - - - - - - - - - - - - - - - - IN / OUT STOCK - - - - - - - - - - - - - - - - - -  //
-                                        Text(
-                                            controller.testProduct.inStock!
-                                                ? "In Stock"
-                                                : "Out Stock",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                                    color: controller
-                                                            .testProduct
-                                                            .inStock!
-                                                        ? CustomColors.GREEN
-                                                        : CustomColors.RED))
-                                      ],
-                                    ),
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                1.5),
-
-                                    // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Iconsax.medal_star,
-                                          size: 20,
+                                      // - - - - - - - - - - - - - - - - - - SHARE ICON - - - - - - - - - - - - - - - - - -  //
+                                      InkWell(
+                                        onTap: controller.onShareIcon,
+                                        child: Icon(
+                                          Iconsax.share,
                                           color: darkLightColor(context),
                                         ),
-                                        const SizedBox(
-                                            width: CustomSizes
-                                                    .SPACE_BETWEEN_ITEMS /
-                                                2),
-                                        CustomBrand(
-                                          brand: controller.testProduct.brand!,
-                                          brandColor: darkLightColor(context),
-                                        ),
-                                      ],
+                                      )
+                                    ],
+                                  ),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+
+                                  Row(children: [
+                                    // - - - - - - - - - - - - - - - - - - DISCOUNT - - - - - - - - - - - - - - - - - -  //
+                                    CustomTextBox(
+                                        oldPrice:
+                                            controller.testProduct.oldPrice!,
+                                        price: controller.testProduct.price!),
+
+                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                    const SizedBox(
+                                        width: CustomSizes.SPACE_BETWEEN_ITEMS),
+
+                                    // - - - - - - - - - - - - - - - - - - PRICES - - - - - - - - - - - - - - - - - -  //
+                                    CustomPrices(
+                                      oldPrice:
+                                          controller.testProduct.oldPrice!,
+                                      price: controller.testProduct.price!,
+                                      displayPricesVertical: false,
                                     ),
+                                  ]),
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
 
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
 
-                                    // - - - - - - - - - - - - - - - - - - SIZE TITLE - - - - - - - - - - - - - - - - - -  //
-                                    Text("Size",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
-
-                                    // - - - - - - - - - - - - - - - - - - PRODUCT SIZES  - - - - - - - - - - - - - - - - - -  //
-                                    SizedBox(
-                                      width: getWidth(context),
-                                      height: 50,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount:
-                                              controller.productSizes.length,
-                                          itemBuilder: (BuildContext context,
-                                                  int index) =>
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Obx(
-                                                    () => CustomTextBox(
-                                                      verticalPadding: 8,
-                                                      horizontalPadding: 20,
-                                                      background: controller
-                                                                  .sizeSelected
-                                                                  .value ==
-                                                              controller
-                                                                      .productSizes[
-                                                                  index]
-                                                          ? primaryColor(
-                                                              context)
-                                                          : grayColor(context)
-                                                              .withOpacity(
-                                                                  isDark(context)
-                                                                      ? 0.6
-                                                                      : 0.3),
-                                                      textColor:
-                                                          CustomColors.WHITE,
-                                                      text: controller
-                                                          .productSizes[index],
-                                                      icon: controller
-                                                                  .sizeSelected
-                                                                  .value ==
-                                                              controller
-                                                                      .productSizes[
-                                                                  index]
-                                                          ? const Icon(
-                                                              Icons.check,
-                                                              color:
-                                                                  CustomColors
-                                                                      .WHITE,
-                                                              size: 18)
-                                                          : null,
-                                                      onSelected:
-                                                          controller.updateSize,
-                                                    ),
-                                                  ))),
-                                    ),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - PRODUCT SIZES  - - - - - - - - - - - - - - - - - -  //
-                                    CustomElevatedButton(
-                                        text: "Checkout",
-                                        onClick: controller.onCheckOut,
-                                        width: getWidth(context)),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - DESCRIPTION TITLE - - - - - - - - - - - - - - - - - -  //
-                                    Text("Description",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall),
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS /
-                                                2),
-
-                                    // - - - - - - - - - - - - - - - - - - DESCRIPTION BODY - - - - - - - - - - - - - - - - - -  //
-                                    ReadMoreText(
-                                      controller.testProduct.description ?? "",
-                                      trimMode: TrimMode.Line,
-                                      trimExpandedText: " show less",
-                                      trimCollapsedText: " read more",
+                                  // - - - - - - - - - - - - - - - - - - TITLE - - - - - - - - - - - - - - - - - -  //
+                                  Text("${controller.testProduct.title} .",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodySmall
+                                          .headlineSmall
                                           ?.copyWith(
-                                              color: isDark(context)
-                                                  ? CustomColors.WHITE
-                                                      .withOpacity(0.7)
-                                                  : CustomColors.BLACK
-                                                      .withOpacity(0.7)),
-                                      moreStyle: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                              color: primaryColor(context)),
-                                      lessStyle: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                              color: primaryColor(context)),
-                                    ),
+                                              color: darkLightColor(context))),
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
 
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
+                                  // - - - - - - - - - - - - - - - - - - STOCK ROW - - - - - - - - - - - - - - - - - -  //
+                                  Row(
+                                    children: [
+                                      // - - - - - - - - - - - - - - - - - - STOCK TITLE - - - - - - - - - - - - - - - - - -  //
+                                      Text("Stock : ",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall),
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
+                                      // - - - - - - - - - - - - - - - - - - IN / OUT STOCK - - - - - - - - - - - - - - - - - -  //
+                                      Text(
+                                          controller.testProduct.inStock!
+                                              ? "In Stock"
+                                              : "Out Stock",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge
+                                              ?.copyWith(
+                                                  color: controller
+                                                          .testProduct.inStock!
+                                                      ? CustomColors.GREEN
+                                                      : CustomColors.RED))
+                                    ],
+                                  ),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS /
+                                          1.5),
 
-                                    // - - - - - - - - - - - - - - - - - - GO TO REVIEWS SCREEN - - - - - - - - - - - - - - - - - -  //
-                                    InkWell(
-                                      onTap: () =>
-                                          controller.navigateToReviewsScreen(
-                                              deviceType: DeviceType.MOBILE),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Reviews (+100)",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall),
-                                          Icon(
-                                            Iconsax.arrow_right_3,
-                                            color: darkLightColor(context),
-                                          )
-                                        ],
+                                  // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Iconsax.medal_star,
+                                        size: 20,
+                                        color: darkLightColor(context),
                                       ),
+                                      const SizedBox(
+                                          width:
+                                              CustomSizes.SPACE_BETWEEN_ITEMS /
+                                                  2),
+                                      CustomBrand(
+                                        brand: controller.testProduct.brand!,
+                                        brandColor: darkLightColor(context),
+                                      ),
+                                    ],
+                                  ),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+
+                                  // - - - - - - - - - - - - - - - - - - SIZE TITLE - - - - - - - - - - - - - - - - - -  //
+                                  Text("Size",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+
+                                  // - - - - - - - - - - - - - - - - - - PRODUCT SIZES  - - - - - - - - - - - - - - - - - -  //
+                                  SizedBox(
+                                    width: getWidth(context),
+                                    height: 50,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            controller.productSizes.length,
+                                        itemBuilder: (BuildContext context,
+                                                int index) =>
+                                            Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Obx(
+                                                  () => CustomTextBox(
+                                                    verticalPadding: 8,
+                                                    horizontalPadding: 20,
+                                                    background: controller
+                                                                .sizeSelected
+                                                                .value ==
+                                                            controller
+                                                                    .productSizes[
+                                                                index]
+                                                        ? primaryColor(context)
+                                                        : grayColor(context)
+                                                            .withOpacity(
+                                                                isDark(context)
+                                                                    ? 0.6
+                                                                    : 0.3),
+                                                    textColor:
+                                                        CustomColors.WHITE,
+                                                    text: controller
+                                                        .productSizes[index],
+                                                    icon: controller
+                                                                .sizeSelected
+                                                                .value ==
+                                                            controller
+                                                                    .productSizes[
+                                                                index]
+                                                        ? const Icon(
+                                                            Icons.check,
+                                                            color: CustomColors
+                                                                .WHITE,
+                                                            size: 18)
+                                                        : null,
+                                                    onSelected:
+                                                        controller.updateSize,
+                                                  ),
+                                                ))),
+                                  ),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - PRODUCT SIZES  - - - - - - - - - - - - - - - - - -  //
+                                  CustomElevatedButton(
+                                      text: "Checkout",
+                                      onClick: controller.onCheckOut,
+                                      width: getWidth(context)),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - DESCRIPTION TITLE - - - - - - - - - - - - - - - - - -  //
+                                  Text("Description",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+
+                                  // - - - - - - - - - - - - - - - - - - DESCRIPTION BODY - - - - - - - - - - - - - - - - - -  //
+                                  ReadMoreText(
+                                    controller.testProduct.description ?? "",
+                                    trimMode: TrimMode.Line,
+                                    trimExpandedText: " show less",
+                                    trimCollapsedText: " read more",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                            color: isDark(context)
+                                                ? CustomColors.WHITE
+                                                    .withOpacity(0.7)
+                                                : CustomColors.BLACK
+                                                    .withOpacity(0.7)),
+                                    moreStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                            color: primaryColor(context)),
+                                    lessStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                            color: primaryColor(context)),
+                                  ),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - GO TO REVIEWS SCREEN - - - - - - - - - - - - - - - - - -  //
+                                  InkWell(
+                                    onTap: () =>
+                                        controller.navigateToReviewsScreen(
+                                            deviceType: DeviceType.MOBILE),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("Reviews (+100)",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall),
+                                        Icon(
+                                          Iconsax.arrow_right_3,
+                                          color: darkLightColor(context),
+                                        )
+                                      ],
                                     ),
+                                  ),
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
 
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
 
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
 
-                                    Text("Product Images",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall),
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS),
+                                  Text("Product Images",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall),
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS),
 
-                                    // - - - - - - - - - - - - - - - - - - THUMBNAIL 1 - - - - - - - - - - - - - - - - - -  //
-                                    CustomImageNetwork(
-                                        height: getHeight(context) * 0.4,
-                                        width: getWidth(context),
-                                        borderColor: darkLightColor(context),
-                                        src: controller.testProduct.thumbnail1!,
-                                        product: controller.testProduct),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS),
-
-                                    // - - - - - - - - - - - - - - - - - - THUMBNAIL 2 - - - - - - - - - - - - - - - - - -  //
-                                    CustomImageNetwork(
-                                        height: getHeight(context) * 0.4,
-                                        width: getWidth(context),
-                                        borderColor: darkLightColor(context),
-                                        src: controller.testProduct.thumbnail2!,
-                                        product: controller.testProduct),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS),
-
-                                    // - - - - - - - - - - - - - - - - - - THUMBNAIL 3 - - - - - - - - - - - - - - - - - -  //
-                                    CustomImageNetwork(
-                                        height: getHeight(context) * 0.4,
-                                        width: getWidth(context),
-                                        borderColor: darkLightColor(context),
-                                        src: controller.testProduct.thumbnail3!,
-                                        product: controller.testProduct),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS),
-
-                                    // - - - - - - - - - - - - - - - - - - THUMBNAIL 4 - - - - - - - - - - - - - - - - - -  //
-                                    CustomImageNetwork(
-                                        height: getHeight(context) * 0.4,
-                                        width: getWidth(context),
-                                        borderColor: darkLightColor(context),
-                                        src: controller.testProduct.thumbnail4!,
-                                        product: controller.testProduct),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    divider,
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - CONTACT US - - - - - - - - - - - - - - - - - -  //
-                                    const ContactUs(),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - CONDITIONS - - - - - - - - - - - - - - - - - -  //
-                                    const Conditions(),
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height: CustomSizes.SPACE_DEFAULT),
-
-                                    // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
-                                    divider,
-
-                                    // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                                    const SizedBox(
-                                        height:
-                                            CustomSizes.SPACE_BETWEEN_ITEMS),
-
-                                    // - - - - - - - - - - - - - - - - - - COPYRIGHT TEXT - - - - - - - - - - - - - - - - - -  //
-                                    SizedBox(
+                                  // - - - - - - - - - - - - - - - - - - THUMBNAIL 1 - - - - - - - - - - - - - - - - - -  //
+                                  CustomImageNetwork(
+                                      height: getHeight(context) * 0.4,
                                       width: getWidth(context),
-                                      child: Text(
-                                        "Copyright © 2024 ${CustomTextStrings.APP_NAME}. All rights reserved",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                        maxLines: 2,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                      borderColor: darkLightColor(context),
+                                      src: controller.testProduct.thumbnail1!,
+                                      product: controller.testProduct),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS),
+
+                                  // - - - - - - - - - - - - - - - - - - THUMBNAIL 2 - - - - - - - - - - - - - - - - - -  //
+                                  CustomImageNetwork(
+                                      height: getHeight(context) * 0.4,
+                                      width: getWidth(context),
+                                      borderColor: darkLightColor(context),
+                                      src: controller.testProduct.thumbnail2!,
+                                      product: controller.testProduct),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS),
+
+                                  // - - - - - - - - - - - - - - - - - - THUMBNAIL 3 - - - - - - - - - - - - - - - - - -  //
+                                  CustomImageNetwork(
+                                      height: getHeight(context) * 0.4,
+                                      width: getWidth(context),
+                                      borderColor: darkLightColor(context),
+                                      src: controller.testProduct.thumbnail3!,
+                                      product: controller.testProduct),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS),
+
+                                  // - - - - - - - - - - - - - - - - - - THUMBNAIL 4 - - - - - - - - - - - - - - - - - -  //
+                                  CustomImageNetwork(
+                                      height: getHeight(context) * 0.4,
+                                      width: getWidth(context),
+                                      borderColor: darkLightColor(context),
+                                      src: controller.testProduct.thumbnail4!,
+                                      product: controller.testProduct),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  divider,
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - CONTACT US - - - - - - - - - - - - - - - - - -  //
+                                  const ContactUs(),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - CONDITIONS - - - - - - - - - - - - - - - - - -  //
+                                  const Conditions(),
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_DEFAULT),
+
+                                  // - - - - - - - - - - - - - - - - - - DIVIDER - - - - - - - - - - - - - - - - - -  //
+                                  divider,
+
+                                  // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
+                                  const SizedBox(
+                                      height: CustomSizes.SPACE_BETWEEN_ITEMS),
+
+                                  // - - - - - - - - - - - - - - - - - - COPYRIGHT TEXT - - - - - - - - - - - - - - - - - -  //
+                                  SizedBox(
+                                    width: getWidth(context),
+                                    child: Text(
+                                      "Copyright © 2024 ${CustomTextStrings.APP_NAME}. All rights reserved",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],

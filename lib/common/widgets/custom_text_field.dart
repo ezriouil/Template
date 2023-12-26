@@ -7,7 +7,7 @@ class CustomTextField extends Responsive {
   final int lines;
   final String hint;
   final bool autoFocus;
-  final bool obscureText;
+  final bool obscureText, readOnly;
   final IconData? leadingIcon;
   final Widget? trailingIcon;
   final TextInputType textInputType;
@@ -22,6 +22,7 @@ class CustomTextField extends Responsive {
       required this.hint,
       required this.validator,
       this.autoFocus = false,
+      this.readOnly = false,
       this.withDefaultPadding = true,
       this.obscureText = false,
       required this.width,
@@ -62,6 +63,7 @@ class CustomTextField extends Responsive {
             maxLines: lines,
             autocorrect: false,
             autofocus: autoFocus,
+            readOnly: readOnly,
             obscureText: obscureText,
             keyboardType: textInputType,
           )),

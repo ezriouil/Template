@@ -4,6 +4,12 @@ import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
 import 'package:test1/data/models/location_address.dart';
 import 'package:test1/data/repositories/local_repositories/location_address_repository.dart';
+import 'package:test1/features/localization_address/screens/mobile/mobile_add_new_localization_address_screen.dart';
+import 'package:test1/features/localization_address/screens/mobile/mobile_localization_screen.dart';
+import 'package:test1/features/localization_address/screens/tablet/tablet_add_new_localization_address_screen.dart';
+import 'package:test1/features/localization_address/screens/tablet/tablet_localization_screen.dart';
+import 'package:test1/features/localization_address/screens/web/web_add_new_localization_address_screen.dart';
+import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/local/database/app_database.dart';
 
 class LocalizationAddressController extends GetxController {
@@ -266,6 +272,18 @@ class LocalizationAddressController extends GetxController {
     }
   }
 
+  // - - - - - - - - - - - - - - - - - - FLOATING ACTION BUTTON - - - - - - - - - - - - - - - - - -  //
+  Future<void> onNavigateToInsertAddressScreen(DeviceType deviceType) async {
+    switch (deviceType) {
+      case DeviceType.MOBILE:
+        Get.to(() => const MobileAddNewLocalizationAddressScreen());
+      case DeviceType.TABLE:
+        Get.to(() => const TabletAddNewLocalizationAddressScreen());
+      case DeviceType.WEB:
+        Get.to(() => const WebAddNewLocalizationAddressScreen());
+    }
+  }
+
   // - - - - - - - - - - - - - - - - - - DELETE ALL ADDRESSES - - - - - - - - - - - - - - - - - -  //
   // Future<void> onDeleteAllAddresses() async {
   //   try {
@@ -323,5 +341,4 @@ class LocalizationAddressController extends GetxController {
     locationAddresses.close();
     _database = null;
   }
-
 }
