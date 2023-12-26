@@ -99,4 +99,12 @@ class NotificationController extends GetxController {
           title: "Error 404", message: "please try again next time!");
     }
   }
+  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
+  @override
+  void dispose() {
+    super.dispose();
+    notifications.close();
+    isLoading.close();
+    errorMsg.close();
+  }
 }

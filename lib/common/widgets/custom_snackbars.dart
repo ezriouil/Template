@@ -47,7 +47,7 @@ class CustomSnackBars {
         isDismissible: true,
         shouldIconPulse: true,
         colorText: CustomColors.BLACK,
-        backgroundColor: CustomColors.YELLOW,
+        backgroundColor: CustomColors.YELLOW_DARK,
         overlayBlur: 1,
         duration: Duration(seconds: duration),
         margin: const EdgeInsets.all(8),

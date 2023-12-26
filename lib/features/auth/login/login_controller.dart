@@ -240,8 +240,10 @@ class LoginController extends GetxController {
     return true;
   }
 
+  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {
+    super.dispose();
     emailController.dispose();
     passwordController.dispose();
     _userCredential = null;

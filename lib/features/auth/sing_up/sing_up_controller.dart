@@ -198,11 +198,11 @@ class SignUpController extends GetxController {
       onActionClick: () {
         switch (deviceType) {
           case DeviceType.MOBILE:
-            Get.to(()=>const MobileLoginScreen());
+            Get.to(() => const MobileLoginScreen());
           case DeviceType.TABLE:
-            Get.to(()=>const TabletLoginScreen());
+            Get.to(() => const TabletLoginScreen());
           case DeviceType.WEB:
-            Get.to(()=>const WebLoginScreen());
+            Get.to(() => const WebLoginScreen());
         }
       },
     ));
@@ -221,8 +221,10 @@ class SignUpController extends GetxController {
     return true;
   }
 
+  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {
+    super.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
     userNameController.dispose();

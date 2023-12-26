@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
-import 'package:test1/common/widgets/custom_icon_button.dart';
+import 'package:test1/common/widgets/custom_icon_outlined_button.dart';
 import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/features/auth/sing_up/sing_up_controller.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
@@ -203,13 +203,13 @@ class MobileSignUp extends Responsive {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomIconButton(
+                      CustomIconOutlinedButton(
                           icon: CustomIconStrings.GOOGLE_RGB,
                           onClick: () => {
                                controller.onSingUpWithGoogle()
                               }),
                       const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
-                      CustomIconButton(
+                      CustomIconOutlinedButton(
                           icon: CustomIconStrings.FACEBOOK_RGB,
                           onClick: () => {controller.onSingUpWithFacebook()}),
                     ],

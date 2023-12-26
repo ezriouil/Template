@@ -2,7 +2,14 @@ class Product {
   // - - - - - - - - - - - - - - - - - - STATES - - - - - - - - - - - - - - - - - -  //
 
   final int? id, discount, price, oldPrice;
-  final bool? inStock;
+  final bool? inStock,
+      sizeSmall,
+      sizeMedium,
+      sizeLarge,
+      sizeXLarge,
+      sizeXXLarge,
+      sizeXXXLarge,
+      sizeXXXXLarge;
   final String? title,
       thumbnail1,
       thumbnail2,
@@ -12,6 +19,7 @@ class Product {
       brand,
       type,
       made,
+      categoryId,
       color;
 
   // - - - - - - - - - - - - - - - - - - CONSTRUCTOR- - - - - - - - - - - - - - - - - -  //
@@ -29,8 +37,16 @@ class Product {
       this.oldPrice = 0,
       this.price = 0,
       this.brand = "",
+      this.categoryId = "",
       this.made = "",
-      this.color = ""});
+      this.color = "",
+      this.sizeSmall = false,
+      this.sizeMedium = false,
+      this.sizeLarge = false,
+      this.sizeXLarge = false,
+      this.sizeXXLarge = false,
+      this.sizeXXXLarge = false,
+      this.sizeXXXXLarge = false});
 
   // - - - - - - - - - - - - - - - - - - TO JSON - - - - - - - - - - - - - - - - - -  //
   Map<String, dynamic> toJson() => {
@@ -46,34 +62,51 @@ class Product {
         'oldPrice': oldPrice,
         'price': price,
         'brand': brand,
+        'categoryId': categoryId,
         'made': made,
-        'color': color
+        'color': color,
+        'sizeSmall': sizeSmall,
+        'sizeMedium': sizeMedium,
+        'sizeLarge': sizeLarge,
+        'sizeXLarge': sizeXLarge,
+        'sizeXXLarge': sizeXXLarge,
+        'sizeXXXLarge': sizeXXXLarge,
+        'sizeXXXXLarge': sizeXXXXLarge,
       };
 
   // - - - - - - - - - - - - - - - - - - FROM JSON - - - - - - - - - - - - - - - - - -  //
   static Product fromJson(Map json) {
     return Product(
-        id: json['id'],
-        title: json['title'],
-        inStock: json['inStock'],
-        thumbnail1: json['thumbnail1'],
-        thumbnail2: json['thumbnail1'],
-        thumbnail3: json['thumbnail3'],
-        thumbnail4: json['thumbnail4'],
-        description: json['description'],
-        type: json['type'],
-        discount: json['discount'],
-        oldPrice: json['oldPrice'],
-        price: json['price'],
-        brand: json['brand'],
-        made: json['made'],
-        color: json['color']);
+      id: json['id'],
+      title: json['title'],
+      inStock: json['inStock'],
+      thumbnail1: json['thumbnail1'],
+      thumbnail2: json['thumbnail1'],
+      thumbnail3: json['thumbnail3'],
+      thumbnail4: json['thumbnail4'],
+      description: json['description'],
+      type: json['type'],
+      discount: json['discount'],
+      oldPrice: json['oldPrice'],
+      price: json['price'],
+      brand: json['brand'],
+      categoryId: json['categoryId'],
+      made: json['made'],
+      color: json['color'],
+      sizeSmall: json['sizeSmall'],
+      sizeMedium: json['sizeMedium'],
+      sizeLarge: json['sizeLarge'],
+      sizeXLarge: json['sizeXLarge'],
+      sizeXXLarge: json['sizeXXLarge'],
+      sizeXXXLarge: json['sizeXXXLarge'],
+      sizeXXXXLarge: json['sizeXXXXLarge'],
+    );
   }
 
   // - - - - - - - - - - - - - - - - - - FROM JSON LOCAL- - - - - - - - - - - - - - - - - -  //
   static Product fromJsonLocal(Map<String, dynamic> json) {
     return Product(
-        id: json[COLUMN_ID],
+        id: int.parse(json[COLUMN_ID]),
         title: json[COLUMN_TITLE],
         thumbnail1: json[COLUMN_THUMBNAIL],
         discount: int.parse(json[COLUMN_DISCOUNT]),
@@ -84,6 +117,7 @@ class Product {
 
   // - - - - - - - - - - - - - - - - - - TO JSON LOCAL - - - - - - - - - - - - - - - - - -  //
   Map<String, dynamic> toJsonLocal() => {
+        COLUMN_ID: id,
         COLUMN_TITLE: title,
         COLUMN_THUMBNAIL: thumbnail1,
         COLUMN_OLD_PRICE: oldPrice,
@@ -104,7 +138,7 @@ class Product {
   static const String TABLE_NAME = "WishList";
 
   static const String CREATE_TABLE = "CREATE TABLE $TABLE_NAME ( "
-      "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "$COLUMN_ID INTEGER ,"
       "$COLUMN_TITLE TEXT ,"
       "$COLUMN_THUMBNAIL TEXT ,"
       "$COLUMN_DISCOUNT TEXT ,"

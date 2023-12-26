@@ -37,6 +37,7 @@ class CustomTextStrings {
   static const String FULL_ADDRESS = "Full address";
   static const String PASSWORD = "Password";
   static const String SUBJCT = "Subject";
+  static const String MESSAGE = "Message";
   static const String SEND_MESSAGE = "Send message";
   static const String YOUR_REVIEW = "Your review..";
   static const String SUBSCRIBE_FOR_FREE = "SUBSCRIBE FOR FREE";

@@ -94,17 +94,17 @@ class CrudOperations {
     }
   }
 
-  // - - - - - - - - - - - - - - - - - - DELETE ALL - - - - - - - - - - - - - - - - - -  //
+// - - - - - - - - - - - - - - - - - - DELETE ALL - - - - - - - - - - - - - - - - - -  //
 
-  // static Future<int> deleteAll({
-  //   required Database database,
-  //   required String tableName,
-  // }) async {
-  //   try {
-  //     final codeResult = await database.rawDelete("DELETE FORM $tableName");
-  //     return codeResult;
-  //   } catch (_) {
-  //     return CODE_ERROR;
-  //   }
-  // }
+// static Future<int> deleteAll({
+//   required Database database,
+//   required String tableName,
+// }) async {
+//   try {
+//     final codeResult = await database.rawDelete("DELETE FORM $tableName");
+//     return codeResult;
+//   } catch (_) {
+//     return CODE_ERROR;
+//   }
+// }
 }

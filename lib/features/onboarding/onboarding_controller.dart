@@ -44,6 +44,7 @@ class OnBoardingController extends GetxController {
         duration: const Duration(milliseconds: 1000), curve: Curves.linear);
   }
 
+  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {
     super.dispose();

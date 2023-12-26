@@ -33,7 +33,6 @@ class WishListController extends GetxController {
     final instance = await _database!.database;
     _repository = WishListRepository(instance);
     await onGetWishLists();
-
   }
 
   // - - - - - - - - - - - - - - - - - - GET WISHLISTS FROM LOCAL DATABASE - - - - - - - - - - - - - - - - - -  //
@@ -172,5 +171,7 @@ class WishListController extends GetxController {
     _repository = null;
     wishLists.close();
     _database = null;
+    isLoading.close();
+    errorMsg.close();
   }
 }

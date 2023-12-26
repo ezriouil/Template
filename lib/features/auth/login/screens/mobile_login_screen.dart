@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
-import 'package:test1/common/widgets/custom_icon_button.dart';
+import 'package:test1/common/widgets/custom_icon_outlined_button.dart';
 import 'package:test1/common/widgets/custom_outlined_button.dart';
 import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/features/auth/login/login_controller.dart';
@@ -161,12 +161,12 @@ class MobileLoginScreen extends Responsive {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // - - - - - - - - - - - - - - - - - - LOGIN WITH GOOGLE - - - - - - - - - - - - - - - - - -  //
-                      CustomIconButton(
+                      CustomIconOutlinedButton(
                           icon: CustomIconStrings.GOOGLE_RGB,
                           onClick: () => {controller.onLoginWithGoogle()}),
                       const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
                       // - - - - - - - - - - - - - - - - - - LOGIN WITH FACEBOOK - - - - - - - - - - - - - - - - - -  //
-                      CustomIconButton(
+                      CustomIconOutlinedButton(
                           icon: CustomIconStrings.FACEBOOK_RGB,
                           onClick: () => {controller.onLoginWithFacebook()}),
                     ],

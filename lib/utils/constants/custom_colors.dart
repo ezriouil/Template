@@ -16,7 +16,8 @@ class CustomColors{
 
   static const RED = Color(0xFFEF1C2A);
   static const GREEN= Color(0xFF077907);
-  static const YELLOW= Color(0xFFFFF441);
+  static const YELLOW_DARK= Color(0xFFFFF441);
+  static const YELLOW_LIGHT= Color(0xFFFFD600);
   static const BLUE= Color(0xE22091FF);
 
   static const SECONDARY_LIGHT= Colors.redAccent;

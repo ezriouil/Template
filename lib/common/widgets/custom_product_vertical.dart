@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:test1/common/widgets/custom_brand.dart';
 import 'package:test1/common/widgets/custom_image_network.dart';
+import 'package:test1/common/widgets/custom_prices.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
@@ -28,7 +30,6 @@ class CustomProductVertical extends Responsive {
       // - - - - - - - - - - - - - - - - - - CARD CLICK - - - - - - - - - - - - - - - - - -  //
       child: InkWell(
         onTap: () => {onClick(product.id ?? 1)},
-        onDoubleTap: () => {onClick(product.id ?? 1)},
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           // - - - - - - - - - - - - - - - - - - COLUMN - - - - - - - - - - - - - - - - - -  //
@@ -38,6 +39,7 @@ class CustomProductVertical extends Responsive {
             children: [
               // - - - - - - - - - - - - - - - - - - IMAGE FROM NETWORK - - - - - - - - - - - - - - - - - -  //
               CustomImageNetwork(
+                width: getWidth(context),
                 src: product.thumbnail1,
                 discount: product.discount,
                 product: product,
@@ -53,14 +55,7 @@ class CustomProductVertical extends Responsive {
               Row(
                 children: [
                   // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
-                  Text(
-                    product.brand?.toUpperCase() ?? "",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: grayColor(context), fontSize: 12),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  CustomBrand(brand: product.brand),
                   const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
                   // - - - - - - - - - - - - - - - - - - ICON VERIFY - - - - - - - - - - - - - - - - - -  //
                   const Icon(Iconsax.verify5,
@@ -70,54 +65,9 @@ class CustomProductVertical extends Responsive {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // - - - - - - - - - - - - - - - - - - OLD PRICE - - - - - - - - - - - - - - - - - -  //
-                      RichText(
-                        text: TextSpan(
-                          text: (product.oldPrice! - 1).toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                              fontSize: 12.0,
-                              decoration: TextDecoration.lineThrough),
-                          children: [
-                            TextSpan(
-                              text: ".99 DH",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                  fontSize: 8.0,
-                                  decoration: TextDecoration.lineThrough),
-                            )
-                          ],
-                        ),
-                      ),
-                      // - - - - - - - - - - - - - - - - - - PRICE - - - - - - - - - - - - - - - - - -  //
-                      RichText(
-                        text: TextSpan(
-                          text: (product.price! - 1).toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(letterSpacing: 0.4),
-                          children: [
-                            TextSpan(
-                              text: ".99 DH",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(letterSpacing: 0.4),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                  CustomPrices(
+                      oldPrice: product.oldPrice ?? 0,
+                      price: product.price ?? 0),
                   // - - - - - - - - - - - - - - - - - - ICON ADD - - - - - - - - - - - - - - - - - -  //
                   Container(
                     padding: const EdgeInsets.all(4),

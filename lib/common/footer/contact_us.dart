@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:test1/common/footer/footer_controller.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
+import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
+import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class ContactUs extends Responsive {
@@ -9,6 +14,7 @@ class ContactUs extends Responsive {
 
   @override
   Widget execute(BuildContext context) {
+    final FooterController controller = Get.put(FooterController());
     return Center(
       child: Column(
         children: [
@@ -29,57 +35,73 @@ class ContactUs extends Responsive {
                 ?.copyWith(color: grayColor(context)),
             textAlign: TextAlign.center,
           ),
-          /*
+
           /// TEXT FIELDS FOR FIRST AND LAST NAME
           Row(
             children: [
-              Expanded(
+              Expanded(flex: 1,
                   child: CustomTextField(
-                      width: getWidth(context),
-                      lines: 1,
+                      leadingIcon: Iconsax.user,
                       hint: CustomTextStrings.FISRT_NAME,
-                      onChange: (text) {},
-                      leadingIcon: Iconsax.user)),
+                      controller: controller.firstNameController,
+                      validator: (value) => Validator.validateEmptyField(
+                          CustomTextStrings.FISRT_NAME, value),
+                      width: getWidth(context),
+                      withDefaultPadding: false)),
+
+              const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS/2),
+
               Expanded(
+                  flex: 1,
                   child: CustomTextField(
-                width: getWidth(context),
-                hint: CustomTextStrings.LAST_NAME,
-                onChange: (text) {},
-                leadingIcon: Iconsax.user,
-              ))
+                      leadingIcon: Iconsax.user,
+                      hint: CustomTextStrings.LAST_NAME,
+                      controller: controller.lastNameController,
+                      validator: (value) => Validator.validateEmptyField(
+                          CustomTextStrings.LAST_NAME, value),
+                      width: getWidth(context),
+                      withDefaultPadding: false))
             ],
           ),
 
-          /// TEXT FIELD FOR EMAIL
+          // - - - - - - - - - - - - - - - - - - EMAIL - - - - - - - - - - - - - - - - - -  //
+
           CustomTextField(
-              width: getWidth(context),
+              leadingIcon: Iconsax.direct_right,
               hint: CustomTextStrings.EMAIL,
-              onChange: (text) {},
-              leadingIcon: Iconsax.direct_right),
+              controller: controller.emailController,
+              validator: (value) => Validator.validateEmailField(value),
+              width: getWidth(context),
+              textInputType: TextInputType.emailAddress,
+              withDefaultPadding: false),
 
           /// TEXT FIELD FOR SUBJECT
           CustomTextField(
-              width: getWidth(context),
+              leadingIcon: Iconsax.activity,
               hint: CustomTextStrings.SUBJCT,
-              controller: controller.onEvent(SingUpEventOnFirstName()),
-              validator: (value){Validator.validateEmptyField(CustomTextStrings.FISRT_NAME, value);},
-              leadingIcon: Iconsax.activity),
+              controller: controller.subjectController,
+              validator: (value) => Validator.validateEmptyField(
+                  CustomTextStrings.SUBJCT, value),
+              width: getWidth(context),
+              withDefaultPadding: false),
 
           /// TEXT FIRLD FOR MESSAGE
+          /// TEXT FIELD FOR SUBJECT
           CustomTextField(
-              width: getWidth(context),
-              lines: 3,
+              leadingIcon: Iconsax.message,
               hint: CustomTextStrings.MESSAGE,
-              onChange: (text) {}),
+              controller: controller.messageController,
+              validator: (value) => Validator.validateEmptyField(
+                  CustomTextStrings.MESSAGE, value),
+              width: getWidth(context),
+              withDefaultPadding: false),
 
-
-           */
 
           /// BUTTON SEND
           CustomElevatedButton(
               width: getWidth(context),
               text: CustomTextStrings.SEND_MESSAGE,
-              onClick: () {}),
+              onClick:controller.onSendMessage),
         ],
       ),
     );

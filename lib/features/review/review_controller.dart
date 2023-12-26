@@ -156,11 +156,12 @@ class ReviewController extends GetxController {
   }
 
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
-
   @override
   void dispose() {
     super.dispose();
     reviewController.dispose();
     formState.currentState?.dispose();
+    reviews.close();
+    reviewsRating.close();
   }
 }
