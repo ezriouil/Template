@@ -33,6 +33,10 @@ class CustomTextStrings {
   static const String CITY = "City";
   static const String CITY_STATE = "State";
   static const String ZIP_CODE = "Zip code";
+  static const String EXPIRY_DATE = "Expiry date";
+  static const String SECURITY_CODE = "Security code";
+  static const String CARD_NUMBER = "Card number";
+  static const String CARD_NAME = "Card name";
   static const String COUNTRY = "Country";
   static const String Nearby = "Nearby";
   static const String FULL_ADDRESS = "Full address";

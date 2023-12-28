@@ -14,7 +14,7 @@ class CustomTextField extends Responsive {
   final double width;
   final TextEditingController controller;
   final String? Function(String? value)? validator;
-  final bool withDefaultPadding;
+  final bool withDefaultPadding, withBorder;
 
   const CustomTextField(
       {super.key,
@@ -25,6 +25,7 @@ class CustomTextField extends Responsive {
       this.readOnly = false,
       this.withDefaultPadding = true,
       this.obscureText = false,
+      this.withBorder = true,
       required this.width,
       required this.controller,
       this.textInputType = TextInputType.text,
@@ -43,7 +44,7 @@ class CustomTextField extends Responsive {
           child: TextFormField(
             controller: controller,
             validator: validator,
-            decoration: InputDecoration(
+            decoration: InputDecoration(enabledBorder: withBorder ? null : InputBorder.none ,focusedBorder: withBorder ? null : InputBorder.none,
                 errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: isDark(context)
                         ? CustomColors.PRIMARY_DARK
