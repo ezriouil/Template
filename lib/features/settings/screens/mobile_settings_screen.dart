@@ -38,13 +38,19 @@ class MobileSettingsScreen extends Responsive {
                           .headlineMedium
                           ?.copyWith(color: CustomColors.WHITE)),
                 ),
+                leading: InkWell(
+                  onTap: () => Get.back(),
+                  child: const Icon(
+                    Iconsax.arrow_left_24,
+                    color: CustomColors.WHITE,
+                  ),
+                ),
                 centerTitle: false,
                 backgroundColor: primaryColor(context),
                 systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: primaryColor(context),
                     statusBarIconBrightness:
-                        isDark(context) ? Brightness.light : Brightness.light),
-                leading: null)
+                        isDark(context) ? Brightness.light : Brightness.light))
           ];
         },
 

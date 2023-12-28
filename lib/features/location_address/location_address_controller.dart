@@ -51,6 +51,7 @@ class LocationAddressController extends GetxController {
   Future<void> _init() async {
     final instance = await _database!.database;
     _repository = LocationAddressRepository(instance);
+    onGetAddresses();
   }
 
   // - - - - - - - - - - - - - - - - - - INSERT NEW ADDRESS INTO LOCAL DATABASE - - - - - - - - - - - - - - - - - -  //
@@ -118,6 +119,9 @@ class LocationAddressController extends GetxController {
       /// GET ADDRESSES
 
       final addresses = await _repository!.getLocationAddresses();
+
+      print("list");
+      print(addresses?.length);
 
       if (addresses == null) {
         await Future.delayed(const Duration(milliseconds: 500));

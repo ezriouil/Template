@@ -59,7 +59,6 @@ class WishListController extends GetxController {
 
       if (getWishLists.isEmpty) {
         wishLists.value = [];
-
         /// SHOW THE ERROR SNACK BAR
         isLoading.value = false;
         return;

@@ -439,12 +439,7 @@ class MobileProductScreen extends Responsive {
                                             CustomTextBox(
                                               verticalPadding: 8,
                                               horizontalPadding: 20,
-                                              background: controller
-                                                  .sizeSelected
-                                                  .value ==
-                                                  controller
-                                                      .productSizes[
-                                                  index]
+                                              background: controller.sizeSelected.value == controller.productSizes[index]
                                                   ? primaryColor(context)
                                                   : grayColor(context)
                                                   .withOpacity(
@@ -480,7 +475,7 @@ class MobileProductScreen extends Responsive {
                         // - - - - - - - - - - - - - - - - - - PRODUCT SIZES  - - - - - - - - - - - - - - - - - -  //
                         CustomElevatedButton(
                             text: "Checkout",
-                            onClick: (){controller.onCheckOut(id: controller.testProduct.id ?? 1, deviceType: DeviceType.MOBILE);},
+                            onClick: (){controller.onCheckOut(product: controller.testProduct, deviceType: DeviceType.MOBILE);},
                             width: getWidth(context)),
 
                         // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
@@ -710,7 +705,7 @@ class MobileProductScreen extends Responsive {
             Expanded(
               child: CustomElevatedButton(
                 text: "Add to Bag",
-                onClick: (){controller.onAddToBag(id: controller.testProduct.id ?? 1, deviceType: DeviceType.MOBILE);},
+                onClick: (){controller.onAddToBag(product: controller.testProduct, deviceType: DeviceType.MOBILE);},
                 width: getWidth(context),
               ),
             )

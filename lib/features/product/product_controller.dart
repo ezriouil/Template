@@ -178,18 +178,17 @@ class ProductController extends GetxController {
   void onShareIcon() {}
 
   // - - - - - - - - - - - - - - - - - - BUTTON CHECKOUT - - - - - - - - - - - - - - - - - -  //
-  onCheckOut({required int id, required DeviceType deviceType}) async {
-    await onAddToBag(id: id, deviceType: deviceType);
+  onCheckOut({required Product product, required DeviceType deviceType}) async {
+    await onAddToBag(product: product, deviceType: deviceType);
   }
 
   // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
-  onAddToBag({required int id, required DeviceType deviceType}) async {
+  onAddToBag({required Product product, required DeviceType deviceType}) async {
     try {
       /// GET WISHLIST BY ID
-      final Product? productCart =
-          await _cartRepository!.getProductFromCartById(id: id);
+      final int resultCode = await _cartRepository!.insertToCart(product);
 
-      if (productCart == null) {
+      if (resultCode == CartRepository.CODE_ERROR) {
         /// SHOW THE ERROR SNACK BAR
         CustomSnackBars.error(
             title: "We can't insert this product to cart",
@@ -246,7 +245,7 @@ class ProductController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - TEST - - - - - - - - - - - - - - - - - -  //
   final Product testProduct = Product(
-      id: 1,
+      id: 6,
       title: "Jacket cot noir color",
       thumbnail1:
           "https://www.marwa.com/media/catalog/product/cache/ea8393ab089fbcfdc2d5454cda4cf9fa/v/1/v1090h24_black_devant_1.jpg",
@@ -259,7 +258,7 @@ class ProductController extends GetxController {
       description:
           "Jacket cot noir color Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cot noir color Jacket cot noir color",
       inStock: true,
-      discount: 30,
+      discount: 1,
       oldPrice: 230,
       price: 199,
       brand: "Turkey Gum",
@@ -282,7 +281,7 @@ class ProductController extends GetxController {
   navigateToReviewsScreen({required DeviceType deviceType}) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.to(() => const MobileReviewScreen(), arguments: [testProduct.id]);
+        Get.to(() => const MobileReviewScreen(), arguments: [testProduct.id.toString()]);
       case DeviceType.TABLE:
         Get.to(() => const TabletReviewScreen(), arguments: [testProduct.id]);
       case DeviceType.WEB:

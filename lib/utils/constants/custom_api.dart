@@ -4,7 +4,7 @@ class CustomApi {
   // - - - - - - - - - - - - - - - - - - BASE URL + API KEY - - - - - - - - - - - - - - - - - -  //
   static String BASE_URL = "https://script.google.com";
   static const String API_KEY =
-      "/macros/s/AKfycbxvQV71ahgptocES_tQ7yDeaUgHBWbuC5LT8Q4azvJH-b3JMZ-b3V4zkwxGLjMBwshtOA/exec";
+      "/macros/s/AKfycbwHZDSMN2fvAdGTtWOesIfUmPfwkxb3306k7AxEaV8LomyPcZh8N2ERbPRPh2P_JiEPnA/exec";
 
   // - - - - - - - - - - - - - - - - - - PRODUCT ACTIONS - - - - - - - - - - - - - - - - - -  //
   static const ACTION_GET_PRODUCTS = "?action=getFoods";

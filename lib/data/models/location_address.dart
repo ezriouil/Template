@@ -39,16 +39,16 @@ class LocationAddress {
   // - - - - - - - - - - - - - - - - - - FROM JSON- - - - - - - - - - - - - - - - - -  //
   static LocationAddress fromJson(Map<String,dynamic> json) {
     return LocationAddress(
-        id: json[COLUMN_ID],
-        title: json[COLUMN_TITILE],
-        fullName: json[COLUMN_FULL_NAME],
-        fullAddress: json[COLUMN_FULL_ADDRESS],
-        nearby: json[COLUMN_NEARBY],
-        city: json[COLUMN_CITY],
-        state: json[COLUMN_STATE],
-        zipCode: json[COLUMN_ZIP_CODE],
-        country: json[COLUMN_COUNTRY],
-        phone: json[COLUMN_PHONE]);
+        id: json[COLUMN_ID] as int,
+        title: json[COLUMN_TITILE] as String,
+        fullName: json[COLUMN_FULL_NAME] as String,
+        fullAddress: json[COLUMN_FULL_ADDRESS] as String,
+        nearby: json[COLUMN_NEARBY ]as String,
+        city: json[COLUMN_CITY] as String,
+        state: json[COLUMN_STATE] as String,
+        zipCode: json[COLUMN_ZIP_CODE] as String,
+        country: json[COLUMN_COUNTRY] as String,
+        phone: json[COLUMN_PHONE] as String);
   }
 
   // - - - - - - - - - - - - - - - - - - TABLE COLUMNS - - - - - - - - - - - - - - - - - -  //

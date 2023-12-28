@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
+import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/features/review/review_controller.dart';
 import 'package:test1/features/review/widgets/custom_linear_progress_bar.dart';
@@ -86,7 +87,7 @@ class MobileReviewScreen extends Responsive {
               child: CustomTextField(
                   leadingIcon: Iconsax.message,
                   hint: CustomTextStrings.YOUR_REVIEW,
-                  controller: controller.reviewController,
+                  controller: TextEditingController(),
                   validator: (value) => Validator.validateEmptyField(
                       CustomTextStrings.YOUR_REVIEW, value),
                   width: getWidth(context),
@@ -101,14 +102,46 @@ class MobileReviewScreen extends Responsive {
             SizedBox(
                 width: getWidth(context),
                 height: getHeight(context) * 0.6,
-                child: Obx(() => controller.reviews.isEmpty
+                child: Obx(() => // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
+
+                controller.isLoading.isTrue
                     ? Center(
-                        child: CircularProgressIndicator(
-                            color: primaryColor(context)))
+                    child: CircularProgressIndicator(
+                        color: primaryColor(context)))
+
+                // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
+
+                    : controller.errorMsg.value != null
+
+                // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+
+                    ? SizedBox(
+                    height: getHeight(context),
+                    width: getWidth(context),
+                    child: const CustomEmpty(
+                      text: "Error 404 !",
+                      icon: Iconsax.message_remove,
+                    ))
+                    : controller.reviews.isEmpty
+
+                // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
+
+                    ? SizedBox(
+                  height: getHeight(context),
+                  width: getWidth(context),
+                  child: const CustomEmpty(text: "No Wish Lists !"),
+                )
+
+                // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
+
                     : ListView.builder(
-                        itemCount: controller.reviews.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            CustomReview(review: controller.reviews[index])))),
+                    itemCount: controller.reviews.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        CustomReview(review: controller.reviews[index]
+                        )
+                )
+                )
+            ),
           ]),
         ),
       ),

@@ -21,9 +21,7 @@ import 'package:test1/utils/local/storage/local_storage.dart';
 class LoginController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
 
-  late final TextEditingController emailController;
-  late final TextEditingController passwordController;
-
+  late final TextEditingController emailController, passwordController;
   late final GlobalKey<FormState> formState;
   late final UserCredential? _userCredential;
   late final GetStorage _storage;
@@ -39,7 +37,7 @@ class LoginController extends GetxController {
     passwordController = TextEditingController();
     _storage = GetStorage();
     passwordObscure = true.obs;
-    passwordObscure = true.obs;
+    checkbox = true.obs;
     formState = GlobalKey<FormState>();
     init();
   }

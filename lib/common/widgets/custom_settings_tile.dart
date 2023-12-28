@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_image_network.dart';
-import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 

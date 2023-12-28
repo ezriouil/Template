@@ -10,12 +10,13 @@ import 'package:test1/utils/helpers/network.dart';
 class ReviewController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
 
-  late final TextEditingController reviewController;
+  late final  TextEditingController reviewController;
   late final GlobalKey<FormState> formState;
   late final RxDouble reviewsRating;
   late final RxList<Review> reviews;
   late final String _productName;
-  late RxBool showFloatingActionButton;
+  late RxBool showFloatingActionButton, isLoading;
+  late Rx<String?> errorMsg;
   late final ScrollController scrollController;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
@@ -25,13 +26,15 @@ class ReviewController extends GetxController {
     super.onInit();
     reviewController = TextEditingController();
     formState = GlobalKey<FormState>();
-    reviews = RxList();
+    reviews = RxList.empty();
     reviewsRating = 0.0.obs;
+    errorMsg = "".obs;
     scrollController = ScrollController();
     showFloatingActionButton = false.obs;
+    isLoading = true.obs;
     manageScrollController();
     _init();
-    _productName = Get.arguments[0];
+    //_productName = Get.arguments[0] as String;
   }
 
   void _init() async {
@@ -177,7 +180,7 @@ class ReviewController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    reviewController.dispose();
+    // reviewController.dispose();
     formState.currentState?.dispose();
     reviews.close();
     reviewsRating.close();

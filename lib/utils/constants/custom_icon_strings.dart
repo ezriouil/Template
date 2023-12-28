@@ -26,6 +26,7 @@ static const String PAYPAL = "assets/icons/payments_methods/paypal.png";
 static const String RUPAY = "assets/icons/payments_methods/rupay.png";
 static const String VISA = "assets/icons/payments_methods/visa.png";
 static const String CASH_ON_DELIVERY = "assets/icons/payments_methods/cash_on_delivery.png";
+static const String PAYMENTS_METHOD_ONLINE = "assets/icons/payments_methods/payments_methode.png";
 
 static const String APPLE_STORE = "assets/icons/phone_stores/apple_store.png";
 static const String GOOGLE_STORE = "assets/icons/phone_stores/google_store.png";
