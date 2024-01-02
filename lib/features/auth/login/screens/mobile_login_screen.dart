@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
@@ -21,6 +22,7 @@ class MobileLoginScreen extends Responsive {
   Widget execute(BuildContext context) {
     // - - - - - - - - - - - - - - - - - - INSTANCE FROM THE CONTROLLER - - - - - - - - - - - - - - - - - -  //
     final LoginController controller = Get.put(LoginController());
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return Scaffold(
       body: SingleChildScrollView(

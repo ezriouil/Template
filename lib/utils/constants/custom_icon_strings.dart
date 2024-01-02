@@ -31,4 +31,14 @@ static const String PAYMENTS_METHOD_ONLINE = "assets/icons/payments_methods/paym
 static const String APPLE_STORE = "assets/icons/phone_stores/apple_store.png";
 static const String GOOGLE_STORE = "assets/icons/phone_stores/google_store.png";
 static const String HUAWEI_STORE = "assets/icons/phone_stores/huawei_store.png";
+
+  /// CATEGORIES
+  static const String CARDIGAN = "assets/icons/categories/cardigan.png";
+  static const String DRESS = "assets/icons/categories/dress.png";
+  static const String JACKET = "assets/icons/categories/jacket.png";
+  static const String JEANS = "assets/icons/categories/jeans.png";
+  static const String SCARF = "assets/icons/categories/scarf.png";
+  static const String SNEAKERS = "assets/icons/categories/sneakers.png";
+  static const String TIE = "assets/icons/categories/tie.png";
+  static const String TSHIRT = "assets/icons/categories/tshirt.png";
 }

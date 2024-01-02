@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_outlined_button.dart';
@@ -29,15 +28,11 @@ class MobileSettingsScreen extends Responsive {
           return [
             // - - - - - - - - - - - - - - - - - - APP BAR - - - - - - - - - - - - - - - - - -  //
             SliverAppBar(
-                title: Padding(
-                  padding: const EdgeInsets.only(
-                      left: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
-                  child: Text("Account",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(color: CustomColors.WHITE)),
-                ),
+                title: Text("Account",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(color: CustomColors.WHITE)),
                 leading: InkWell(
                   onTap: () => Get.back(),
                   child: const Icon(
@@ -46,11 +41,7 @@ class MobileSettingsScreen extends Responsive {
                   ),
                 ),
                 centerTitle: false,
-                backgroundColor: primaryColor(context),
-                systemOverlayStyle: SystemUiOverlayStyle(
-                    statusBarColor: primaryColor(context),
-                    statusBarIconBrightness:
-                        isDark(context) ? Brightness.light : Brightness.light))
+                backgroundColor: primaryColor(context))
           ];
         },
 

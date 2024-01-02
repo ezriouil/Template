@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
@@ -14,7 +14,6 @@ class ReviewController extends GetxController {
   late final GlobalKey<FormState> formState;
   late final RxDouble reviewsRating;
   late final RxList<Review> reviews;
-  late final String _productName;
   late RxBool showFloatingActionButton, isLoading;
   late Rx<String?> errorMsg;
   late final ScrollController scrollController;
@@ -28,7 +27,7 @@ class ReviewController extends GetxController {
     formState = GlobalKey<FormState>();
     reviews = RxList.empty();
     reviewsRating = 0.0.obs;
-    errorMsg = "".obs;
+    errorMsg = null.obs;
     scrollController = ScrollController();
     showFloatingActionButton = false.obs;
     isLoading = true.obs;
@@ -37,7 +36,7 @@ class ReviewController extends GetxController {
     //_productName = Get.arguments[0] as String;
   }
 
-  void _init() async {
+  _init() {
     final List<Review> fakeReviews = [
       Review(
           id: 1,
@@ -49,8 +48,7 @@ class ReviewController extends GetxController {
           storeComment:
               "Hey everyone, this product is height quality i have being 3 years im using it and he is still keep working with me best greeting to you all. ",
           storeCommentTime: "15 Nov, 2023",
-          productTitle: _productName,
-          userProfileImg: null),
+          userProfileImg: ""),
       Review(
           id: 2,
           userName: "Jalal jalal",
@@ -61,8 +59,7 @@ class ReviewController extends GetxController {
           storeComment:
               "Hey everyone, this product is height quality i have being 3 years im using it and he is still keep working with me best greeting to you all. ",
           storeCommentTime: "15 Nov, 2023",
-          productTitle: _productName,
-          userProfileImg: null),
+          userProfileImg: ""),
       Review(
           id: 3,
           userName: "Aicha aicha",
@@ -73,8 +70,7 @@ class ReviewController extends GetxController {
           storeComment:
               "Hey everyone, this product is height quality i have being 3 years im using it and he is still keep working with me best greeting to you all. ",
           storeCommentTime: "15 Nov, 2023",
-          productTitle: _productName,
-          userProfileImg: null),
+          userProfileImg: ""),
       Review(
           id: 4,
           userName: "Oumaima oumaima",
@@ -85,29 +81,15 @@ class ReviewController extends GetxController {
           storeComment:
               "Hey everyone, this product is height quality i have being 3 years im using it and he is still keep working with me best greeting to you all. ",
           storeCommentTime: "15 Nov, 2023",
-          productTitle: _productName,
-          userProfileImg: null)
+          userProfileImg: "")
     ];
-    await Future.delayed(const Duration(seconds: 3));
     int sum = 0;
     for (Review review in fakeReviews) {
       reviews.add(review);
       sum += review.userRating;
+      isLoading.value = false;
     }
     reviewsRating.value = (sum / reviews.length).toPrecision(1);
-  }
-
-  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
-  manageScrollController() async {
-    scrollController.addListener(() {
-      //scroll listener
-      double showOffset = 5.0;
-      if (scrollController.offset > showOffset) {
-        showFloatingActionButton.value = true;
-      } else {
-        showFloatingActionButton.value = false;
-      }
-    });
   }
 
   void postReview() async {
@@ -176,13 +158,25 @@ class ReviewController extends GetxController {
     return true;
   }
 
+  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
+  manageScrollController() async {
+    scrollController.addListener(() {
+      double showOffset = 5.0;
+      if (scrollController.offset > showOffset) {
+        showFloatingActionButton.value = true;
+      } else {
+        showFloatingActionButton.value = false;
+      }
+    });
+  }
+
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {
-    super.dispose();
-    // reviewController.dispose();
+    reviewController.dispose();
     formState.currentState?.dispose();
     reviews.close();
     reviewsRating.close();
+    super.dispose();
   }
 }

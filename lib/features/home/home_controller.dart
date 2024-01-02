@@ -1,13 +1,16 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/data/models/product.dart';
 
 class HomeController extends GetxController{
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
-  late final RxList<Product> wishLists;
+  late final RxList<Product> productsLists;
   late Rx<String?> errorMsg;
-  late RxBool isLoading, showFloatingActionButton;
+  late RxBool isLoading;
   late final ScrollController scrollController;
+  late CarouselController pageController;
+  late RxInt currentPageIndex;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -15,23 +18,10 @@ class HomeController extends GetxController{
     super.onInit();
     isLoading = true.obs;
     errorMsg = null.obs;
-    wishLists = RxList.empty();
+    productsLists = RxList.empty();
     scrollController = ScrollController();
-    showFloatingActionButton = false.obs;
-    manageScrollController();
-  }
-
-  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
-  manageScrollController() async {
-    scrollController.addListener(() {
-      //scroll listener
-      double showOffset = 5.0;
-      if (scrollController.offset > showOffset) {
-        showFloatingActionButton.value = true;
-      } else {
-        showFloatingActionButton.value = false;
-      }
-    });
+    pageController = CarouselController();
+    currentPageIndex = 0.obs;
   }
 
 }

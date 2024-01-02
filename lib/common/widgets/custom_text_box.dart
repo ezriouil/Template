@@ -20,8 +20,8 @@ class CustomTextBox extends Responsive {
       this.text,
       this.background,
       this.textColor,
-      this.verticalPadding = 2.0,
-      this.horizontalPadding = 4.0});
+      this.verticalPadding = 4.0,
+      this.horizontalPadding = 6.0});
 
   @override
   Widget execute(BuildContext context) {
@@ -30,6 +30,7 @@ class CustomTextBox extends Responsive {
     return InkWell(
       onTap: onSelected == null ? null : () => onSelected!(text!),
       child: Container(
+        width: CustomSizes.SPACE_BETWEEN_ITEMS * 2.5,
         decoration: BoxDecoration(
             color: background ?? yellowColor(context),
             borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -39,7 +40,7 @@ class CustomTextBox extends Responsive {
           children: [
             if (icon != null) icon!,
             if (icon != null)
-              const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
+              const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
             Text(text ?? "$calculateDiscount%",
                 style: Theme.of(context)
                     .textTheme

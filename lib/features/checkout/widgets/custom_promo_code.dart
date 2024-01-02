@@ -29,7 +29,6 @@ class CustomPromoCode extends Responsive {
               child: CustomTextField(
                   hint: "Have promo code ?",
                   validator: validator,
-                  withBorder: false,
                   withDefaultPadding: false,
                   width: getWidth(context),
                   controller: controller)),

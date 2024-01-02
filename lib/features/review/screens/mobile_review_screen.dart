@@ -36,37 +36,30 @@ class MobileReviewScreen extends Responsive {
                 controller.reviewsRating.value == 0.0
                     ? "Loading"
                     : controller.reviewsRating.value.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontSize: 50),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
-                const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS * 0.5),
-                Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
-                const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS * 0.5),
-                Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
-                const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS * 0.5),
-                Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
-                const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS * 0.5),
-                Icon(Iconsax.star1, size: 24, color: grayColor(context)),
-              ],
-            ),
-            const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS * 0.2),
-            Obx(
-              () => Text(
-                "${controller.reviews.length} Reviews",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.w300),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(context) / 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
+                  Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
+                  Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
+                  Icon(Iconsax.star1, size: 24, color: primaryColor(context)),
+                  Icon(Iconsax.star1, size: 24, color: grayColor(context)),
+                ],
               ),
             ),
-            const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS * 2),
+            Text(
+              "Reviews",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w300),
+            ),
+                const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS),
             const CustomLinearProgressBar(
                 number: "1", progressValue: 1, width: 0.7),
             const CustomLinearProgressBar(
@@ -77,6 +70,7 @@ class MobileReviewScreen extends Responsive {
                 number: "4", progressValue: 0.4, width: 0.7),
             const CustomLinearProgressBar(
                 number: "5", progressValue: 0.2, width: 0.7),
+
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_SECTIONS),
 
             /// ADD NEW REVIEW
@@ -87,7 +81,7 @@ class MobileReviewScreen extends Responsive {
               child: CustomTextField(
                   leadingIcon: Iconsax.message,
                   hint: CustomTextStrings.YOUR_REVIEW,
-                  controller: TextEditingController(),
+                  controller: controller.reviewController,
                   validator: (value) => Validator.validateEmptyField(
                       CustomTextStrings.YOUR_REVIEW, value),
                   width: getWidth(context),
@@ -97,56 +91,60 @@ class MobileReviewScreen extends Responsive {
             SizedBox(
                 width: getWidth(context),
                 child: CustomElevatedButton(
-                    width: getWidth(context), text: "Comment", onClick: controller.postReview)),
+                    width: getWidth(context),
+                    text: "Comment",
+                    onClick: controller.postReview)),
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS),
             SizedBox(
                 width: getWidth(context),
                 height: getHeight(context) * 0.6,
-                child: Obx(() => // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
+                child: Obx(
+                    () => // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
 
-                controller.isLoading.isTrue
-                    ? Center(
-                    child: CircularProgressIndicator(
-                        color: primaryColor(context)))
+                        controller.isLoading.isTrue
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                    color: primaryColor(context)))
 
-                // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
+                            // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
 
-                    : controller.errorMsg.value != null
+                            : controller.errorMsg.value != null
 
-                // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+                                // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
 
-                    ? SizedBox(
-                    height: getHeight(context),
-                    width: getWidth(context),
-                    child: const CustomEmpty(
-                      text: "Error 404 !",
-                      icon: Iconsax.message_remove,
-                    ))
-                    : controller.reviews.isEmpty
+                                ? SizedBox(
+                                    height: getHeight(context),
+                                    width: getWidth(context),
+                                    child: const CustomEmpty(
+                                      text: "Error 404 !",
+                                      icon: Iconsax.message_remove,
+                                    ))
+                                : controller.reviews.isEmpty
 
-                // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
+                                    // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
 
-                    ? SizedBox(
-                  height: getHeight(context),
-                  width: getWidth(context),
-                  child: const CustomEmpty(text: "No Wish Lists !"),
-                )
+                                    ? SizedBox(
+                                        height: getHeight(context),
+                                        width: getWidth(context),
+                                        child: const CustomEmpty(
+                                            text: "No Wish Lists !"),
+                                      )
 
-                // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
+                                    // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
 
-                    : ListView.builder(
-                    itemCount: controller.reviews.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        CustomReview(review: controller.reviews[index]
-                        )
-                )
-                )
-            ),
+                                    : ListView.builder(
+                                          itemCount: controller.reviews.length,
+                                          itemBuilder:
+                                              (BuildContext context, int index) =>
+                                                  CustomReview(
+                                                      review: controller
+                                                          .reviews[index])),
+                                    )),
           ]),
         ),
       ),
       floatingActionButton: Obx(
-            () => AnimatedOpacity(
+        () => AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
           opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
           child: FloatingActionButton(

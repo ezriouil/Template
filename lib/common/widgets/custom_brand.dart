@@ -7,8 +7,14 @@ import 'package:test1/utils/responsive/responsive.dart';
 class CustomBrand extends Responsive {
   final String? brand;
   final Color? brandColor;
+  final double? textSize, iconSize;
 
-  const CustomBrand({super.key, required this.brand, this.brandColor});
+  const CustomBrand(
+      {super.key,
+      required this.brand,
+      this.brandColor,
+      this.textSize,
+      this.iconSize});
 
   @override
   Widget execute(BuildContext context) {
@@ -17,17 +23,15 @@ class CustomBrand extends Responsive {
         // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
         Text(
           brand?.toUpperCase() ?? "New",
-          style: Theme
-              .of(context)
-              .textTheme
-              .bodyLarge
-              ?.copyWith(color: brandColor ?? grayColor(context).withOpacity(isDark(context)? 1:0.5), fontSize: 12),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: brandColor ??
+                  grayColor(context).withOpacity(isDark(context) ? 1 : 0.5),
+              fontSize: textSize ?? 12),
           overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
+        const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 3),
         // - - - - - - - - - - - - - - - - - - ICON VERIFY - - - - - - - - - - - - - - - - - -  //
-        const Icon(Iconsax.verify5,
-            size: 12, color: CustomColors.BLUE),
+        Icon(Iconsax.verify5, size: iconSize ?? 16, color: CustomColors.DARK_BLUE),
       ],
     );
   }

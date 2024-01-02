@@ -5,9 +5,12 @@ import 'package:test1/common/widgets/custom_brand.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
 import 'package:test1/common/widgets/custom_image_network.dart';
 import 'package:test1/features/checkout/checkout_controller.dart';
+import 'package:test1/features/checkout/widgets/custom_promo_code.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
+import 'package:test1/utils/constants/custom_txt_strings.dart';
+import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class MobileCheckoutScreen extends Responsive {
@@ -36,37 +39,48 @@ class MobileCheckoutScreen extends Responsive {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS),
+          padding: const EdgeInsets.symmetric(
+              horizontal: CustomSizes.SPACE_BETWEEN_ITEMS),
           child: Column(
             children: [
-              SizedBox(
-                height: 100.0,
-                width: getWidth(context),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) => ListTile(
-                          leading: const CustomImageNetwork(
-                            src:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPm5-09U3905IKZGo1EuFsNmLhOoww1toGr9efKOGEkQ&s",
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          contentPadding: EdgeInsets.zero,
-                          dense: true,
-                          title: const CustomBrand(brand: "zara"),
-                          subtitle: Text("Jacket noir v3 sport new",
-                              style: Theme.of(context).textTheme.bodyLarge),
-                        )),
+              Obx(
+                () => SizedBox(
+                  height: (controller.cartProducts.length) * 70,
+                  width: getWidth(context),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.cartProducts.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          ListTile(
+                            leading: CustomImageNetwork(
+                              src: controller.cartProducts[index].thumbnail1 ??
+                                  "",
+                              width: 50,
+                              height: 50,
+                            ),
+                            contentPadding: EdgeInsets.zero,
+                            title: CustomBrand(
+                                brand:
+                                    controller.cartProducts[index].brand ?? ""),
+                            subtitle: Text(
+                                controller.cartProducts[index].title ?? "",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                            trailing: Text(
+                                "x${controller.cartProducts[index].discount}",
+                                style: Theme.of(context).textTheme.bodySmall),
+                          )),
+                ),
               ),
-              // const SizedBox(height: CustomSizes.SPACE_BETWEEN_SECTIONS),
-              // CustomPromoCode(
-              //     controller: controller.codePromoController,
-              //     validator: (value) => Validator.validateEmptyField(
-              //         CustomTextStrings.SECURITY_CODE, value),
-              //     onClick: controller.onValidateCodePromo),
+              const SizedBox(
+                height: CustomSizes.SPACE_BETWEEN_ITEMS,
+              ),
+              CustomPromoCode(
+                  controller: controller.codePromoController,
+                  validator: (value) => Validator.validateEmptyField(
+                      CustomTextStrings.SECURITY_CODE, value),
+                  onClick: controller.onValidateCodePromo),
               const SizedBox(height: CustomSizes.SPACE_BETWEEN_SECTIONS),
               Container(
                   padding:
@@ -85,7 +99,7 @@ class MobileCheckoutScreen extends Responsive {
                             const VisualDensity(horizontal: 0, vertical: -4),
                         leading: Text("Subtotal",
                             style: Theme.of(context).textTheme.bodySmall),
-                        trailing: Text("1500.00 MAD",
+                        trailing: Text("${controller.subTotal - 1}.99 MAD",
                             style: Theme.of(context).textTheme.bodySmall),
                       ),
                       ListTile(
@@ -127,7 +141,7 @@ class MobileCheckoutScreen extends Responsive {
                           trailing: InkWell(
                             onTap: controller.onChangePaymentMethod,
                             child: Text("change",
-                                style: Theme.of(context).textTheme.bodySmall),
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(decoration: TextDecoration.underline)),
                           )),
                       Obx(
                         () => ListTile(
@@ -158,7 +172,7 @@ class MobileCheckoutScreen extends Responsive {
                         trailing: InkWell(
                           onTap: controller.onChangeLocationAddress,
                           child: Text("change",
-                              style: Theme.of(context).textTheme.bodySmall),
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(decoration: TextDecoration.underline)),
                         ),
                       ),
                       Obx(

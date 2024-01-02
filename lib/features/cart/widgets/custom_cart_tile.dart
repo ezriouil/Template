@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_brand.dart';
 import 'package:test1/common/widgets/custom_counter.dart';
 import 'package:test1/common/widgets/custom_image_network.dart';
@@ -8,14 +7,13 @@ import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class CustomCartTile extends Responsive {
-  final GestureTapCallback onDecrement, onIncrement, onDelete;
+  final GestureTapCallback onDecrement, onIncrement;
   final Product? product;
 
   const CustomCartTile(
       {super.key,
       required this.product,
       required this.onDecrement,
-      required this.onDelete,
       required this.onIncrement});
 
   @override
@@ -25,9 +23,7 @@ class CustomCartTile extends Responsive {
           vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 4,
           horizontal: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-            vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 1.5,
-            horizontal: CustomSizes.SPACE_BETWEEN_ITEMS),
+        padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS / 2),
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS),
@@ -35,48 +31,37 @@ class CustomCartTile extends Responsive {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-
-                InkWell(
-                    onTap: onDelete,
-                    child: Icon(Iconsax.trush_square4,
-                        color: darkLightColor(context)))
-              ],
-            ),
-            const SizedBox(
-                height: CustomSizes
-                    .SPACE_BETWEEN_ITEMS),
-
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomImageNetwork(src: "https://avatars.githubusercontent.com/u/130238246?s=400&u=da527d8650bf8833bf66c213e70d09b8aaa025b7&v=4", width: 70,height: 70),
+                CustomImageNetwork(
+                    src: product?.thumbnail1 ?? "",
+                    fit: BoxFit.fill,
+                    width: 50,
+                    height: 60),
                 // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-                const SizedBox(
-                    width: CustomSizes
-                        .SPACE_BETWEEN_ITEMS / 2),
+                const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       // - - - - - - - - - - - - - - - - - - TITLE - - - - - - - - - - - - - - - - - -  //
                       Text(product?.title ?? "",
                           style: Theme.of(context).textTheme.titleMedium,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis),
 
-
                       // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
                       CustomBrand(brand: product?.brand!),
 
-
-
                       // - - - - - - - - - - - - - - - - - - SIZE - - - - - - - - - - - - - - - - - -  //
-                      Text("size : ${product!.size()}", style: Theme.of(context).textTheme.bodySmall),
+                      Text("size : ${product!.size()}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                  color: grayColor(context)
+                                      .withOpacity(isDark(context) ? 1 : 0.5))),
                     ],
                   ),
                 )
@@ -84,9 +69,7 @@ class CustomCartTile extends Responsive {
             ),
 
             // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-            const SizedBox(
-                height: CustomSizes
-                    .SPACE_BETWEEN_ITEMS),
+            const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS),
 
             // - - - - - - - - - - - - - - - - - - COUNTER + TOTAL - - - - - - - - - - - - - - - - - -  //
             Row(
@@ -99,7 +82,8 @@ class CustomCartTile extends Responsive {
                     onIncrement: onIncrement),
 
                 // - - - - - - - - - - - - - - - - - - TOTAL - - - - - - - - - - - - - - - - - -  //
-                Text("${product?.price} MAD", style: Theme.of(context).textTheme.titleLarge),
+                Text("${product!.price! - 1}.99 MAD",
+                    style: Theme.of(context).textTheme.titleMedium),
               ],
             )
           ],

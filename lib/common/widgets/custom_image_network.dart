@@ -64,14 +64,14 @@ class CustomImageNetwork extends Responsive {
         // - - - - - - - - - - - - - - - - - - DISCOUNT BADGE - - - - - - - - - - - - - - - - - -  //
         if (hasDiscountBadge)
           Padding(
-            padding: const EdgeInsets.only(top: 4, left: 4),
+            padding: const EdgeInsets.only(top: 8, left: 8),
             child: CustomTextBox(oldPrice: product!.oldPrice!, price: product!.price!),
           ),
         // - - - - - - - - - - - - - - - - - - ICON HEART - - - - - - - - - - - - - - - - - -  //
         if (onHeartClick != null)
           Positioned(
-            right: 4,
-            top: 4,
+            right: 6,
+            top: 6,
             child: CustomIconButton(
               onHeartClick: onHeartClick!,
               product: product!,

@@ -1,24 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
-import 'package:test1/bindings/root_Bindings.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:test1/features/home/screens/mobile_home_screen.dart';
-import 'package:test1/features/home/screens/web_home_screen.dart';
-import 'package:test1/utils/responsive/responsive_layout.dart';
-import 'package:test1/utils/theme/theme_app.dart';
+import 'package:test1/features/settings/screens/mobile_settings_screen.dart';
+import 'package:test1/features/store/screens/mobile_store_screen.dart';
+import 'package:test1/features/track/screens/mobile_track_order_screen.dart';
+import 'package:test1/features/wish_list/screens/mobile_wish_list_screen.dart';
+import 'package:test1/utils/responsive/responsive.dart';
 
-class Index extends StatelessWidget {
+class Index extends Responsive {
   const Index({super.key});
 
   @override
-  Widget build(BuildContext context) => GetMaterialApp(
-      themeMode: ThemeMode.system,
-      theme: ThemeApp.lightTheme,
-      darkTheme: ThemeApp.darkTheme,
-      debugShowCheckedModeBanner: false,
-      initialBinding: RootBindings(),
-      home: const ResponsiveLayout(
-          mobile: MobileHomeScreen(),
-          tablet: WebHomeScreen(),
-          web: WebHomeScreen()));
+  Widget execute(BuildContext context) {
+    final IndexController controller = Get.put(IndexController());
+    return Scaffold(
+      body: Obx(() => controller.screens[controller.currentIndex.value]),
+      bottomNavigationBar: Obx(
+        () =>NavigationBar(
+          height: 70.0,
+          elevation: 0.0,
+          selectedIndex: controller.currentIndex.value,
+          onDestinationSelected: controller.onUpdateCurrentIndex,
+          destinations: const [
+            NavigationDestination(icon: Icon(Iconsax.home), label: "Home"),
+            NavigationDestination(icon: Icon(Iconsax.shop), label: "Store"),
+            NavigationDestination(icon: Icon(Iconsax.heart), label: "Wishlist"),
+            NavigationDestination(icon: Icon(Iconsax.user), label: "Profile")
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class IndexController extends GetxController {
+  // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
+  late final RxInt currentIndex;
+
+  // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
+  @override
+  void onInit() {
+    super.onInit();
+    currentIndex = 0.obs;
+  }
+
+  // - - - - - - - - - - - - - - - - - - UPDATE CURRENT INDEX - - - - - - - - - - - - - - - - - -  //
+  onUpdateCurrentIndex(int index) {
+    currentIndex.value = index;
+  }
+
+  // - - - - - - - - - - - - - - - - - - SCREENS - - - - - - - - - - - - - - - - - -  //
+  final screens = const [
+    MobileHomeScreen(),
+    MobileStoreScreen(),
+    MobileWishListScreen(),
+    MobileSettingsScreen(),
+  ];
 }

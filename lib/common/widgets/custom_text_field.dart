@@ -12,9 +12,10 @@ class CustomTextField extends Responsive {
   final Widget? trailingIcon;
   final TextInputType textInputType;
   final double width;
+  final Color? backgroundColor;
   final TextEditingController controller;
   final String? Function(String? value)? validator;
-  final bool withDefaultPadding, withBorder;
+  final bool withDefaultPadding;
 
   const CustomTextField(
       {super.key,
@@ -25,9 +26,9 @@ class CustomTextField extends Responsive {
       this.readOnly = false,
       this.withDefaultPadding = true,
       this.obscureText = false,
-      this.withBorder = true,
       required this.width,
       required this.controller,
+      this.backgroundColor,
       this.textInputType = TextInputType.text,
       this.trailingIcon,
       this.leadingIcon});
@@ -44,7 +45,9 @@ class CustomTextField extends Responsive {
           child: TextFormField(
             controller: controller,
             validator: validator,
-            decoration: InputDecoration(enabledBorder: withBorder ? null : InputBorder.none ,focusedBorder: withBorder ? null : InputBorder.none,
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: backgroundColor ?? CustomColors.TRANSPARENT,
                 errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: isDark(context)
                         ? CustomColors.PRIMARY_DARK
@@ -57,9 +60,11 @@ class CustomTextField extends Responsive {
                       )
                     : null,
                 suffixIcon: trailingIcon,
-                border: const OutlineInputBorder().copyWith(
-                    borderRadius: BorderRadius.circular(14.0),
-                    borderSide: const BorderSide(color: Colors.grey))),
+                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide(
+                        color: backgroundColor == null
+                            ? darkLightColor(context)
+                            : CustomColors.TRANSPARENT))),
             minLines: lines,
             maxLines: lines,
             autocorrect: false,

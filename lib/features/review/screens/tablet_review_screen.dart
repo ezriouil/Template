@@ -75,7 +75,7 @@ class TabletReviewScreen extends Responsive {
               child: CustomTextField(
                   leadingIcon: Iconsax.message,
                   hint: CustomTextStrings.YOUR_REVIEW,
-                  controller: TextEditingController(),
+                  controller: controller.reviewController,
                   validator: (value) => Validator.validateEmptyField(
                       CustomTextStrings.YOUR_REVIEW, value),
                   width: getWidth(context),

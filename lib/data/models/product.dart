@@ -75,6 +75,17 @@ class Product {
     return listSizes;
   }
 
+
+  // - - - - - - - - - - - - - - - - - - PRODUCTS LIST IMAGES - - - - - - - - - - - - - - - - - -  //
+  List<String> productListImages(){
+    final List<String> images = [];
+    images.add(thumbnail1 ?? "");
+    images.add(thumbnail2 ?? "");
+    images.add(thumbnail3 ?? "");
+    images.add(thumbnail4 ?? "");
+    return images;
+  }
+
   // - - - - - - - - - - - - - - - - - - TO JSON - - - - - - - - - - - - - - - - - -  //
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -195,12 +206,12 @@ class Product {
   // - - - - - - - - - - - - - - - - - - *FROM* JSON PRODUCT CART LOCAL - - - - - - - - - - - - - - - - - -  //
   static Product fromJsonProductCartLocal(Map<String, dynamic> json) {
     return Product(
-        id: json[COLUMN_ID],
-        title: json[COLUMN_TITLE],
-        thumbnail1: json[COLUMN_THUMBNAIL],
-        discount: json[COLUMN_COUNT], // COUNT FIELD I JUST REPLACED BY DISCOUNT
-        price: json[COLUMN_PRICE],
-        brand: json[COLUMN_BRAND]);
+        id: json[COLUMN_ID] as int,
+        title: json[COLUMN_TITLE] as String,
+        thumbnail1: json[COLUMN_THUMBNAIL] as String,
+        discount: json[COLUMN_COUNT] as int, // COUNT FIELD I JUST REPLACED BY DISCOUNT
+        brand: json[COLUMN_BRAND] as String,
+        price: json[COLUMN_PRICE] as int);
   }
 
   // - - - - - - - - - - - - - - - - - - *TO* JSON PRODUCT CART LOCAL - - - - - - - - - - - - - - - - - -  //
@@ -216,28 +227,28 @@ class Product {
   // *- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * //
   // *- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * //
 
-  // - - - - - - - - - - - - - - - - - - CHECKOUT CART - - - - - - - - - - - - - - - - - -  //
-  static const String TABLE_CHECKOUT_NAME = "Checkout";
-  static const String CREATE_CHECKOUT_TABLE = "CREATE TABLE $TABLE_CHECKOUT_NAME ( "
-      "$COLUMN_ID INTEGER PRIMARY KEY ,"
-      "$COLUMN_TITLE TEXT ,"
-      "$COLUMN_THUMBNAIL TEXT ,"
-      "$COLUMN_BRAND TEXT )";
-
-  // - - - - - - - - - - - - - - - - - - *FROM* JSON PRODUCT CHECKOUT LOCAL - - - - - - - - - - - - - - - - - -  //
-  static Product fromJsonProductCheckoutLocal(Map<String, dynamic> json) {
-    return Product(
-        id: json[COLUMN_ID],
-        title: json[COLUMN_TITLE],
-        thumbnail1: json[COLUMN_THUMBNAIL],
-        brand: json[COLUMN_BRAND]);
-  }
-
-  // - - - - - - - - - - - - - - - - - - *TO* JSON PRODUCT CHECKOUT LOCAL - - - - - - - - - - - - - - - - - -  //
-  Map<String, dynamic> toJsonProductCheckoutLocal() => {
-    COLUMN_ID: id,
-    COLUMN_TITLE: title,
-    COLUMN_THUMBNAIL: thumbnail1,
-    COLUMN_PRICE: price,
-  };
+  // // - - - - - - - - - - - - - - - - - - CHECKOUT CART - - - - - - - - - - - - - - - - - -  //
+  // static const String TABLE_CHECKOUT_NAME = "Checkout";
+  // static const String CREATE_CHECKOUT_TABLE = "CREATE TABLE $TABLE_CHECKOUT_NAME ( "
+  //     "$COLUMN_ID INTEGER PRIMARY KEY ,"
+  //     "$COLUMN_TITLE TEXT ,"
+  //     "$COLUMN_THUMBNAIL TEXT ,"
+  //     "$COLUMN_BRAND TEXT )";
+  //
+  // // - - - - - - - - - - - - - - - - - - *FROM* JSON PRODUCT CHECKOUT LOCAL - - - - - - - - - - - - - - - - - -  //
+  // static Product fromJsonProductCheckoutLocal(Map<String, dynamic> json) {
+  //   return Product(
+  //       id: json[COLUMN_ID],
+  //       title: json[COLUMN_TITLE],
+  //       thumbnail1: json[COLUMN_THUMBNAIL],
+  //       brand: json[COLUMN_BRAND]);
+  // }
+  //
+  // // - - - - - - - - - - - - - - - - - - *TO* JSON PRODUCT CHECKOUT LOCAL - - - - - - - - - - - - - - - - - -  //
+  // Map<String, dynamic> toJsonProductCheckoutLocal() => {
+  //   COLUMN_ID: id,
+  //   COLUMN_TITLE: title,
+  //   COLUMN_THUMBNAIL: thumbnail1,
+  //   COLUMN_PRICE: price,
+  // };
 }

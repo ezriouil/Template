@@ -24,15 +24,14 @@ class CustomPrices extends Responsive {
                 text: TextSpan(
                   text: (oldPrice - 1).toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: darkLightColor(context),
-                      fontSize: 12.0,
+                      color: darkLightColor(context).withOpacity(0.6),
                       decoration: TextDecoration.lineThrough),
                   children: [
                     TextSpan(
-                      text: ".99 DH",
+                      text: ".99 MAD",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: darkLightColor(context),
-                          fontSize: 8.0,
+                          color: darkLightColor(context).withOpacity(0.6),
+                          fontSize: 12.0,
                           decoration: TextDecoration.lineThrough),
                     )
                   ],
@@ -46,8 +45,8 @@ class CustomPrices extends Responsive {
                       color: darkLightColor(context), letterSpacing: 0.4),
                   children: [
                     TextSpan(
-                      text: ".99 DH",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      text: ".99 MAD",
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: darkLightColor(context), letterSpacing: 0.4),
                     )
                   ],
@@ -61,7 +60,7 @@ class CustomPrices extends Responsive {
               RichText(
                 text: TextSpan(
                   text: (price - 1).toString(),
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: darkLightColor(context), letterSpacing: 0.4),
                   children: [
                     TextSpan(
@@ -73,12 +72,12 @@ class CustomPrices extends Responsive {
                 ),
               ),
               // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
-              const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
+              const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
               // - - - - - - - - - - - - - - - - - - OLD PRICE - - - - - - - - - - - - - - - - - -  //
               RichText(
                 text: TextSpan(
                   text: "${oldPrice - 1}",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: darkLightColor(context).withOpacity(0.6),
                       decoration: TextDecoration.lineThrough),
                   children: [

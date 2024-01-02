@@ -46,7 +46,6 @@ class WishListController extends GetxController {
 
       /// GET WISHLISTS
       final getWishLists = await _repository!.getWishLists();
-      await Future.delayed(const Duration(milliseconds: 500));
 
       if (getWishLists == null) {
         await Future.delayed(const Duration(milliseconds: 500));

@@ -51,7 +51,7 @@ class CustomSettingTile extends Responsive {
             ),
           ),
           const Spacer(),
-          if (trailing != null) Expanded(flex: 2, child: trailing!)
+          if (trailing != null) Expanded(flex: 3, child: trailing!)
         ],
       ),
     );

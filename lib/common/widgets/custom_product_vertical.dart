@@ -31,7 +31,7 @@ class CustomProductVertical extends Responsive {
       child: InkWell(
         onTap: () => {onClick(product.id ?? 1)},
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+          padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS /4),
           // - - - - - - - - - - - - - - - - - - COLUMN - - - - - - - - - - - - - - - - - -  //
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,29 +39,22 @@ class CustomProductVertical extends Responsive {
             children: [
               // - - - - - - - - - - - - - - - - - - IMAGE FROM NETWORK - - - - - - - - - - - - - - - - - -  //
               CustomImageNetwork(
-                width: getWidth(context),
+                width: getWidth(context) * 0.5,
+                height: getWidth(context) * 0.5,
                 src: product.thumbnail1,
-                hasDiscountBadge: product.discount!>0,
+                hasDiscountBadge: product.discount! > 0,
                 product: product,
                 onHeartClick: onHeartClick,
               ),
               // - - - - - - - - - - - - - - - - - - TITLE - - - - - - - - - - - - - - - - - -  //
               Text(
                 product.title ?? "",
-                maxLines: 2,
+                maxLines: 1,
                 style: Theme.of(context).textTheme.titleMedium,
                 overflow: TextOverflow.ellipsis,
               ),
-              Row(
-                children: [
-                  // - - - - - - - - - - - - - - - - - - BRAND - - - - - - - - - - - - - - - - - -  //
-                  CustomBrand(brand: product.brand),
-                  const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
-                  // - - - - - - - - - - - - - - - - - - ICON VERIFY - - - - - - - - - - - - - - - - - -  //
-                  const Icon(Iconsax.verify5,
-                      size: 12, color: CustomColors.BLUE),
-                ],
-              ),
+              CustomBrand(brand: product.brand, iconSize: 12, textSize: 10,),
+              const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS/1.5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

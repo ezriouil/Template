@@ -21,12 +21,12 @@ class CustomCounter extends Responsive {
         // - - - - - - - - - - - - - - - - - - MINUS BUTTON - - - - - - - - - - - - - - - - - -  //
         InkWell(
           onTap: onDecrement,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS / 2),
           child: Container(
             decoration: BoxDecoration(
                 color: darkLightColor(context).withOpacity(0.2),
-                borderRadius: BorderRadius.circular(50)),
-            padding: const EdgeInsets.all(6.0),
+                borderRadius: BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS / 2)),
+            padding: const EdgeInsets.all(2.0),
             child: const Icon(
               Iconsax.minus,
               color: CustomColors.WHITE,
@@ -38,7 +38,7 @@ class CustomCounter extends Responsive {
         const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
 
         // - - - - - - - - - - - - - - - - - - COUNTER TEXT - - - - - - - - - - - - - - - - - -  //
-        Text(counter, style: Theme.of(context).textTheme.headlineSmall),
+        Text(counter, style: Theme.of(context).textTheme.titleLarge),
 
         // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
         const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
@@ -46,12 +46,12 @@ class CustomCounter extends Responsive {
         // - - - - - - - - - - - - - - - - - - ADD BUTTON - - - - - - - - - - - - - - - - - -  //
         InkWell(
           onTap: onIncrement,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS / 2),
           child: Container(
             decoration: BoxDecoration(
                 color: primaryColor(context),
-                borderRadius: BorderRadius.circular(50)),
-            padding: const EdgeInsets.all(6.0),
+                borderRadius: BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS / 2)),
+            padding: const EdgeInsets.all(2.0),
             child: const Icon(
               Iconsax.add,
               color: CustomColors.WHITE,

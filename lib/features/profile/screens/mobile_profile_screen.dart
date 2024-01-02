@@ -27,10 +27,6 @@ class MobileProfileScreen extends Responsive {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor(context),
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: primaryColor(context),
-              statusBarIconBrightness:
-                  isDark(context) ? Brightness.light : Brightness.light),
           title: Text("Update Profile",
               style: Theme.of(context)
                   .textTheme

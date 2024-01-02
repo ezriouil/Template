@@ -33,22 +33,6 @@ class WebCartScreen extends Responsive {
         ),
       ),
       body: const Placeholder(),
-      floatingActionButton: Obx(
-        () => AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
-          child: FloatingActionButton(
-            onPressed: () {
-              controller.scrollController.animateTo(0,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.fastOutSlowIn);
-            },
-            elevation: 16.0,
-            backgroundColor: primaryColor(context),
-            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
-          ),
-        ),
-      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
             borderRadius:
@@ -59,7 +43,7 @@ class WebCartScreen extends Responsive {
         child: // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
             CustomElevatedButton(
           text: "Checkout ${controller.total.value - 1}.99",
-          onClick: controller.onCheckout,
+          onClick: (){},
           width: getWidth(context),
           style: ElevatedButton.styleFrom(
               side: const BorderSide(color: CustomColors.TRANSPARENT)),

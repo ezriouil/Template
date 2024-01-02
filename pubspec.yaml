@@ -27,6 +27,7 @@ dependencies:
   lottie: ^2.7.0
   smooth_page_indicator: ^1.1.0
   image_picker: ^1.0.5
+  carousel_slider: ^4.2.1
 
   # FIREBASE
   firebase_core: ^2.24.2
@@ -66,6 +67,7 @@ flutter:
     - assets/icons/security/
     - assets/icons/phone_stores/
     - assets/icons/shipping/
+    - assets/icons/categories/
     - assets/images/
     - assets/images/store_history/
     - assets/animations/

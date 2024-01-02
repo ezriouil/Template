@@ -1,10 +1,9 @@
 class Review {
   // - - - - - - - - - - - - - - - - - - STATES - - - - - - - - - - - - - - - - - -  //
 
-  int id, userRating;
+  final int id, userRating;
   final String? userName,
       userProfileImg,
-      productTitle,
       userComment,
       userCommentTime,
       storeComment,
@@ -14,7 +13,6 @@ class Review {
   Review(
       {this.id = 0,
       this.userRating = 0,
-      this.productTitle = "",
       this.userName = "",
       this.userProfileImg = "",
       this.userComment = "",
@@ -27,7 +25,6 @@ class Review {
         'id': id,
         'userRating': userRating,
         'userName': userName,
-        'productName': productTitle,
         'userProfileImg': userProfileImg,
         'userComment': userComment,
         'userCommentTime': userCommentTime,
@@ -41,7 +38,6 @@ class Review {
         id: json['id'],
         userRating: json['userRating'],
         userName: json['userName'],
-        productTitle: json['productName'],
         userProfileImg: json['userProfileImg'],
         userComment: json['userComment'],
         userCommentTime: json['userCommentTime'],

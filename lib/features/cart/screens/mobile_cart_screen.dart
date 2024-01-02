@@ -6,6 +6,7 @@ import 'package:test1/features/cart/cart_controller.dart';
 import 'package:test1/features/cart/widgets/custom_cart_tile.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
+import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class MobileCartScreen extends Responsive {
@@ -37,7 +38,6 @@ class MobileCartScreen extends Responsive {
       // - - - - - - - - - - - - - - - - - - LIST VIEW - - - - - - - - - - - - - - - - - -  //
       body: Obx(()=>ListView.builder(
             padding: EdgeInsets.zero,
-            controller: controller.scrollController,
             itemCount: controller.cartProducts.length,
             itemBuilder: (BuildContext context, int index) => CustomCartTile(
                 product: controller.cartProducts[index],
@@ -48,26 +48,7 @@ class MobileCartScreen extends Responsive {
                 onDecrement: () {
                   controller.decrementTheCounter(
                       product: controller.cartProducts[index]);
-                },
-                onDelete: (){controller.onDeleteItem(product: controller.cartProducts[index]);})),
-      ),
-
-      // - - - - - - - - - - - - - - - - - - FLOATING ACTION BUTTON - - - - - - - - - - - - - - - - - -  //
-      floatingActionButton: Obx(
-        () => AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
-          child: FloatingActionButton(
-            onPressed: () {
-              controller.scrollController.animateTo(0,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.fastOutSlowIn);
-            },
-            elevation: 16.0,
-            backgroundColor: primaryColor(context),
-            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
-          ),
-        ),
+                })),
       ),
 
       // - - - - - - - - - - - - - - - - - - BOTTOM NAVIGATION BAR - - - - - - - - - - - - - - - - - -  //
@@ -80,8 +61,8 @@ class MobileCartScreen extends Responsive {
         width: getWidth(context),
         child: // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
             Obx(()=> CustomElevatedButton(
-                        text: controller.total.value > 0 ? "Checkout ${controller.total.value}.00" : "waiting",
-                        onClick: controller.onCheckout,
+                        text: controller.total.value > 0 ? "Checkout ${controller.total.value - 1}.99" : "waiting",
+                        onClick: ()=>controller.onCheckout(deviceType: DeviceType.MOBILE),
                         width: getWidth(context),
                         style: ElevatedButton.styleFrom(
                 side: const BorderSide(color: CustomColors.TRANSPARENT)),

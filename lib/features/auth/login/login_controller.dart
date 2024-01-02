@@ -13,6 +13,8 @@ import 'package:test1/features/auth/forget_password/screens/web_forget_password.
 import 'package:test1/features/auth/sing_up/screens/mobile_sign_up_screen.dart';
 import 'package:test1/features/auth/sing_up/screens/tablet_sign_up_screen.dart';
 import 'package:test1/features/auth/sing_up/screens/web_sign_up_screen.dart';
+import 'package:test1/features/home/screens/mobile_home_screen.dart';
+import 'package:test1/index.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/helpers/network.dart';
@@ -55,63 +57,64 @@ class LoginController extends GetxController {
   // - - - - - - - - - - - - - - - - - - LOGIN TO ACCOUNT WITH EMAIL AND PASSWORD - - - - - - - - - - - - - - - - - -  //
 
   void onLogin() async {
-    try {
-      /// CHECK THE NETWORK
-      final bool hasConnection = await _checkTheNetwork();
-      if (!hasConnection) return;
-
-      /// CHECK FROM VALIDATION
-      if (!formState.currentState!.validate()) return;
-
-      /// START LOADER
-      Get.to(
-          const CustomAnimationScreen(text: "We are processing your info ..."));
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// LOGIN INTO ACCOUNT WITH EMAIL AND PASSWORD
-      _userCredential = await LoginRepository.loginWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      if (_userCredential == null) {
-        Get.back();
-        await Future.delayed(const Duration(milliseconds: 500));
-
-        /// SHOW THE ERROR SNACK BAR
-        CustomSnackBars.error(
-            title: "The email or password incorrect!",
-            message:
-                "if you forget your password click on forget password below.");
-        await Future.delayed(const Duration(milliseconds: 500));
-        return;
-      }
-
-      /// SAVE EMAIL AND PASSWORD INTO LOCAL STORAGE
-      if (checkbox.isTrue) {
-        await LocalStorage.upsert(
-            key: CustomTextStrings.EMAIL,
-            value: emailController.text,
-            storage: _storage);
-        await LocalStorage.upsert(
-            key: CustomTextStrings.PASSWORD,
-            value: passwordController.text,
-            storage: _storage);
-      }
-
-      /// STOP THE LOADER
-      Get.back();
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// NAVIGATE TO HOME SCREEN
-      //Get.offAll();
-    } catch (_) {
-      /// STOP THE LOADER
-      await Future.delayed(const Duration(milliseconds: 500));
-      Get.back();
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      /// SHOW THE ERROR SNACK BAR
-      CustomSnackBars.error(
-          title: "Error 404", message: "please try again next time!");
-    }
+    Get.to(()=>const Index());
+    // try {
+    //   /// CHECK THE NETWORK
+    //   final bool hasConnection = await _checkTheNetwork();
+    //   if (!hasConnection) return;
+    //
+    //   /// CHECK FROM VALIDATION
+    //   if (!formState.currentState!.validate()) return;
+    //
+    //   /// START LOADER
+    //   Get.to(
+    //       const CustomAnimationScreen(text: "We are processing your info ..."));
+    //   await Future.delayed(const Duration(milliseconds: 500));
+    //
+    //   /// LOGIN INTO ACCOUNT WITH EMAIL AND PASSWORD
+    //   _userCredential = await LoginRepository.loginWithEmailAndPassword(
+    //       email: emailController.text, password: passwordController.text);
+    //   if (_userCredential == null) {
+    //     Get.back();
+    //     await Future.delayed(const Duration(milliseconds: 500));
+    //
+    //     /// SHOW THE ERROR SNACK BAR
+    //     CustomSnackBars.error(
+    //         title: "The email or password incorrect!",
+    //         message:
+    //             "if you forget your password click on forget password below.");
+    //     await Future.delayed(const Duration(milliseconds: 500));
+    //     return;
+    //   }
+    //
+    //   /// SAVE EMAIL AND PASSWORD INTO LOCAL STORAGE
+    //   if (checkbox.isTrue) {
+    //     await LocalStorage.upsert(
+    //         key: CustomTextStrings.EMAIL,
+    //         value: emailController.text,
+    //         storage: _storage);
+    //     await LocalStorage.upsert(
+    //         key: CustomTextStrings.PASSWORD,
+    //         value: passwordController.text,
+    //         storage: _storage);
+    //   }
+    //
+    //   /// STOP THE LOADER
+    //   Get.back();
+    //   await Future.delayed(const Duration(milliseconds: 500));
+    //
+    //   /// NAVIGATE TO HOME SCREEN
+    //   //Get.offAll();
+    // } catch (_) {
+    //   /// STOP THE LOADER
+    //   await Future.delayed(const Duration(milliseconds: 500));
+    //   Get.back();
+    //   await Future.delayed(const Duration(milliseconds: 500));
+    //
+    //   /// SHOW THE ERROR SNACK BAR
+    //   CustomSnackBars.error(
+    //       title: "Error 404", message: "please try again next time!");
+    // }
   }
 
   // - - - - - - - - - - - - - - - - - - LOGIN WITH GOOGLE - - - - - - - - - - - - - - - - - -  //

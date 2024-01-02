@@ -13,4 +13,8 @@ class CustomApi {
   // - - - - - - - - - - - - - - - - - - NOTIFICATION ACTIONS - - - - - - - - - - - - - - - - - -  //
   static const ACTION_GET_NOTIFICATIONS = "?action=getNotifications";
   static const ACTION_DELETE_NOTIFICATION_BY_ID = "?action=deleteNotificationById&id=";
+
+  // - - - - - - - - - - - - - - - - - - ORDER ACTIONS - - - - - - - - - - - - - - - - - -  //
+  static const ACTION_GET_ORDERS = "?action=getOrders";
+
 }

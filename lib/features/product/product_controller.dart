@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
@@ -26,6 +27,8 @@ class ProductController extends GetxController {
   late RxList<String> productSizes;
   late RxInt counter;
   late RxBool heart;
+  late CarouselController pageController;
+  late RxInt currentPageIndex;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -35,10 +38,12 @@ class ProductController extends GetxController {
     _database = AppDatabase();
     mainThumbnail = "".obs;
     sizeSelected = "".obs;
-    counter = 0.obs;
+    counter = 1.obs;
     productSizes = RxList.empty();
     heart = false.obs;
     product = null.obs;
+    pageController = CarouselController();
+    currentPageIndex = 0.obs;
     _init();
     mainThumbnail.value = testProduct.thumbnail1!;
     updateProductSizesList(testProduct);
@@ -49,6 +54,7 @@ class ProductController extends GetxController {
     final instance = await _database!.database;
     _wishListRepository = WishListRepository(instance);
     _cartRepository = CartRepository(instance);
+    onGetProductWishListById(6);
     // const int productId = 1 /*Get.arguments as int*/;
     // await onGetProductInfo(productId);
     // await onGetProductWishListById(productId);
@@ -97,8 +103,7 @@ class ProductController extends GetxController {
   Future<void> onGetProductWishListById(id) async {
     try {
       /// GET WISHLIST BY ID
-      final Product? productWishList =
-          await _wishListRepository!.getWishListById(id: id);
+      final Product? productWishList = await _wishListRepository!.getWishListById(id: id);
 
       if (productWishList == null) {
         heart.value = false;
@@ -248,15 +253,15 @@ class ProductController extends GetxController {
       id: 6,
       title: "Jacket cot noir color",
       thumbnail1:
-          "https://www.marwa.com/media/catalog/product/cache/ea8393ab089fbcfdc2d5454cda4cf9fa/v/1/v1090h24_black_devant_1.jpg",
+          "https://static.lefties.com/9/photos2/2024/V/0/1/p/5811/300/712/06/5811300712_2_9_1.jpg?t=1701180509424",
       thumbnail2:
           "https://www.marwa.com/media/catalog/product/cache/ea8393ab089fbcfdc2d5454cda4cf9fa/v/1/v1090h24_black_dos.jpg",
       thumbnail3:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLxKBisanIO3zZ1XTm_oxcZrAMWG89SACmFg&usqp=CAU",
+          "https://static.pullandbear.net/2/photos//2023/I/1/1/p/1101/040/040/1101040040_2_1_8.jpg?t=1699002546518&imwidth=750",
       thumbnail4:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsG0R_oBHRvL6WLQezjdbbNpSZcrilOPD0lQ&usqp=CAU",
+          "https://static.lefties.com/9/photos2/2024/V/0/1/p/5801/303/183/01/5801303183_2_2_1.jpg?t=1701948109326",
       description:
-          "Jacket cot noir color Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cotr Jacket cot noir color Jacket cot noir color Jacket cot noir color",
+          "Jacket cot noir color Jacket cot noir color Jacket cot Jacket cot noir color Jacket cot Jacket cot noir color Jacket cot Jacket cot noir color Jacket cot Jacket cot noir color Jacket cot noir color Jacket cot noir color",
       inStock: true,
       discount: 1,
       oldPrice: 230,
@@ -281,7 +286,8 @@ class ProductController extends GetxController {
   navigateToReviewsScreen({required DeviceType deviceType}) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.to(() => const MobileReviewScreen(), arguments: [testProduct.id.toString()]);
+        Get.to(() => const MobileReviewScreen(),
+            arguments: [testProduct.id.toString()]);
       case DeviceType.TABLE:
         Get.to(() => const TabletReviewScreen(), arguments: [testProduct.id]);
       case DeviceType.WEB:

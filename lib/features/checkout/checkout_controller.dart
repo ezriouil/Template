@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:test1/common/widgets/custom_dialog.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
 import 'package:test1/data/models/location_address.dart';
+import 'package:test1/data/models/product.dart';
+import 'package:test1/data/repositories/local_repositories/cart_repository.dart';
 import 'package:test1/data/repositories/local_repositories/location_address_repository.dart';
 import 'package:test1/features/checkout/widgets/custom_addresses_bottom_sheet.dart';
 import 'package:test1/features/checkout/widgets/custom_checkout_bottom_sheet.dart';
 import 'package:test1/features/checkout/widgets/custom_payment_methode.dart';
+import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/local/database/app_database.dart';
@@ -21,28 +24,33 @@ class CheckoutController extends GetxController {
       zipCodeController;
 
   late final AppDatabase? _database;
-  late final LocationAddressRepository? _repository;
+  late final LocationAddressRepository? _locationRepository;
+  late final CartRepository? _cartRepository;
 
   late Rx<LocationAddress?> onSelected, currentLocationAddress;
-  late RxList<LocationAddress>? locationAddresses;
+  late RxList<LocationAddress> locationAddresses;
+  late RxList<Product> cartProducts;
+
+  late int subTotal;
 
   late final RxString methodPaymentSelectedValue;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
-
   @override
   void onInit() {
     super.onInit();
-    codePromoController = TextEditingController();
     cardNumberController = TextEditingController();
     cardNameController = TextEditingController();
     expiryDateController = TextEditingController();
     securityCodeController = TextEditingController();
     zipCodeController = TextEditingController();
+    codePromoController = TextEditingController();
     onSelected = LocationAddress().obs;
     currentLocationAddress = LocationAddress().obs;
     locationAddresses = RxList.empty();
+    cartProducts = RxList.empty();
     methodPaymentSelectedValue = "Online".obs;
+    subTotal = Get.arguments;
     _database = AppDatabase();
     init();
   }
@@ -50,7 +58,9 @@ class CheckoutController extends GetxController {
   // - - - - - - - - - - - - - - - - - - INIT - - - - - - - - - - - - - - - - - -  //
   init() async {
     final instance = await _database!.database;
-    _repository = LocationAddressRepository(instance);
+    _locationRepository = LocationAddressRepository(instance);
+    _cartRepository = CartRepository(instance);
+    await onGetCartProducts();
     await onGetAddresses();
   }
 
@@ -89,7 +99,7 @@ class CheckoutController extends GetxController {
   Future<void> onGetAddresses() async {
     try {
       /// GET ADDRESSES
-      final addresses = await _repository!.getLocationAddresses();
+      final addresses = await _locationRepository!.getLocationAddresses();
 
       if (addresses == null) {
         /// SHOW THE ERROR SNACK BAR
@@ -97,10 +107,10 @@ class CheckoutController extends GetxController {
         return;
       }
 
-      locationAddresses?.addAll(addresses);
+      locationAddresses.addAll(addresses);
 
-      if (locationAddresses!.isNotEmpty) {
-        currentLocationAddress.value = locationAddresses!.first;
+      if (locationAddresses.isNotEmpty) {
+        currentLocationAddress.value = locationAddresses.first;
       }
 
       /// STOP THE LOADER
@@ -116,8 +126,37 @@ class CheckoutController extends GetxController {
     }
   }
 
+  // - - - - - - - - - - - - - - - - - - GET PRODUCTS FROM CART - - - - - - - - - - - - - - - - - -  //
+  Future onGetCartProducts() async {
+    try {
+      /// GET WISHLISTS
+      final getProductsFromCart = await _cartRepository!.getProductsFromCart();
+      await Future.delayed(const Duration(milliseconds: 500));
+
+
+      if (getProductsFromCart == null) {
+        return;
+      }
+
+      if (getProductsFromCart.isEmpty) {
+        cartProducts.value = [];
+        return;
+      }
+
+      cartProducts.addAll(getProductsFromCart);
+
+      /// STOP THE LOADER
+    } catch (_) {}
+  }
+
   // - - - - - - - - - - - - - - - - - - VALIDATE CODE PROMO BUTTON - - - - - - - - - - - - - - - - - -  //
-  onValidateCodePromo() {}
+  onValidateCodePromo() {
+    if(codePromoController.text.isEmpty){
+      CustomSnackBars.error(title: "Field empty", message: "please try again!");
+      return;
+    }
+
+  }
 
   // - - - - - - - - - - - - - - - - - - CHECKOUT BUTTON - - - - - - - - - - - - - - - - - -  //
   onCheckout() {
@@ -158,6 +197,7 @@ class CheckoutController extends GetxController {
         title: "",
         middleText: "",
         titlePadding: EdgeInsets.zero,
+        backgroundColor: CustomColors.TRANSPARENT,
         content: CustomDialog(
           title: "Confirm your payment",
           subTitle: "By clicking on accept you will complete your paiment",
@@ -167,7 +207,6 @@ class CheckoutController extends GetxController {
             isOnline ? printInfo(info: "yes") : printInfo(info: "no");
           },
           onButtonLeftClick: Get.back,
-        ),
-        backgroundColor: Colors.transparent);
+        ));
   }
 }
