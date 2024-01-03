@@ -35,6 +35,8 @@ class CheckoutController extends GetxController {
 
   late final RxString methodPaymentSelectedValue;
 
+  final durationSecond = const Duration(seconds: 1);
+
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void onInit() {
@@ -91,7 +93,7 @@ class CheckoutController extends GetxController {
             },
             locationAddresses: locationAddresses,
             locationAddress: currentLocationAddress.value),
-      ),
+      ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond
     );
   }
 
@@ -155,12 +157,12 @@ class CheckoutController extends GetxController {
       CustomSnackBars.error(title: "Field empty", message: "please try again!");
       return;
     }
-
   }
 
   // - - - - - - - - - - - - - - - - - - CHECKOUT BUTTON - - - - - - - - - - - - - - - - - -  //
   onCheckout() {
     if (methodPaymentSelectedValue.value == "Online") {
+
       Get.bottomSheet(
         CustomCheckoutBottomSheet(
           onClick: () async {
@@ -184,6 +186,7 @@ class CheckoutController extends GetxController {
           securityCodeController: securityCodeController,
           expiryDateController: expiryDateController,
         ),
+          enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond
       );
     }
     if (methodPaymentSelectedValue.value == "Offline") {

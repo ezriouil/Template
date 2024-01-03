@@ -25,8 +25,7 @@ class CustomTextBox extends Responsive {
 
   @override
   Widget execute(BuildContext context) {
-    final calculateDiscount =
-        (((oldPrice - price) / oldPrice) * 100).toStringAsFixed(0);
+    final calculateDiscount = price == 0 ? "00" : (((oldPrice - price) / oldPrice) * 100).toStringAsFixed(0);
     return InkWell(
       onTap: onSelected == null ? null : () => onSelected!(text!),
       child: Container(

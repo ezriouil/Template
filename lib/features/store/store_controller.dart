@@ -10,6 +10,8 @@ class StoreController extends GetxController {
   late final Rx<Color?> filterColorSelected;
   late final Rx<String?> filterCategorySelected;
 
+  final durationSecond = const Duration(seconds: 1);
+
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void onInit() {
@@ -22,17 +24,18 @@ class StoreController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - COLORS - - - - - - - - - - - - - - - - - -  //
   final colors = [
+    CustomColors.BLACK,
+    CustomColors.WHITE,
     CustomColors.RED,
     CustomColors.GREEN,
-    CustomColors.WHITE,
     CustomColors.YELLOW_LIGHT,
     CustomColors.BLUE,
-    CustomColors.BLACK,
     CustomColors.GREY_LIGHT,
   ];
 
   // - - - - - - - - - - - - - - - - - - CATEGORIES - - - - - - - - - - - - - - - - - -  //
   final categories = [
+    CustomIconStrings.ALL_CATEGORIES,
     CustomIconStrings.CARDIGAN,
     CustomIconStrings.DRESS,
     CustomIconStrings.JACKET,
@@ -44,9 +47,27 @@ class StoreController extends GetxController {
   ];
 
   // - - - - - - - - - - - - - - - - - - INIT - - - - - - - - - - - - - - - - - -  //
-  init() async {}
+  init() async {
+    await Future.delayed(durationSecond);
+    Get.bottomSheet(Obx(
+          () => CustomFilterBottomSheet(
+          colors: colors,
+          categories: categories,
+          colorSelected: filterColorSelected.value,
+          onColorChange: (color) {
+            filterColorSelected.value = color;
+          },
+          onCategoryChange: (category) {
+            filterCategorySelected.value = category;
+          },
+          onFilter: () {
 
-  // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
+          },
+          categorySelected: filterCategorySelected.value),
+    ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
+  }
+
+  // - - - - - - - - - - - - - - - - - - SHOW FILTER BOTTOM SHEET - - - - - - - - - - - - - - - - - -  //
   showFilterBottomSheet() {
     Get.bottomSheet(Obx(
       () => CustomFilterBottomSheet(
@@ -55,16 +76,15 @@ class StoreController extends GetxController {
           colorSelected: filterColorSelected.value,
           onColorChange: (color) {
             filterColorSelected.value = color;
-            print(color);
           },
           onCategoryChange: (category) {
             filterCategorySelected.value = category;
           },
           onFilter: () {
-            Get.back();
+
           },
           categorySelected: filterCategorySelected.value),
-    ));
+    ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
   }
 
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //

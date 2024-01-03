@@ -1,7 +1,7 @@
 class Product {
   // - - - - - - - - - - - - - - - - - - STATES - - - - - - - - - - - - - - - - - -  //
 
-  final int? oldPrice, discount;
+  final int?id, price, oldPrice, discount ;
   final bool? inStock,
       sizeSmall,
       sizeMedium,
@@ -21,21 +21,20 @@ class Product {
       made,
       categoryId,
       color;
-  final int? id, price;
 
   // - - - - - - - - - - - - - - - - - - CONSTRUCTOR- - - - - - - - - - - - - - - - - -  //
   Product({
-    this.id,
-    this.title,
-    this.inStock,
-    this.thumbnail1,
-    this.description,
-    this.type,
-    this.price,
-    this.brand,
-    this.sizeSmall,
-    this.sizeMedium,
-    this.sizeLarge,
+    this.id = 0,
+    this.title = "",
+    this.inStock = false,
+    this.thumbnail1 = "",
+    this.description = "",
+    this.type = "",
+    this.price = 0,
+    this.brand = "",
+    this.sizeSmall = false,
+    this.sizeMedium = false,
+    this.sizeLarge = false,
     this.thumbnail2 = "",
     this.thumbnail3 = "",
     this.thumbnail4 = "",
@@ -116,29 +115,29 @@ class Product {
   // - - - - - - - - - - - - - - - - - - FROM JSON - - - - - - - - - - - - - - - - - -  //
   static Product fromJson(Map json) {
     return Product(
-      id: json['id'],
-      title: json['title'],
-      inStock: json['inStock'],
-      thumbnail1: json['thumbnail1'],
-      thumbnail2: json['thumbnail1'],
-      thumbnail3: json['thumbnail3'],
-      thumbnail4: json['thumbnail4'],
-      description: json['description'],
-      type: json['type'],
-      discount: json['discount'],
-      oldPrice: json['oldPrice'],
-      price: json['price'],
-      brand: json['brand'],
-      categoryId: json['categoryId'],
-      made: json['made'],
-      color: json['color'],
-      sizeSmall: json['sizeSmall'],
-      sizeMedium: json['sizeMedium'],
-      sizeLarge: json['sizeLarge'],
-      sizeXLarge: json['sizeXLarge'],
-      sizeXXLarge: json['sizeXXLarge'],
-      sizeXXXLarge: json['sizeXXXLarge'],
-      sizeXXXXLarge: json['sizeXXXXLarge'],
+      id: json['id'] as int,
+      title: json['title'] as String,
+      thumbnail1: json['thumbnail1'] as String,
+      thumbnail2: json['thumbnail1'] as String,
+      thumbnail3: json['thumbnail3'] as String,
+      thumbnail4: json['thumbnail4'] as String,
+      description: json['description'] as String,
+      type: json['type'] as String,
+      discount: json['discount'] as int,
+      oldPrice: json['oldPrice'] as int,
+      inStock: json['inStock'] as bool,
+      price: json['price'] as int,
+      brand: json['brand'] as String,
+      categoryId: json['categoryId'] as String,
+      made: json['made'] as String,
+      color: json['color'] as String,
+      sizeSmall: json['sizeSmall'] as bool,
+      sizeMedium: json['sizeMedium'] as bool,
+      sizeLarge: json['sizeLarge'] as bool,
+      sizeXLarge: json['sizeXLarge'] as bool,
+      sizeXXLarge: json['sizeXXLarge'] as bool,
+      sizeXXXLarge: json['sizeXXXLarge'] as bool,
+      sizeXXXXLarge: json['sizeXXXXLarge'] as bool,
     );
   }
 

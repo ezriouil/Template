@@ -42,7 +42,7 @@ class CustomFilterBottomSheet extends Responsive {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Category", style: Theme.of(context).textTheme.headlineSmall),
+            Text("Categories", style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
             SizedBox(
               height: 50,
@@ -70,10 +70,10 @@ class CustomFilterBottomSheet extends Responsive {
                       )),
             ),
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS),
-            Text("Color", style: Theme.of(context).textTheme.headlineSmall),
+            Text("Colors", style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
             SizedBox(
-              height: 60,
+              height: 44,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: colors.length,
@@ -91,10 +91,10 @@ class CustomFilterBottomSheet extends Responsive {
                                         : 1.0),
                                 borderRadius: BorderRadius.circular(30)),
                             padding: const EdgeInsets.all(
-                                CustomSizes.SPACE_BETWEEN_ITEMS),
+                                CustomSizes.SPACE_BETWEEN_ITEMS/2),
                             margin: const EdgeInsets.symmetric(
                                 horizontal:
-                                    CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+                                    CustomSizes.SPACE_BETWEEN_ITEMS / 4),
                             child: Icon(
                                 colorSelected == colors[index]
                                     ? Icons.check
@@ -115,7 +115,7 @@ class CustomFilterBottomSheet extends Responsive {
                 onClick: () {}),
             const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
             CustomSettingTile(
-                icon: Iconsax.ticket_discount,
+                icon: Iconsax.discount_shape,
                 title: "Has Discount",
                 subTitle: "Filter products has discount",
                 trailing: Switch(value: true, onChanged: (value) {}),

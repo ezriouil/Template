@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:test1/bindings/root_Bindings.dart';
@@ -12,7 +11,6 @@ import 'utils/theme/theme_app.dart';
 
 void main() async {
   //await GetStorage.init();
-//  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FlutterNativeSplash.remove();

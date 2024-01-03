@@ -11,7 +11,6 @@ class NotificationRepository {
 
 
   // - - - - - - - - - - - - - - - - - - GET NOTIFICATIONS - - - - - - - - - - - - - - - - - -  //
-
   static Future<List<LocalNotification>?> getNotifications() async {
     final response = await Http.get(CustomApi.ACTION_GET_NOTIFICATIONS);
     if (response == null) return null;

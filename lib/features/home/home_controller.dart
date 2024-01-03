@@ -2,6 +2,12 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/data/models/product.dart';
+import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
+import 'package:test1/features/product/screens/mobile_product_screen.dart';
+import 'package:test1/features/store/screens/mobile_store_screen.dart';
+import 'package:test1/index.dart';
+import 'package:test1/utils/constants/custom_icon_strings.dart';
+import 'package:test1/utils/device/device_utility.dart';
 
 class HomeController extends GetxController{
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
@@ -22,6 +28,78 @@ class HomeController extends GetxController{
     scrollController = ScrollController();
     pageController = CarouselController();
     currentPageIndex = 0.obs;
+    init();
   }
+
+  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
+  init()async {
+    await _onGetProducts();
+  }
+
+  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
+  void onNavigateToProductScreen({required DeviceType deviceType, required int id}){
+    switch(deviceType){
+      case DeviceType.MOBILE: Get.to(()=>const MobileProductScreen(), arguments: id);
+      case DeviceType.TABLE:  Get.off(const MobileStoreScreen(), arguments: true);
+      case DeviceType.WEB:  Get.off(const MobileStoreScreen(), arguments: true);
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
+  void onNavigateToShopScreen({required DeviceType deviceType}){
+    switch(deviceType){
+      case DeviceType.MOBILE: {
+        IndexController.currentIndex.value = 1;
+      }
+      case DeviceType.TABLE:  Get.off(const MobileStoreScreen(), arguments: true);
+      case DeviceType.WEB:  Get.off(const MobileStoreScreen(), arguments: true);
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - FETCH PRODUCT FROM REMOTE DATABASE - - - - - - - - - - - - - - - - - -  //
+  Future<void> _onGetProducts() async {
+    try {
+      /// GET NOTIFICATIONS
+      final getProducts = await ProductRepository.getProducts();
+
+      if (getProducts == null) {
+        /// SHOW THE ERROR SNACK BAR
+        isLoading.value = false;
+        errorMsg.value = "Try again..";
+        return;
+      }
+
+      if (getProducts.isEmpty) {
+        productsLists.value = [];
+
+        /// SHOW THE ERROR SNACK BAR
+        isLoading.value = false;
+        return;
+      }
+      productsLists.addAll(getProducts);
+
+      print(productsLists.first.title);
+
+      /// STOP THE LOADER
+      isLoading.value = false;
+    } catch (e) {
+      /// STOP THE LOADER
+      isLoading.value = false;
+      print(e);
+      errorMsg.value = "Try again..";
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - CATEGORIES - - - - - - - - - - - - - - - - - -  //
+  final categories = [
+    CustomIconStrings.CARDIGAN,
+    CustomIconStrings.DRESS,
+    CustomIconStrings.JACKET,
+    CustomIconStrings.JEANS,
+    CustomIconStrings.SCARF,
+    CustomIconStrings.SNEAKERS,
+    CustomIconStrings.TIE,
+    CustomIconStrings.TSHIRT,
+  ];
 
 }

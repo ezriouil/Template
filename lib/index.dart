@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:test1/features/home/screens/mobile_home_screen.dart';
 import 'package:test1/features/settings/screens/mobile_settings_screen.dart';
 import 'package:test1/features/store/screens/mobile_store_screen.dart';
-import 'package:test1/features/track/screens/mobile_track_order_screen.dart';
 import 'package:test1/features/wish_list/screens/mobile_wish_list_screen.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
@@ -15,12 +14,12 @@ class Index extends Responsive {
   Widget execute(BuildContext context) {
     final IndexController controller = Get.put(IndexController());
     return Scaffold(
-      body: Obx(() => controller.screens[controller.currentIndex.value]),
+      body: Obx(() => controller.screens[IndexController.currentIndex.value]),
       bottomNavigationBar: Obx(
         () =>NavigationBar(
           height: 70.0,
           elevation: 0.0,
-          selectedIndex: controller.currentIndex.value,
+          selectedIndex: IndexController.currentIndex.value,
           onDestinationSelected: controller.onUpdateCurrentIndex,
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: "Home"),
@@ -36,7 +35,7 @@ class Index extends Responsive {
 
 class IndexController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
-  late final RxInt currentIndex;
+  static late final RxInt currentIndex;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -46,7 +45,7 @@ class IndexController extends GetxController {
   }
 
   // - - - - - - - - - - - - - - - - - - UPDATE CURRENT INDEX - - - - - - - - - - - - - - - - - -  //
-  onUpdateCurrentIndex(int index) {
+   onUpdateCurrentIndex(int index) {
     currentIndex.value = index;
   }
 

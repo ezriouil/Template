@@ -33,13 +33,7 @@ class MobileSettingsScreen extends Responsive {
                         .textTheme
                         .headlineMedium
                         ?.copyWith(color: CustomColors.WHITE)),
-                leading: InkWell(
-                  onTap: () => Get.back(),
-                  child: const Icon(
-                    Iconsax.arrow_left_24,
-                    color: CustomColors.WHITE,
-                  ),
-                ),
+                automaticallyImplyLeading: false,
                 centerTitle: false,
                 backgroundColor: primaryColor(context))
           ];

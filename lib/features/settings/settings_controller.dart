@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:test1/features/location_address/screens/mobile/mobile_location_screen.dart';
 import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
 import 'package:test1/features/notification/screens/tablet_notification_screen.dart';
 import 'package:test1/features/notification/screens/web_notification_screen.dart';
@@ -70,7 +71,7 @@ class SettingsController extends GetxController {
   navigateToAddressesScreen({required DeviceType deviceType}) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.to(() => const MobileProfileScreen());
+        Get.to(() => const MobileLocationScreen());
       case DeviceType.TABLE:
         Get.to(() => const TabletProfileScreen());
       case DeviceType.WEB:

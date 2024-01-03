@@ -19,13 +19,8 @@ class MobileWishListScreen extends Responsive {
     final WishListController controller = Get.put(WishListController());
     return Scaffold(
         appBar: AppBar(title: const Text("Wish List"),
-          leading: InkWell(
-            onTap: () => Get.back(),
-            child: Icon(
-              Iconsax.arrow_left_24,
-              color: darkLightColor(context),
-            ),
-          ),
+          automaticallyImplyLeading: false,
+          centerTitle: false,
         ),
         body: Padding(
           padding: const EdgeInsets.all(4.0),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_grid_view.dart';
 import 'package:test1/common/widgets/custom_product_vertical.dart';
-import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/features/home/home_controller.dart';
 import 'package:test1/features/product/widgets/custom_carousel_product_images.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
-import 'package:test1/utils/extensions/validator.dart';
+import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class MobileHomeScreen extends Responsive {
@@ -20,7 +20,6 @@ class MobileHomeScreen extends Responsive {
   @override
   Widget execute(BuildContext context) {
     final HomeController controller = Get.put(HomeController());
-    var x = "Jeans";
     const radius24 = Radius.circular(CustomSizes.SPACE_DEFAULT);
     return Scaffold(
         body: NestedScrollView(
@@ -51,11 +50,11 @@ class MobileHomeScreen extends Responsive {
                         const Positioned(
                           right: 0,
                           child: Badge(backgroundColor: CustomColors.WHITE),
-                        )
+                        ),
                       ]),
                     ),
                     automaticallyImplyLeading: false,
-                    backgroundColor: primaryColor(context))
+                    backgroundColor: CustomColors.GREY_DARK)
               ];
             },
 
@@ -66,38 +65,54 @@ class MobileHomeScreen extends Responsive {
                 children: [
                   Container(
                     width: getWidth(context),
-                    height: 230,
-                    decoration: BoxDecoration(
-                        color: primaryColor(context),
-                        borderRadius: const BorderRadius.only(
+                    height: 205,
+                    decoration: const BoxDecoration(
+                        color: CustomColors.GREY_DARK,
+                        borderRadius: BorderRadius.only(
                             bottomLeft: radius24, bottomRight: radius24)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 2,
+                              vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 4,
                               horizontal: CustomSizes.SPACE_BETWEEN_ITEMS),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: () {},
-                                child: CustomTextField(
-                                    hint: "Search in store",
-                                    validator: (value) =>
-                                        Validator.validateEmptyField(
-                                            "Search in store", value),
-                                    width: getWidth(context),
-                                    leadingIcon: Iconsax.search_normal,
-                                    controller: TextEditingController(),
-                                    readOnly: true,
-                                    backgroundColor:
-                                        darkDarkLightLightColor(context),
-                                    withDefaultPadding: false),
+                                onTap: () {
+                                  controller.onNavigateToShopScreen(
+                                      deviceType: DeviceType.MOBILE);
+                                },
+                                child: Container(
+                                  height: 58,
+                                  width: getWidth(context),
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical:
+                                          CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+                                  decoration: BoxDecoration(
+                                      color: CustomColors.WHITE,
+                                      borderRadius: BorderRadius.circular(
+                                          CustomSizes.SPACE_BETWEEN_ITEMS)),
+                                  child: ListTile(
+                                      leading: Icon(Iconsax.search_normal,
+                                          color: grayColor(context)
+                                              .withOpacity(0.5)),
+                                      trailing: Icon(Iconsax.filter,
+                                          color: grayColor(context)
+                                              .withOpacity(0.5)),
+                                      title: Text("Search in store",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: grayColor(context)
+                                                      .withOpacity(0.5)))),
+                                ),
                               ),
                               const SizedBox(
-                                  height: CustomSizes.SPACE_BETWEEN_ITEMS),
+                                  height: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
                               Text("Popular Categories",
                                   style: Theme.of(context)
                                       .textTheme
@@ -107,21 +122,24 @@ class MobileHomeScreen extends Responsive {
                           ),
                         ),
                         SizedBox(
-                          height: 93,
+                          height: 80,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: 10,
+                              itemCount: controller.categories.length,
                               itemBuilder: (BuildContext context, int index) =>
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      controller.onNavigateToShopScreen(
+                                          deviceType: DeviceType.MOBILE);
+                                    },
                                     child: Column(
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: darkDarkLightLightColor(
-                                                  context),
                                               borderRadius:
-                                                  BorderRadius.circular(30)),
+                                                  BorderRadius.circular(30),
+                                              color: darkDarkLightLightColor(
+                                                  context)),
                                           padding: const EdgeInsets.all(
                                               CustomSizes.SPACE_BETWEEN_ITEMS /
                                                   1.5),
@@ -129,15 +147,18 @@ class MobileHomeScreen extends Responsive {
                                               horizontal: CustomSizes
                                                       .SPACE_BETWEEN_ITEMS /
                                                   2),
-                                          child: Icon(Iconsax.check,
+                                          child: Image.asset(
+                                              controller.categories[index],
+                                              height: 26,
+                                              width: 26,
                                               color: darkLightColor(context)),
                                         ),
+                                        const SizedBox(
+                                            height: CustomSizes
+                                                    .SPACE_BETWEEN_ITEMS /
+                                                4),
                                         Text(
-                                            x.length <= 5
-                                                ? x
-                                                : x
-                                                    .substring(0, 5)
-                                                    .replaceRange(5, 5, "..."),
+                                            "${controller.categories[index].replaceAll("assets/icons/categories/", "").substring(0, 4)}..",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodySmall
@@ -160,11 +181,11 @@ class MobileHomeScreen extends Responsive {
                         CustomCarouselProductImages(
                             controller: controller.pageController,
                             images: const [
-                              "https://www.thoughtco.com/thmb/ctxxtfGGeK5f_-S3f8J-jbY-Gp8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-clothes-hanging-in-row-739240657-5a78b11f8e1b6e003715c0ec.jpg",
-                              "https://www.thoughtco.com/thmb/ctxxtfGGeK5f_-S3f8J-jbY-Gp8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-clothes-hanging-in-row-739240657-5a78b11f8e1b6e003715c0ec.jpg",
-                              "https://www.thoughtco.com/thmb/ctxxtfGGeK5f_-S3f8J-jbY-Gp8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-clothes-hanging-in-row-739240657-5a78b11f8e1b6e003715c0ec.jpg"
+                              "https://ma.jumia.is/cms/000_2024/000001_Janvier/SodesHiver/UND/TV/SX.gif",
+                              "https://imgaz.staticbg.com/banggood/os/202401/20240101200711_835.jpg",
+                              "https://ma.jumia.is/cms/000_2024/000001_Janvier/SodesHiver/SX_Solde.jpg"
                             ],
-                            sizeHeight: getWidth(context) / 2,
+                            sizeHeight: getWidth(context) / 2.5,
                             indicatorColor: darkDarkLightLightColor(context),
                             onPageChange: (index, _) {
                               controller.currentPageIndex.value = index;
@@ -174,7 +195,8 @@ class MobileHomeScreen extends Responsive {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: CustomSizes.SPACE_DEFAULT,
+                                  vertical:
+                                      CustomSizes.SPACE_BETWEEN_SECTIONS / 2,
                                   horizontal:
                                       CustomSizes.SPACE_BETWEEN_ITEMS / 2),
                               child: Row(
@@ -191,23 +213,60 @@ class MobileHomeScreen extends Responsive {
                                 ],
                               ),
                             ),
-                            CustomGridView(
-                                count: 10,
-                                controller: controller.scrollController,
-                                itemBuilder:
-                                    (BuildContext context, int index) =>
-                                        CustomProductVertical(
-                                          onClick: (int id) {},
-                                          product: Product(
-                                              title: "T-shirt sport",
-                                              discount: 1,
-                                              brand: "France CL",
-                                              price: 200,
-                                              oldPrice: 250,
-                                              thumbnail1:
-                                                  "https://contents.mediadecathlon.com/p2436315/e957bd6a23553ffabaef22fd550e99c3/p2436315.jpg?format=auto&quality=70&f=650x0"),
-                                          onHeartClick: (Product product) {},
-                                        ))
+                            Obx(() =>
+
+                                // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
+                                controller.isLoading.isTrue
+                                    ? Center(
+                                        child: CircularProgressIndicator(
+                                            color: primaryColor(context)))
+
+                                    // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
+                                    : controller.errorMsg.value != null
+
+                                        // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+                                        ? SizedBox(
+                                            height: getHeight(context),
+                                            width: getWidth(context),
+                                            child: const CustomEmpty(
+                                              text: "Error 404 !",
+                                              icon: Iconsax.message_remove,
+                                            ))
+                                        : controller.productsLists.isEmpty
+
+                                            // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
+                                            ? SizedBox(
+                                                height: getHeight(context),
+                                                width: getWidth(context),
+                                                child: const CustomEmpty(
+                                                    text: "No Notifications !"),
+                                              )
+
+                                            // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
+                                            : CustomGridView(
+                                  spaceBetweenColumns: CustomSizes.SPACE_BETWEEN_ITEMS/2,
+                                  spaceBetweenRows: CustomSizes.SPACE_BETWEEN_ITEMS/4,
+                                                count: controller
+                                                    .productsLists.length,
+                                                controller:
+                                                    controller.scrollController,
+                                                itemBuilder: (BuildContext
+                                                            context,
+                                                        int index) =>
+                                                    CustomProductVertical(
+                                                      onClick: (int id) {
+                                                        controller
+                                                            .onNavigateToProductScreen(
+                                                                deviceType:
+                                                                    DeviceType
+                                                                        .MOBILE,
+                                                                id: id);
+                                                      },
+                                                      product: controller
+                                                          .productsLists[index],
+                                                      onHeartClick:
+                                                          (Product product) {},
+                                                    )))
                           ],
                         )
                       ],
@@ -218,3 +277,7 @@ class MobileHomeScreen extends Responsive {
             )));
   }
 }
+
+/*
+
+ */

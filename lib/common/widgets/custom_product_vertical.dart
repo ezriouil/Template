@@ -24,10 +24,20 @@ class CustomProductVertical extends Responsive {
     const borderRadius12 = Radius.circular(12);
 
     // - - - - - - - - - - - - - - - - - - CARD - - - - - - - - - - - - - - - - - -  //
-    return Card(
-      elevation: isDark(context) ? 12 : 8,
-      color: isDark(context) ? CustomColors.BLACK : CustomColors.WHITE,
-      // - - - - - - - - - - - - - - - - - - CARD CLICK - - - - - - - - - - - - - - - - - -  //
+    return Container(
+      decoration:BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: grayColor(context), width: 0.5),
+        gradient: LinearGradient(
+          colors: [
+            CustomColors.GREY_DARK,
+            darkDarkLightLightColor(context),
+            darkDarkLightLightColor(context)
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: InkWell(
         onTap: () => {onClick(product.id ?? 1)},
         child: Padding(

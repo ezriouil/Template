@@ -41,4 +41,5 @@ static const String HUAWEI_STORE = "assets/icons/phone_stores/huawei_store.png";
   static const String SNEAKERS = "assets/icons/categories/sneakers.png";
   static const String TIE = "assets/icons/categories/tie.png";
   static const String TSHIRT = "assets/icons/categories/tshirt.png";
+  static const String ALL_CATEGORIES = "assets/icons/categories/categories.png";
 }
