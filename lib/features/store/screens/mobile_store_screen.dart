@@ -57,7 +57,7 @@ class MobileStoreScreen extends Responsive {
                                 color: darkLightColor(context))),
                       ),
                       Positioned(
-                        right: CustomSizes.SPACE_BETWEEN_ITEMS/1.5,
+                        right: CustomSizes.SPACE_BETWEEN_ITEMS / 1.5,
                         child: Badge(backgroundColor: primaryColor(context)),
                       )
                     ]),
@@ -93,15 +93,14 @@ class MobileStoreScreen extends Responsive {
                         children: [
                           Expanded(
                               flex: 6,
-                              child: CustomTextField(
-                                  hint: "Search in store",
-                                  validator: (value) =>
-                                      Validator.validateEmptyField(
-                                          "Search in store", value),
-                                  width: getWidth(context),
-                                  leadingIcon: Iconsax.search_normal,
-                                  controller: TextEditingController(),
-                                  withDefaultPadding: false)),
+                              child: TextField(
+                                onChanged:controller.filter,
+                                  decoration: InputDecoration(
+                                      hintText: "Search in store",
+                                      prefix: Icon(
+                                        Iconsax.search_normal,
+                                        color: grayColor(context),
+                                      )))),
                           Expanded(
                               child: InkWell(
                                   onTap: controller.showFilterBottomSheet,
@@ -137,7 +136,7 @@ class MobileStoreScreen extends Responsive {
                                     height: getHeight(context),
                                     width: getWidth(context),
                                     child: const CustomEmpty(
-                                        text: "No Notifications !"),
+                                        text: "No Products !"),
                                   )
 
                                 // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
@@ -158,8 +157,7 @@ class MobileStoreScreen extends Responsive {
                                                         DeviceType.MOBILE,
                                                     id: id);
                                           },
-                                          product:
-                                              controller.productsLists[index],
+                                          product: controller.productsLists[index],
                                           onHeartClick: (Product product) {},
                                         ))
                   ],

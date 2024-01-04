@@ -10,7 +10,7 @@ import 'package:test1/utils/device/device_utility.dart';
 
 class StoreController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
-  late final RxList<Product> productsLists;
+  late final RxList<Product> productsLists, products;
   late final ScrollController scrollController;
   late final Rx<Color?> filterColorSelected;
   late final Rx<String?> filterCategorySelected, errorMsg;
@@ -25,6 +25,7 @@ class StoreController extends GetxController {
     isLoading = true.obs;
     errorMsg = null.obs;
     productsLists = RxList.empty();
+    products = RxList.empty();
     scrollController = ScrollController();
     filterColorSelected = colors.first.obs;
     filterCategorySelected = categories.first.obs;
@@ -59,22 +60,23 @@ class StoreController extends GetxController {
   init() async {
     await _onGetProducts();
     await Future.delayed(durationSecond);
-    Get.bottomSheet(Obx(
+    Get.bottomSheet(
+        Obx(
           () => CustomFilterBottomSheet(
-          colors: colors,
-          categories: categories,
-          colorSelected: filterColorSelected.value,
-          onColorChange: (color) {
-            filterColorSelected.value = color;
-          },
-          onCategoryChange: (category) {
-            filterCategorySelected.value = category;
-          },
-          onFilter: () {
-
-          },
-          categorySelected: filterCategorySelected.value),
-    ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
+              colors: colors,
+              categories: categories,
+              colorSelected: filterColorSelected.value,
+              onColorChange: (color) {
+                filterColorSelected.value = color;
+              },
+              onCategoryChange: (category) {
+                filterCategorySelected.value = category;
+              },
+              onFilter: () {},
+              categorySelected: filterCategorySelected.value),
+        ),
+        enterBottomSheetDuration: durationSecond,
+        exitBottomSheetDuration: durationSecond);
   }
 
   // - - - - - - - - - - - - - - - - - - FETCH PRODUCT FROM REMOTE DATABASE - - - - - - - - - - - - - - - - - -  //
@@ -98,6 +100,10 @@ class StoreController extends GetxController {
         return;
       }
       productsLists.addAll(getProducts);
+      products.addAll(productsLists);
+      print("------------");
+      print(products.length);
+      print("--------------");
 
       /// STOP THE LOADER
       isLoading.value = false;
@@ -108,33 +114,52 @@ class StoreController extends GetxController {
     }
   }
 
+  // - - - - - - - - - - - - - - - - - - FETCH PRODUCT FROM REMOTE DATABASE - - - - - - - - - - - - - - - - - -  //
+  filter(String query) {
+    List<Product> filteredList = [];
+    if (query.isEmpty) {
+      filteredList = products;
+    } else {
+      filteredList = products
+          .where((product) => product.title!.toLowerCase().contains(query))
+          .toList();
+    }
+
+    productsLists.value = filteredList;
+  }
+
   // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
-  void onNavigateToProductScreen({required DeviceType deviceType, required int id}){
-    switch(deviceType){
-      case DeviceType.MOBILE: Get.to(()=>const MobileProductScreen(), arguments: id);
-      case DeviceType.TABLE:  /*Get.off(const MobileStoreScreen(), arguments: true);*/
-      case DeviceType.WEB:  /*Get.off(const MobileStoreScreen(), arguments: true);*/
+  void onNavigateToProductScreen(
+      {required DeviceType deviceType, required int id}) {
+    switch (deviceType) {
+      case DeviceType.MOBILE:
+        Get.to(() => const MobileProductScreen(), arguments: id);
+      case DeviceType.TABLE:
+      /*Get.off(const MobileStoreScreen(), arguments: true);*/
+      case DeviceType.WEB:
+      /*Get.off(const MobileStoreScreen(), arguments: true);*/
     }
   }
 
   // - - - - - - - - - - - - - - - - - - SHOW FILTER BOTTOM SHEET - - - - - - - - - - - - - - - - - -  //
   showFilterBottomSheet() {
-    Get.bottomSheet(Obx(
-      () => CustomFilterBottomSheet(
-          colors: colors,
-          categories: categories,
-          colorSelected: filterColorSelected.value,
-          onColorChange: (color) {
-            filterColorSelected.value = color;
-          },
-          onCategoryChange: (category) {
-            filterCategorySelected.value = category;
-          },
-          onFilter: () {
-
-          },
-          categorySelected: filterCategorySelected.value),
-    ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
+    Get.bottomSheet(
+        Obx(
+          () => CustomFilterBottomSheet(
+              colors: colors,
+              categories: categories,
+              colorSelected: filterColorSelected.value,
+              onColorChange: (color) {
+                filterColorSelected.value = color;
+              },
+              onCategoryChange: (category) {
+                filterCategorySelected.value = category;
+              },
+              onFilter: () {},
+              categorySelected: filterCategorySelected.value),
+        ),
+        enterBottomSheetDuration: durationSecond,
+        exitBottomSheetDuration: durationSecond);
   }
 
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //

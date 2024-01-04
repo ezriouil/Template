@@ -190,4 +190,5 @@ class WishListController extends GetxController {
     isLoading.close();
     errorMsg.close();
   }
+
 }

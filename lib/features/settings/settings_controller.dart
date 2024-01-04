@@ -74,7 +74,7 @@ class SettingsController extends GetxController {
   navigateToAddressesScreen({required DeviceType deviceType}) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.to(() => const MobileLocationScreen());
+        Get.off(() => const MobileLocationScreen());
       case DeviceType.TABLE:
         Get.to(() => const TabletProfileScreen());
       case DeviceType.WEB:
