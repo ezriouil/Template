@@ -8,7 +8,7 @@ import 'package:test1/utils/responsive/responsive.dart';
 
 class CustomImageNetwork extends Responsive {
   final String? src;
-  final bool hasDiscountBadge;
+  final bool? hasDiscountBadge;
   final Product? product;
   final double height, width;
   final BorderRadius? radius;
@@ -62,7 +62,7 @@ class CustomImageNetwork extends Responsive {
           ),
         ),
         // - - - - - - - - - - - - - - - - - - DISCOUNT BADGE - - - - - - - - - - - - - - - - - -  //
-        if (hasDiscountBadge)
+        if (hasDiscountBadge!)
           Padding(
             padding: const EdgeInsets.only(top: 8, left: 8),
             child: CustomTextBox(oldPrice: product!.oldPrice!, price: product!.price!),

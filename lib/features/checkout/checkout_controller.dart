@@ -79,7 +79,7 @@ class CheckoutController extends GetxController {
             methodPaymentSelectedValue.value = value!;
             Get.back();
           }),
-    ));
+    ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
   }
 
   // - - - - - - - - - - - - - - - - - - CHANGE PAYMENT METHODE - - - - - - - - - - - - - - - - - -  //
@@ -180,7 +180,7 @@ class CheckoutController extends GetxController {
               CustomTextStrings.EXPIRY_DATE, value),
           securityCodeValidator: (value) => Validator.validateEmptyField(
               CustomTextStrings.SECURITY_CODE, value),
-          cardNameController: cardNumberController,
+          cardNameController: cardNameController,
           cardNumberController: cardNumberController,
           zipCodeController: zipCodeController,
           securityCodeController: securityCodeController,

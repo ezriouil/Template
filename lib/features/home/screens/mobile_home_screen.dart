@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_grid_view.dart';
 import 'package:test1/common/widgets/custom_product_vertical.dart';
+import 'package:test1/common/widgets/custom_shimmer_effect.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/features/home/home_controller.dart';
 import 'package:test1/features/product/widgets/custom_carousel_product_images.dart';
@@ -185,6 +187,10 @@ class MobileHomeScreen extends Responsive {
                               "https://imgaz.staticbg.com/banggood/os/202401/20240101200711_835.jpg",
                               "https://ma.jumia.is/cms/000_2024/000001_Janvier/SodesHiver/SX_Solde.jpg"
                             ],
+                            effect: const SwapEffect(
+                                activeDotColor: CustomColors.BLACK,
+                                dotHeight: CustomSizes.SPACE_BETWEEN_ITEMS / 2,
+                                dotWidth: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
                             sizeHeight: getWidth(context) / 2.5,
                             indicatorColor: darkDarkLightLightColor(context),
                             onPageChange: (index, _) {
@@ -213,60 +219,63 @@ class MobileHomeScreen extends Responsive {
                                 ],
                               ),
                             ),
-                            Obx(() =>
+                            // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
+                            controller.isLoading.isTrue
+                                ? CustomShimmerEffect(
+                                    child: CustomProductVertical(
+                                        product: Product(),
+                                        onClick: (_) {},
+                                        onHeartClick: (_) {}))
 
-                                // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
-                                controller.isLoading.isTrue
-                                    ? Center(
-                                        child: CircularProgressIndicator(
-                                            color: primaryColor(context)))
+                                // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
+                                : controller.errorMsg.value != null
 
-                                    // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
-                                    : controller.errorMsg.value != null
+                                    // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+                                    ? SizedBox(
+                                        height: getHeight(context),
+                                        width: getWidth(context),
+                                        child: const CustomEmpty(
+                                          text: "Error 404 !",
+                                          icon: Iconsax.message_remove,
+                                        ))
+                                    : controller.productsLists.isEmpty
 
-                                        // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+                                        // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
                                         ? SizedBox(
                                             height: getHeight(context),
                                             width: getWidth(context),
                                             child: const CustomEmpty(
-                                              text: "Error 404 !",
-                                              icon: Iconsax.message_remove,
-                                            ))
-                                        : controller.productsLists.isEmpty
+                                                text: "No Notifications !"),
+                                          )
 
-                                            // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
-                                            ? SizedBox(
-                                                height: getHeight(context),
-                                                width: getWidth(context),
-                                                child: const CustomEmpty(
-                                                    text: "No Notifications !"),
-                                              )
-
-                                            // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
-                                            : CustomGridView(
-                                  spaceBetweenColumns: CustomSizes.SPACE_BETWEEN_ITEMS/2,
-                                  spaceBetweenRows: CustomSizes.SPACE_BETWEEN_ITEMS/4,
-                                                count: controller
-                                                    .productsLists.length,
-                                                controller:
-                                                    controller.scrollController,
-                                                itemBuilder: (BuildContext
-                                                            context,
-                                                        int index) =>
-                                                    CustomProductVertical(
-                                                      onClick: (int id) {
-                                                        controller
-                                                            .onNavigateToProductScreen(
-                                                                deviceType:
-                                                                    DeviceType
-                                                                        .MOBILE,
-                                                                id: id);
-                                                      },
-                                                      product: controller
-                                                          .productsLists[index],
-                                                      onHeartClick:
-                                                          (Product product) {},
-                                                    )))
+                                        // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
+                                        : CustomGridView(
+                                            spaceBetweenColumns: CustomSizes
+                                                    .SPACE_BETWEEN_ITEMS /
+                                                2,
+                                            spaceBetweenRows: CustomSizes
+                                                    .SPACE_BETWEEN_ITEMS /
+                                                4,
+                                            count:
+                                                controller.productsLists.length,
+                                            controller:
+                                                controller.scrollController,
+                                            itemBuilder: (BuildContext context,
+                                                    int index) =>
+                                                CustomProductVertical(
+                                                  onClick: (int id) {
+                                                    controller
+                                                        .onNavigateToProductScreen(
+                                                            deviceType:
+                                                                DeviceType
+                                                                    .MOBILE,
+                                                            id: id);
+                                                  },
+                                                  product: controller
+                                                      .productsLists[index],
+                                                  onHeartClick:
+                                                      (Product product) {},
+                                                ))
                           ],
                         )
                       ],

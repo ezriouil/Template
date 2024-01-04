@@ -14,11 +14,12 @@ class AboutUs extends Responsive {
 
   const AboutUs(
       {super.key,
-      required this.logo,
+      this.logo = CustomIconStrings.APP_LOGO,
       this.logoSize = 44.0,
       this.iconSize = 30.0,
-      required this.description,
-      required this.appName});
+      this.description =
+          "The obstetrics and gynaecology clinic inside the vast Singapore General Hospital is unlike any ward in the UK. There are no counters or rows of staff waiting to take patients’ details. Instead, their appointments have already been registered via a mobile phone app and they sign themselves",
+        this.appName = "Coffe Shop"});
 
   @override
   Widget execute(BuildContext context) {
@@ -26,7 +27,10 @@ class AboutUs extends Responsive {
       children: [
         Row(
           children: [
-            Image.asset(logo, width: logoSize, height: logoSize,color: darkLightColor(context)),
+            Image.asset(logo,
+                width: logoSize,
+                height: logoSize,
+                color: darkLightColor(context)),
             const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
             Expanded(
                 child: Text(
@@ -39,13 +43,14 @@ class AboutUs extends Responsive {
         ),
         const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS * 1.5),
         Text(description, style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS *1.5),
+        const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS * 1.5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: darkLightColor(context), width: 2.0),
+                  border:
+                      Border.all(color: darkLightColor(context), width: 2.0),
                   borderRadius: BorderRadius.circular(8.0)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -58,13 +63,17 @@ class AboutUs extends Responsive {
                 InkWell(
                   onTap: NavigationOut.onNavigateToFacebook,
                   child: Image.asset(CustomIconStrings.FACEBOOK,
-                      width: iconSize, height: iconSize, color: darkLightColor(context)),
+                      width: iconSize,
+                      height: iconSize,
+                      color: darkLightColor(context)),
                 ),
                 const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
                 InkWell(
                   onTap: NavigationOut.onNavigateToInstagram,
                   child: Image.asset(CustomIconStrings.INSTAGRAM,
-                      width: iconSize, height: iconSize, color: darkLightColor(context)),
+                      width: iconSize,
+                      height: iconSize,
+                      color: darkLightColor(context)),
                 ),
                 const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
                 InkWell(

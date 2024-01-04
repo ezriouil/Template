@@ -37,7 +37,7 @@ class CustomCartTile extends Responsive {
                 CustomImageNetwork(
                     src: product?.thumbnail1 ?? "",
                     fit: BoxFit.fill,
-                    width: 50,
+                    width: 60,
                     height: 60),
                 // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
                 const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS / 2),

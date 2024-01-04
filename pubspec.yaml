@@ -28,7 +28,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   image_picker: ^1.0.5
   carousel_slider: ^4.2.1
-  coupon_uikit: ^0.2.0
+  shimmer: ^3.0.0
 
   # FIREBASE
   firebase_core: ^2.24.2

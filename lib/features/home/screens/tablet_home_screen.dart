@@ -28,11 +28,7 @@ class TabletHomeScreen extends Responsive {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AboutUs(
-                    logo: CustomIconStrings.APP_LOGO,
-                    description:
-                    "The obstetrics and gynaecology clinic inside the vast Singapore General Hospital is unlike any ward in the UK. There are no counters or rows of staff waiting to take patients’ details. Instead, their appointments have already been registered via a mobile phone app and they sign themselves",
-                    appName: "Coffe Shop"),
+                const AboutUs(),
                 const SizedBox(height: 16),
                 const ContactUs(),
                 const SizedBox(height: 16),

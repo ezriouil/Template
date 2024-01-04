@@ -17,33 +17,29 @@ class CustomPromoCode extends Responsive {
 
   @override
   Widget execute(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: CustomSizes.SPACE_BETWEEN_ITEMS),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(CustomSizes.SPACE_BETWEEN_ITEMS),
-          border: Border.all(color: darkLightColor(context))),
-      child: Row(
-        children: [
-          Expanded(
-              flex: 8,
-              child: CustomTextField(
-                  hint: "Have promo code ?",
-                  validator: validator,
-                  withDefaultPadding: false,
-                  width: getWidth(context),
-                  controller: controller)),
-          Expanded(
-              flex: 3,
-              child: CustomElevatedButton(
-                text: "Apply",
-                onClick: onClick,
+    return Row(
+      children: [
+        Expanded(
+            flex: 8,
+            child: CustomTextField(
+                hint: "Have promo code ?",
+                validator: validator,
+                withDefaultPadding: false,
                 width: getWidth(context),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: grayColor(context),
-                    side: BorderSide(color: grayColor(context))),
-              ))
-        ],
-      ),
+                controller: controller)),
+        const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS/2),
+        Expanded(
+            flex: 2,
+            child: CustomElevatedButton(
+              text: "Apply",
+              onClick: onClick,
+              width: getWidth(context),
+              withDefaultPadding: false,
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: grayColor(context),
+                  side: BorderSide(color: grayColor(context))),
+            ))
+      ],
     );
   }
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_product_vertical.dart';
+import 'package:test1/common/widgets/custom_shimmer_effect.dart';
 import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/features/store/store_controller.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
+import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
@@ -36,6 +39,34 @@ class MobileStoreScreen extends Responsive {
                             right: CustomSizes.SPACE_BETWEEN_ITEMS),
                         child: InkWell(
                             onTap: () {},
+                            child: Icon(Iconsax.notification,
+                                color: darkLightColor(context))),
+                      ),
+                      Positioned(
+                        right: CustomSizes.SPACE_BETWEEN_ITEMS,
+                        child: Badge(backgroundColor: primaryColor(context)),
+                      )
+                    ]),
+                    Stack(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: CustomSizes.SPACE_BETWEEN_ITEMS),
+                        child: InkWell(
+                            onTap: () {},
+                            child: Icon(Iconsax.receipt_discount,
+                                color: darkLightColor(context))),
+                      ),
+                      Positioned(
+                        right: CustomSizes.SPACE_BETWEEN_ITEMS/1.5,
+                        child: Badge(backgroundColor: primaryColor(context)),
+                      )
+                    ]),
+                    Stack(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: CustomSizes.SPACE_BETWEEN_ITEMS),
+                        child: InkWell(
+                            onTap: () {},
                             child: Icon(Iconsax.bag_24,
                                 color: darkLightColor(context))),
                       ),
@@ -43,7 +74,7 @@ class MobileStoreScreen extends Responsive {
                         right: CustomSizes.SPACE_BETWEEN_ITEMS,
                         child: Badge(backgroundColor: primaryColor(context)),
                       )
-                    ])
+                    ]),
                   ],
                   centerTitle: false,
                 )
@@ -52,50 +83,87 @@ class MobileStoreScreen extends Responsive {
 
             // - - - - - - - - - - - - - - - - - - BODY - - - - - - - - - - - - - - - - - -  //
             body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            flex: 6,
-                            child: CustomTextField(
-                                hint: "Search in store",
-                                validator: (value) =>
-                                    Validator.validateEmptyField(
-                                        "Search in store", value),
-                                width: getWidth(context),
-                                leadingIcon: Iconsax.search_normal,
-                                controller: TextEditingController(),
-                                withDefaultPadding: false)),
-                        Expanded(
-                            child: InkWell(
-                                onTap: controller.showFilterBottomSheet,
-                                child: const Icon(Icons.filter_list, size: 30)))
-                      ],
+              child: Obx(
+                () => Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 6,
+                              child: CustomTextField(
+                                  hint: "Search in store",
+                                  validator: (value) =>
+                                      Validator.validateEmptyField(
+                                          "Search in store", value),
+                                  width: getWidth(context),
+                                  leadingIcon: Iconsax.search_normal,
+                                  controller: TextEditingController(),
+                                  withDefaultPadding: false)),
+                          Expanded(
+                              child: InkWell(
+                                  onTap: controller.showFilterBottomSheet,
+                                  child:
+                                      const Icon(Icons.filter_list, size: 30)))
+                        ],
+                      ),
                     ),
-                  ),
-                  CustomGridView(
-                      count: 10,
-                      spaceBetweenColumns: CustomSizes.SPACE_BETWEEN_ITEMS / 2,
-                      spaceBetweenRows: CustomSizes.SPACE_BETWEEN_ITEMS / 4,
-                      controller: controller.scrollController,
-                      itemBuilder: (BuildContext context, int index) =>
-                          CustomProductVertical(
-                            onClick: (int id) {},
-                            product: Product(
-                                title: "T-shirt sport",
-                                discount: 1,
-                                brand: "France CL",
-                                price: 200,
-                                oldPrice: 250,
-                                thumbnail1:
-                                    "https://contents.mediadecathlon.com/p2436315/e957bd6a23553ffabaef22fd550e99c3/p2436315.jpg?format=auto&quality=70&f=650x0"),
-                            onHeartClick: (Product product) {},
-                          ))
-                ],
+                    const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+                    // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
+                    controller.isLoading.isTrue
+                        ? CustomShimmerEffect(
+                            child: CustomProductVertical(
+                                product: Product(),
+                                onClick: (_) {},
+                                onHeartClick: (_) {}))
+
+                        // - - - - - - - - - - - - - - - - - - LOADING STATE FALSE - - - - - - - - - - - - - - - - - -  //
+                        : controller.errorMsg.value != null
+
+                            // - - - - - - - - - - - - - - - - - - HAS ERROR - - - - - - - - - - - - - - - - - -  //
+                            ? SizedBox(
+                                height: getHeight(context),
+                                width: getWidth(context),
+                                child: const CustomEmpty(
+                                  text: "Error 404 !",
+                                  icon: Iconsax.message_remove,
+                                ))
+                            : controller.productsLists.isEmpty
+
+                                // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
+                                ? SizedBox(
+                                    height: getHeight(context),
+                                    width: getWidth(context),
+                                    child: const CustomEmpty(
+                                        text: "No Notifications !"),
+                                  )
+
+                                // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
+                                : CustomGridView(
+                                    spaceBetweenColumns:
+                                        CustomSizes.SPACE_BETWEEN_ITEMS / 2,
+                                    spaceBetweenRows:
+                                        CustomSizes.SPACE_BETWEEN_ITEMS / 4,
+                                    count: controller.productsLists.length,
+                                    controller: controller.scrollController,
+                                    itemBuilder: (BuildContext context,
+                                            int index) =>
+                                        CustomProductVertical(
+                                          onClick: (int id) {
+                                            controller
+                                                .onNavigateToProductScreen(
+                                                    deviceType:
+                                                        DeviceType.MOBILE,
+                                                    id: id);
+                                          },
+                                          product:
+                                              controller.productsLists[index],
+                                          onHeartClick: (Product product) {},
+                                        ))
+                  ],
+                ),
               ),
             )));
   }

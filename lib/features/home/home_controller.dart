@@ -78,14 +78,11 @@ class HomeController extends GetxController{
       }
       productsLists.addAll(getProducts);
 
-      print(productsLists.first.title);
-
       /// STOP THE LOADER
       isLoading.value = false;
-    } catch (e) {
+    } catch (_) {
       /// STOP THE LOADER
       isLoading.value = false;
-      print(e);
       errorMsg.value = "Try again..";
     }
   }

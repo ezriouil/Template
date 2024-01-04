@@ -13,12 +13,14 @@ class CustomCarouselProductImages extends Responsive {
   final int currentIndex;
   final Color? indicatorColor;
   final double? sizeWidth, sizeHeight;
+  final IndicatorEffect? effect;
 
   const CustomCarouselProductImages(
       {super.key,
       required this.controller,
       required this.images,
         this.sizeWidth,
+        this.effect,
         this.indicatorColor,
         this.sizeHeight,
       required this.onPageChange,
@@ -62,7 +64,7 @@ class CustomCarouselProductImages extends Responsive {
             alignment: Alignment.bottomCenter,
             child: AnimatedSmoothIndicator(
               count: images.length,
-              effect: ExpandingDotsEffect(
+              effect: effect ?? ExpandingDotsEffect(
                   dotHeight: 4.0,
                   dotColor: indicatorColor?.withOpacity(0.4) ??CustomColors.BLACK.withOpacity(0.4),
                   activeDotColor: indicatorColor ??CustomColors.BLACK),

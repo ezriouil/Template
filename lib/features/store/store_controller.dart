@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test1/data/models/product.dart';
+import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
+import 'package:test1/features/product/screens/mobile_product_screen.dart';
 import 'package:test1/features/store/widgets/custom_filter_bottom_sheet.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
+import 'package:test1/utils/device/device_utility.dart';
 
 class StoreController extends GetxController {
   // - - - - - - - - - - - - - - - - - - CREATE STATES - - - - - - - - - - - - - - - - - -  //
+  late final RxList<Product> productsLists;
   late final ScrollController scrollController;
   late final Rx<Color?> filterColorSelected;
-  late final Rx<String?> filterCategorySelected;
+  late final Rx<String?> filterCategorySelected, errorMsg;
+  late RxBool isLoading;
 
   final durationSecond = const Duration(seconds: 1);
 
@@ -16,6 +22,9 @@ class StoreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    isLoading = true.obs;
+    errorMsg = null.obs;
+    productsLists = RxList.empty();
     scrollController = ScrollController();
     filterColorSelected = colors.first.obs;
     filterCategorySelected = categories.first.obs;
@@ -48,6 +57,7 @@ class StoreController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - INIT - - - - - - - - - - - - - - - - - -  //
   init() async {
+    await _onGetProducts();
     await Future.delayed(durationSecond);
     Get.bottomSheet(Obx(
           () => CustomFilterBottomSheet(
@@ -65,6 +75,46 @@ class StoreController extends GetxController {
           },
           categorySelected: filterCategorySelected.value),
     ),enterBottomSheetDuration:durationSecond, exitBottomSheetDuration: durationSecond);
+  }
+
+  // - - - - - - - - - - - - - - - - - - FETCH PRODUCT FROM REMOTE DATABASE - - - - - - - - - - - - - - - - - -  //
+  Future<void> _onGetProducts() async {
+    try {
+      /// GET NOTIFICATIONS
+      final getProducts = await ProductRepository.getProducts();
+
+      if (getProducts == null) {
+        /// SHOW THE ERROR SNACK BAR
+        isLoading.value = false;
+        errorMsg.value = "Try again..";
+        return;
+      }
+
+      if (getProducts.isEmpty) {
+        productsLists.value = [];
+
+        /// SHOW THE ERROR SNACK BAR
+        isLoading.value = false;
+        return;
+      }
+      productsLists.addAll(getProducts);
+
+      /// STOP THE LOADER
+      isLoading.value = false;
+    } catch (_) {
+      /// STOP THE LOADER
+      isLoading.value = false;
+      errorMsg.value = "Try again..";
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
+  void onNavigateToProductScreen({required DeviceType deviceType, required int id}){
+    switch(deviceType){
+      case DeviceType.MOBILE: Get.to(()=>const MobileProductScreen(), arguments: id);
+      case DeviceType.TABLE:  /*Get.off(const MobileStoreScreen(), arguments: true);*/
+      case DeviceType.WEB:  /*Get.off(const MobileStoreScreen(), arguments: true);*/
+    }
   }
 
   // - - - - - - - - - - - - - - - - - - SHOW FILTER BOTTOM SHEET - - - - - - - - - - - - - - - - - -  //
@@ -90,6 +140,9 @@ class StoreController extends GetxController {
   // - - - - - - - - - - - - - - - - - - DISPOSE STATES - - - - - - - - - - - - - - - - - -  //
   @override
   void dispose() {
+    scrollController.dispose();
+    filterColorSelected.close();
+    filterCategorySelected.close();
     super.dispose();
   }
 }

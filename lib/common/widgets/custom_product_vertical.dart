@@ -9,7 +9,7 @@ import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 class CustomProductVertical extends Responsive {
-  final Product product;
+  final Product? product;
   final Function(int id) onClick;
   final Function(Product product) onHeartClick;
 
@@ -39,7 +39,7 @@ class CustomProductVertical extends Responsive {
         ),
       ),
       child: InkWell(
-        onTap: () => {onClick(product.id ?? 1)},
+        onTap: () => {onClick(product?.id ?? 1)},
         child: Padding(
           padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS /4),
           // - - - - - - - - - - - - - - - - - - COLUMN - - - - - - - - - - - - - - - - - -  //
@@ -51,26 +51,26 @@ class CustomProductVertical extends Responsive {
               CustomImageNetwork(
                 width: getWidth(context) * 0.5,
                 height: getWidth(context) * 0.5,
-                src: product.thumbnail1,
-                hasDiscountBadge: product.discount! > 0,
+                src: product?.thumbnail1,
+                hasDiscountBadge: product == null ? false : product!.discount! > 0,
                 product: product,
                 onHeartClick: onHeartClick,
               ),
               // - - - - - - - - - - - - - - - - - - TITLE - - - - - - - - - - - - - - - - - -  //
               Text(
-                product.title ?? "",
+                product?.title ?? "",
                 maxLines: 1,
                 style: Theme.of(context).textTheme.titleMedium,
                 overflow: TextOverflow.ellipsis,
               ),
-              CustomBrand(brand: product.brand, iconSize: 12, textSize: 10,),
+              CustomBrand(brand: product?.brand, iconSize: 12, textSize: 10,),
               const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS/1.5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomPrices(
-                      oldPrice: product.oldPrice ?? 0,
-                      price: product.price ?? 0),
+                      oldPrice: product?.oldPrice ?? 0,
+                      price: product?.price ?? 0),
                   // - - - - - - - - - - - - - - - - - - ICON ADD - - - - - - - - - - - - - - - - - -  //
                   Container(
                     padding: const EdgeInsets.all(4),

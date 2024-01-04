@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
 import 'package:test1/common/widgets/custom_icon_outlined_button.dart';
 import 'package:test1/common/widgets/custom_text_field.dart';
-import 'package:test1/features/auth/sing_up/sing_up_controller.dart';
+import 'package:test1/features/auth/sign_up/sign_up_controller.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:test1/bindings/root_Bindings.dart';
 import 'package:test1/features/auth/login/screens/mobile_login_screen.dart';
 import 'package:test1/features/auth/login/screens/tablet_login_screen.dart';
@@ -10,12 +11,13 @@ import 'package:test1/utils/responsive/responsive_layout.dart';
 import 'utils/theme/theme_app.dart';
 
 void main() async {
-  //await GetStorage.init();
+  await GetStorage.init();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  final bool? applyDarkTheme = GetStorage().read("ENABLE_DARK_MODE");
   FlutterNativeSplash.remove();
   runApp(GetMaterialApp(
-      themeMode: ThemeMode.system,
+      themeMode: applyDarkTheme == null ? ThemeMode.system :  applyDarkTheme == true ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeApp.lightTheme,
       darkTheme: ThemeApp.darkTheme,
       debugShowCheckedModeBanner: false,

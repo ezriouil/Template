@@ -28,7 +28,7 @@ class CustomTextField extends Responsive {
       this.obscureText = false,
       required this.width,
       required this.controller,
-      this.backgroundColor,
+      this.backgroundColor ,
       this.textInputType = TextInputType.text,
       this.trailingIcon,
       this.leadingIcon});
@@ -62,9 +62,8 @@ class CustomTextField extends Responsive {
                 suffixIcon: trailingIcon,
                 enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0),
                     borderSide: BorderSide(
-                        color: backgroundColor == null
-                            ? darkLightColor(context)
-                            : CustomColors.TRANSPARENT))),
+                        color: backgroundColor != null?
+                            CustomColors.TRANSPARENT:darkLightColor(context)))),
             minLines: lines,
             maxLines: lines,
             autocorrect: false,
