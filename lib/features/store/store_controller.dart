@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
+import 'package:test1/features/cart/screens/mobile_cart_screen.dart';
+import 'package:test1/features/cart/screens/tablet_cart_screen.dart';
+import 'package:test1/features/coupon/screens/mobile_coupon_screen.dart';
+import 'package:test1/features/coupon/screens/tablet_coupon_screen.dart';
+import 'package:test1/features/notification/screens/mobile_notification_screen.dart';
+import 'package:test1/features/notification/screens/tablet_notification_screen.dart';
 import 'package:test1/features/product/screens/mobile_product_screen.dart';
 import 'package:test1/features/product/screens/tablet_product_screen.dart';
 import 'package:test1/features/store/widgets/custom_filter_bottom_sheet.dart';
@@ -16,6 +22,7 @@ class StoreController extends GetxController {
   late final Rx<Color?> filterColorSelected;
   late final Rx<String?> filterCategorySelected, errorMsg;
   late RxBool isLoading;
+  late DeviceType deviceType;
 
   final durationSecond = const Duration(seconds: 1);
 
@@ -129,15 +136,39 @@ class StoreController extends GetxController {
     productsLists.value = filteredList;
   }
 
-  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
-  void onNavigateToProductScreen(
-      {required DeviceType deviceType, required int id}) {
+  // - - - - - - - - - - - - - - - - - - NAVIGATE TO NOTIFICATIONS SCREEN - - - - - - - - - - - - - - - - - -  //
+  onNavigateToNotificationsScreen() {
     switch (deviceType) {
-      case DeviceType.MOBILE:
-        Get.to(() => const MobileProductScreen(), arguments: id);
+      case DeviceType.MOBILE:Get.to(() => const MobileNotificationScreen());
+      case DeviceType.TABLE:Get.to(() => const TabletNotificationScreen());
+      case DeviceType.WEB:
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - NAVIGATE TO COUPONS SCREEN - - - - - - - - - - - - - - - - - -  //
+  onNavigateToCouponsScreen() {
+    switch (deviceType) {
+      case DeviceType.MOBILE:Get.to(() => const MobileCouponScreen());
+      case DeviceType.TABLE:Get.to(() => const TabletCouponScreen());
+      case DeviceType.WEB:
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - NAVIGATE TO NOTIFICATIONS SCREEN - - - - - - - - - - - - - - - - - -  //
+  onNavigateToCartScreen() {
+    switch (deviceType) {
+      case DeviceType.MOBILE:Get.to(() => const MobileCartScreen());
+      case DeviceType.TABLE:Get.to(() => const TabletCartScreen());
+      case DeviceType.WEB:
+    }
+  }
+
+  // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
+  void onNavigateToProductScreen({required int id}) {
+    switch (deviceType) {
+      case DeviceType.MOBILE:Get.to(() => const MobileProductScreen(), arguments: id);
       case DeviceType.TABLE:Get.to(() => const TabletProductScreen(), arguments: id);
       case DeviceType.WEB:
-      /*Get.off(const MobileStoreScreen(), arguments: true);*/
     }
   }
 

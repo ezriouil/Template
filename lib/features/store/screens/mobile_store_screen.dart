@@ -4,12 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_product_vertical.dart';
 import 'package:test1/common/widgets/custom_shimmer_effect.dart';
-import 'package:test1/common/widgets/custom_text_field.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/features/store/store_controller.dart';
 import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/device/device_utility.dart';
-import 'package:test1/utils/extensions/validator.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
 import '../../../common/widgets/custom_grid_view.dart';
@@ -22,6 +20,7 @@ class MobileStoreScreen extends Responsive {
   @override
   Widget execute(BuildContext context) {
     final StoreController controller = Get.put(StoreController());
+    controller.deviceType = DeviceType.MOBILE;
     return Scaffold(
         body: NestedScrollView(
             controller: controller.scrollController,
@@ -38,7 +37,7 @@ class MobileStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_BETWEEN_ITEMS),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: controller.onNavigateToNotificationsScreen,
                             child: Icon(Iconsax.notification,
                                 color: darkLightColor(context))),
                       ),
@@ -52,7 +51,7 @@ class MobileStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_BETWEEN_ITEMS),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: controller.onNavigateToCouponsScreen,
                             child: Icon(Iconsax.receipt_discount,
                                 color: darkLightColor(context))),
                       ),
@@ -66,7 +65,7 @@ class MobileStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_BETWEEN_ITEMS),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: controller.onNavigateToCartScreen,
                             child: Icon(Iconsax.bag_24,
                                 color: darkLightColor(context))),
                       ),
@@ -94,7 +93,7 @@ class MobileStoreScreen extends Responsive {
                           Expanded(
                               flex: 6,
                               child: TextField(
-                                onChanged:controller.filter,
+                                  onChanged: controller.filter,
                                   decoration: InputDecoration(
                                       hintText: "Search in store",
                                       prefix: Icon(
@@ -153,11 +152,10 @@ class MobileStoreScreen extends Responsive {
                                           onClick: (int id) {
                                             controller
                                                 .onNavigateToProductScreen(
-                                                    deviceType:
-                                                        DeviceType.MOBILE,
                                                     id: id);
                                           },
-                                          product: controller.productsLists[index],
+                                          product:
+                                              controller.productsLists[index],
                                           onHeartClick: (Product product) {},
                                         ))
                   ],

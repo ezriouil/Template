@@ -61,8 +61,9 @@ class MobileCartScreen extends Responsive {
         width: getWidth(context),
         child: // - - - - - - - - - - - - - - - - - - BUTTON ADD TO BAG - - - - - - - - - - - - - - - - - -  //
             Obx(()=> CustomElevatedButton(
-                        text: controller.total.value > 0 ? "Checkout ${controller.total.value - 1}.99" : "waiting",
-                        onClick: ()=>controller.onCheckout(deviceType: DeviceType.MOBILE),
+                        text: controller.total.value > 0 ? "Checkout ${controller.total.value - 1}.99" : "0.00",
+
+                        onClick: ()=> controller.total.value > 0 ? controller.onCheckout(deviceType: DeviceType.MOBILE) : null,
                         width: getWidth(context),
                         style: ElevatedButton.styleFrom(
                 side: const BorderSide(color: CustomColors.TRANSPARENT)),

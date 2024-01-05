@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/features/account_privacy/screens/mobile_account_privacy_screen.dart';
 import 'package:test1/features/account_privacy/screens/tablet_account_privacy_screen.dart';
@@ -26,10 +25,8 @@ class SettingsController extends GetxController {
   late final RxBool accountPrivacy,
       theme,
       hdImagesQuality,
-      upgradeUi,
-      showFloatingActionButton;
+      upgradeUi;
   late final RxString profileImgUrl, fullName, email;
-  late final ScrollController scrollController;
   late DeviceType deviceType;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
@@ -44,21 +41,6 @@ class SettingsController extends GetxController {
     profileImgUrl = "".obs;
     fullName = "".obs;
     email = "".obs;
-    scrollController = ScrollController();
-    showFloatingActionButton = false.obs;
-    manageScrollController();
-  }
-
-  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
-  manageScrollController() async {
-    scrollController.addListener(() {
-      double showOffset = 5.0;
-      if (scrollController.offset > showOffset) {
-        showFloatingActionButton.value = true;
-      } else {
-        showFloatingActionButton.value = false;
-      }
-    });
   }
 
   // - - - - - - - - - - - - - - - - - - NAVIGATION TO PROFILE SCREEN - - - - - - - - - - - - - - - - - -  //

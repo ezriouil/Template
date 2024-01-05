@@ -20,6 +20,7 @@ class TabletStoreScreen extends Responsive {
   @override
   Widget execute(BuildContext context) {
     final StoreController controller = Get.put(StoreController());
+    controller.deviceType = DeviceType.TABLE;
     return Scaffold(
         body: NestedScrollView(
             controller: controller.scrollController,
@@ -39,7 +40,7 @@ class TabletStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_DEFAULT),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: controller.onNavigateToNotificationsScreen,
                             child: Icon(Iconsax.notification,
                                 size: 30, color: darkLightColor(context))),
                       ),
@@ -53,7 +54,7 @@ class TabletStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_DEFAULT),
                         child: InkWell(
-                            onTap: () {},
+                            onTap: controller.onNavigateToCouponsScreen,
                             child: Icon(Iconsax.receipt_discount,
                                 size: 30, color: darkLightColor(context))),
                       ),
@@ -67,7 +68,7 @@ class TabletStoreScreen extends Responsive {
                         padding: const EdgeInsets.only(
                             right: CustomSizes.SPACE_DEFAULT),
                         child: InkWell(
-                            onTap: () {},
+                            onTap:controller.onNavigateToCartScreen,
                             child: Icon(Iconsax.bag_24,
                                 size: 30, color: darkLightColor(context))),
                       ),
@@ -156,10 +157,7 @@ class TabletStoreScreen extends Responsive {
                                         CustomProductVertical(
                                           onClick: (int id) {
                                             controller
-                                                .onNavigateToProductScreen(
-                                                    deviceType:
-                                                        DeviceType.TABLE,
-                                                    id: id);
+                                                .onNavigateToProductScreen(id: id);
                                           },
                                           product:
                                               controller.productsLists[index],

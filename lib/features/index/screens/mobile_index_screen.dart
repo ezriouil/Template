@@ -18,7 +18,7 @@ class MobileIndexScreen extends Responsive {
         () => NavigationBar(
           height: 70.0,
           elevation: 0.0,
-          animationDuration: const Duration(seconds: 3),
+          animationDuration: const Duration(seconds: 5),
           selectedIndex: IndexController.currentIndex.value,
           onDestinationSelected: controller.onUpdateCurrentIndex,
           destinations: const [

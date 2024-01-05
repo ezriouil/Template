@@ -24,7 +24,6 @@ class TabletSettingsScreen extends Responsive {
     // - - - - - - - - - - - - - - - - - - SCAFFOLD - - - - - - - - - - - - - - - - - -  //
     return Scaffold(
       body: NestedScrollView(
-        controller: controller.scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             // - - - - - - - - - - - - - - - - - - APP BAR - - - - - - - - - - - - - - - - - -  //
@@ -273,22 +272,6 @@ class TabletSettingsScreen extends Responsive {
                 )
               ],
             ),
-          ),
-        ),
-      ),
-      floatingActionButton: Obx(
-        () => AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
-          child: FloatingActionButton(
-            onPressed: () {
-              controller.scrollController.animateTo(0,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.fastOutSlowIn);
-            },
-            elevation: 16.0,
-            backgroundColor: primaryColor(context),
-            child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
           ),
         ),
       ),
