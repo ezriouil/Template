@@ -8,11 +8,13 @@ class CustomShimmerEffect extends Responsive {
   final bool gridEffect;
   final Widget child;
   final int itemCount;
+  final double? itemsHeight;
 
   const CustomShimmerEffect(
       {super.key,
       required this.child,
-      this.gridEffect = true,
+        this.itemsHeight,
+        this.gridEffect = true,
       this.itemCount = 8});
 
   @override
@@ -26,6 +28,7 @@ class CustomShimmerEffect extends Responsive {
               child: CustomGridView(
                   spaceBetweenRows: CustomSizes.SPACE_BETWEEN_ITEMS / 4,
                   count: 8,
+                  itemsHeight: itemsHeight,
                   itemBuilder: (BuildContext context, int index) =>
                       child),
             )

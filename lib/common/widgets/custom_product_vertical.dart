@@ -21,6 +21,7 @@ class CustomProductVertical extends Responsive {
 
   @override
   Widget execute(BuildContext context) {
+
     const borderRadius12 = Radius.circular(12);
 
     // - - - - - - - - - - - - - - - - - - CARD - - - - - - - - - - - - - - - - - -  //
@@ -39,7 +40,7 @@ class CustomProductVertical extends Responsive {
         ),
       ),
       child: InkWell(
-        onTap: () => {onClick(product?.id ?? 1)},
+        onTap: () => {onClick(product?.id ?? 3)},
         child: Padding(
           padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS /4),
           // - - - - - - - - - - - - - - - - - - COLUMN - - - - - - - - - - - - - - - - - -  //
@@ -50,7 +51,7 @@ class CustomProductVertical extends Responsive {
               // - - - - - - - - - - - - - - - - - - IMAGE FROM NETWORK - - - - - - - - - - - - - - - - - -  //
               CustomImageNetwork(
                 width: getWidth(context) * 0.5,
-                height: getWidth(context) * 0.5,
+                height: getWidth(context) * (isMobile(context) ?  0.5 :  isTablet(context) ? 0.4 : 0.5),
                 src: product?.thumbnail1,
                 hasDiscountBadge: product == null ? false : product!.discount! > 0,
                 product: product,

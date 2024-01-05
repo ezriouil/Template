@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
+import 'package:test1/features/index/index_controller.dart';
 import 'package:test1/features/product/screens/mobile_product_screen.dart';
+import 'package:test1/features/product/screens/tablet_product_screen.dart';
+import 'package:test1/features/product/screens/web_product_screen.dart';
 import 'package:test1/features/store/screens/mobile_store_screen.dart';
-import 'package:test1/index.dart';
+import 'package:test1/features/store/screens/tablet_store_screen.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
 import 'package:test1/utils/device/device_utility.dart';
 
@@ -17,6 +20,7 @@ class HomeController extends GetxController{
   late final ScrollController scrollController;
   late CarouselController pageController;
   late RxInt currentPageIndex;
+  late DeviceType deviceType;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -37,22 +41,24 @@ class HomeController extends GetxController{
   }
 
   // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
-  void onNavigateToProductScreen({required DeviceType deviceType, required int id}){
+  void onNavigateToProductScreen({ required int id}){
     switch(deviceType){
       case DeviceType.MOBILE: Get.to(()=>const MobileProductScreen(), arguments: id);
-      case DeviceType.TABLE:  Get.off(const MobileStoreScreen(), arguments: true);
-      case DeviceType.WEB:  Get.off(const MobileStoreScreen(), arguments: true);
+      case DeviceType.TABLE:  Get.to(const TabletProductScreen(), arguments: id);
+      case DeviceType.WEB:  Get.to(const WebProductScreen(), arguments: true);
     }
   }
 
   // - - - - - - - - - - - - - - - - - - ON NAVIGATE TO SHOP SCREEN - - - - - - - - - - - - - - - - - -  //
-  void onNavigateToShopScreen({required DeviceType deviceType}){
+  void onNavigateToShopScreen(){
     switch(deviceType){
       case DeviceType.MOBILE: {
         IndexController.currentIndex.value = 1;
       }
-      case DeviceType.TABLE:  Get.off(const MobileStoreScreen(), arguments: true);
-      case DeviceType.WEB:  Get.off(const MobileStoreScreen(), arguments: true);
+      case DeviceType.TABLE:  {
+        IndexController.currentIndex.value = 1;
+      }
+      case DeviceType.WEB:  Get.to(const MobileStoreScreen(), arguments: true);
     }
   }
 

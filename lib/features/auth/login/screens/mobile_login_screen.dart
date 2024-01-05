@@ -22,6 +22,7 @@ class MobileLoginScreen extends Responsive {
   Widget execute(BuildContext context) {
     // - - - - - - - - - - - - - - - - - - INSTANCE FROM THE CONTROLLER - - - - - - - - - - - - - - - - - -  //
     final LoginController controller = Get.put(LoginController());
+    controller.deviceType = DeviceType.MOBILE;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     return Scaffold(
@@ -103,8 +104,7 @@ class MobileLoginScreen extends Responsive {
                     const Spacer(),
                     InkWell(
                       onTap: () {
-                        controller.onNavigateToForgetPasswordScreen(
-                            deviceType: DeviceType.MOBILE);
+                        controller.onNavigateToForgetPasswordScreen();
                       },
                       // - - - - - - - - - - - - - - - - - - FORGET THE PASSWORD - - - - - - - - - - - - - - - - - -  //
                       child: Text("Forger Password?",
@@ -123,8 +123,7 @@ class MobileLoginScreen extends Responsive {
                   CustomOutlinedButton(
                     text: "Create account",
                     onClick: () {
-                      controller.onNavigateToSingUpScreen(
-                          deviceType: DeviceType.MOBILE);
+                      controller.onNavigateToSingUpScreen();
                     },
                     width: getWidth(context),
                     withDefaultPadding: false,

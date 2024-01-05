@@ -11,7 +11,7 @@ class CustomTextField extends Responsive {
   final IconData? leadingIcon;
   final Widget? trailingIcon;
   final TextInputType textInputType;
-  final double width;
+  final double? width, height;
   final Color? backgroundColor;
   final TextEditingController controller;
   final String? Function(String? value)? validator;
@@ -26,9 +26,10 @@ class CustomTextField extends Responsive {
       this.readOnly = false,
       this.withDefaultPadding = true,
       this.obscureText = false,
-      required this.width,
+      this.width,
+      this.height,
       required this.controller,
-      this.backgroundColor ,
+      this.backgroundColor,
       this.textInputType = TextInputType.text,
       this.trailingIcon,
       this.leadingIcon});
@@ -36,17 +37,19 @@ class CustomTextField extends Responsive {
   @override
   Widget execute(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width ?? getWidth(context),
+      height: height ?? 80,
       child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal:
                   withDefaultPadding ? CustomSizes.SPACE_BETWEEN_ITEMS / 2 : 0,
-              vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 2),
+              vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 4),
           child: TextFormField(
             controller: controller,
             validator: validator,
             decoration: InputDecoration(
                 filled: true,
+                contentPadding: EdgeInsets.all(height == null ? 24 : 30),
                 fillColor: backgroundColor ?? CustomColors.TRANSPARENT,
                 errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: isDark(context)
@@ -60,10 +63,12 @@ class CustomTextField extends Responsive {
                       )
                     : null,
                 suffixIcon: trailingIcon,
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
                     borderSide: BorderSide(
-                        color: backgroundColor != null?
-                            CustomColors.TRANSPARENT:darkLightColor(context)))),
+                        color: backgroundColor != null
+                            ? CustomColors.TRANSPARENT
+                            : darkLightColor(context)))),
             minLines: lines,
             maxLines: lines,
             autocorrect: false,

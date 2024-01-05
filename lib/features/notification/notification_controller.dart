@@ -108,7 +108,6 @@ class NotificationController extends GetxController {
   // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
   manageScrollController() async {
     scrollController.addListener(() {
-      //scroll listener
       double showOffset = 5.0;
       if (scrollController.offset > showOffset) {
         showFloatingActionButton.value = true;

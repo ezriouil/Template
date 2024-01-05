@@ -5,7 +5,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_animation_screen.dart';
 import 'package:test1/common/widgets/custom_snackbars.dart';
-import 'package:test1/data/repositories/auth_repositories/login_repository.dart';
 import 'package:test1/features/auth/common/soical_media_auth.dart';
 import 'package:test1/features/auth/forget_password/screens/mobile_forget_password.dart';
 import 'package:test1/features/auth/forget_password/screens/tablet_forget_password.dart';
@@ -13,8 +12,9 @@ import 'package:test1/features/auth/forget_password/screens/web_forget_password.
 import 'package:test1/features/auth/sign_up/screens/mobile_sign_up_screen.dart';
 import 'package:test1/features/auth/sign_up/screens/tablet_sign_up_screen.dart';
 import 'package:test1/features/auth/sign_up/screens/web_sign_up_screen.dart';
-import 'package:test1/features/home/screens/mobile_home_screen.dart';
-import 'package:test1/index.dart';
+import 'package:test1/features/index/screens/mobile_index_screen.dart';
+import 'package:test1/features/index/screens/tablet_index_screen.dart';
+import 'package:test1/features/index/screens/web_index_screen.dart';
 import 'package:test1/utils/constants/custom_txt_strings.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/helpers/network.dart';
@@ -29,6 +29,7 @@ class LoginController extends GetxController {
   late final GetStorage _storage;
   late final RxBool checkbox;
   late final RxBool passwordObscure;
+  late DeviceType deviceType;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
 
@@ -57,7 +58,16 @@ class LoginController extends GetxController {
   // - - - - - - - - - - - - - - - - - - LOGIN TO ACCOUNT WITH EMAIL AND PASSWORD - - - - - - - - - - - - - - - - - -  //
 
   void onLogin() async {
-    Get.to(()=>const Index());
+
+    switch (deviceType) {
+      case DeviceType.MOBILE:
+        Get.offAll(() => const MobileIndexScreen());
+      case DeviceType.TABLE:
+        Get.offAll(() => const TabletIndexScreen());
+      case DeviceType.WEB:
+        Get.offAll(() => const WebIndexScreen());
+    }
+
     // try {
     //   /// CHECK THE NETWORK
     //   final bool hasConnection = await _checkTheNetwork();
@@ -203,7 +213,7 @@ class LoginController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - GO TO SING UP SCREEN - - - - - - - - - - - - - - - - - -  //
 
-  void onNavigateToSingUpScreen({required DeviceType deviceType}) {
+  void onNavigateToSingUpScreen() {
     switch (deviceType) {
       case DeviceType.MOBILE:
         Get.to(() => const MobileSignUpScreen());
@@ -216,7 +226,7 @@ class LoginController extends GetxController {
 
   // - - - - - - - - - - - - - - - - - - GO TO FORGET PASSWORD SCREEN - - - - - - - - - - - - - - - - - -  //
 
-  void onNavigateToForgetPasswordScreen({required DeviceType deviceType}) {
+  void onNavigateToForgetPasswordScreen() {
     switch (deviceType) {
       case DeviceType.MOBILE:
         Get.to(() => const MobileForgetPassword());

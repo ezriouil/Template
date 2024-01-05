@@ -36,6 +36,8 @@ class ContactUs extends Responsive {
             textAlign: TextAlign.center,
           ),
 
+          const SizedBox(height: CustomSizes.SPACE_BETWEEN_ITEMS/2),
+
           /// TEXT FIELDS FOR FIRST AND LAST NAME
           Row(
             children: [
@@ -46,7 +48,6 @@ class ContactUs extends Responsive {
                       controller: controller.firstNameController,
                       validator: (value) => Validator.validateEmptyField(
                           CustomTextStrings.FISRT_NAME, value),
-                      width: getWidth(context),
                       withDefaultPadding: false)),
 
               const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS/2),
@@ -59,7 +60,6 @@ class ContactUs extends Responsive {
                       controller: controller.lastNameController,
                       validator: (value) => Validator.validateEmptyField(
                           CustomTextStrings.LAST_NAME, value),
-                      width: getWidth(context),
                       withDefaultPadding: false))
             ],
           ),
@@ -71,7 +71,6 @@ class ContactUs extends Responsive {
               hint: CustomTextStrings.EMAIL,
               controller: controller.emailController,
               validator: (value) => Validator.validateEmailField(value),
-              width: getWidth(context),
               textInputType: TextInputType.emailAddress,
               withDefaultPadding: false),
 
@@ -82,24 +81,20 @@ class ContactUs extends Responsive {
               controller: controller.subjectController,
               validator: (value) => Validator.validateEmptyField(
                   CustomTextStrings.SUBJCT, value),
-              width: getWidth(context),
               withDefaultPadding: false),
 
           /// TEXT FIRLD FOR MESSAGE
-          /// TEXT FIELD FOR SUBJECT
           CustomTextField(
               leadingIcon: Iconsax.message,
               hint: CustomTextStrings.MESSAGE,
               controller: controller.messageController,
               validator: (value) => Validator.validateEmptyField(
                   CustomTextStrings.MESSAGE, value),
-              width: getWidth(context),
               withDefaultPadding: false),
 
 
           /// BUTTON SEND
           CustomElevatedButton(
-              width: getWidth(context),
               text: CustomTextStrings.SEND_MESSAGE,
               onClick:controller.onSendMessage),
         ],

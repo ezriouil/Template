@@ -18,6 +18,7 @@ class WishListController extends GetxController {
   late Rx<String?> errorMsg;
   late RxBool isLoading, showFloatingActionButton;
   late final ScrollController scrollController;
+  late DeviceType deviceType;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
   @override
@@ -127,14 +128,14 @@ class WishListController extends GetxController {
   }
 
   // - - - - - - - - - - - - - - - - - - NAVIGATE TO PRODUCT SCREEN BY ID - - - - - - - - - - - - - - - - - -  //
-  onNavigateToProductScreen(int id, DeviceType deviceType) {
+  onNavigateToProductScreen(int id) {
     switch (deviceType) {
       case DeviceType.MOBILE:
-        Get.off(() => const MobileProductScreen(), arguments: id);
+        Get.to(() => const MobileProductScreen(), arguments: id);
       case DeviceType.TABLE:
-        Get.off(() => const TabletProductScreen(), arguments: id);
+        Get.to(() => const TabletProductScreen(), arguments: id);
       case DeviceType.WEB:
-        Get.off(() => const WebProductScreen(), arguments: id);
+        Get.to(() => const WebProductScreen(), arguments: id);
     }
   }
 

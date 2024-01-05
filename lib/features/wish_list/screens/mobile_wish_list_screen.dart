@@ -67,8 +67,7 @@ class MobileWishListScreen extends Responsive {
                               itemBuilder: (BuildContext context, int index) =>
                                   CustomProductVertical(
                                       onClick: (int id) {
-                                        controller.onNavigateToProductScreen(
-                                            id, DeviceType.MOBILE);
+                                        controller.onNavigateToProductScreen(id);
                                       },
                                       onHeartClick:
                                           controller.onDeleteWishListById,

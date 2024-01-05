@@ -12,7 +12,7 @@ class CustomCarouselProductImages extends Responsive {
   final Function(int, dynamic) onPageChange;
   final int currentIndex;
   final Color? indicatorColor;
-  final double? sizeWidth, sizeHeight;
+  final double? sizeWidth, sizeHeight, viewportFraction;
   final IndicatorEffect? effect;
 
   const CustomCarouselProductImages(
@@ -20,6 +20,7 @@ class CustomCarouselProductImages extends Responsive {
       required this.controller,
       required this.images,
         this.sizeWidth,
+        this.viewportFraction,
         this.effect,
         this.indicatorColor,
         this.sizeHeight,
@@ -38,7 +39,7 @@ class CustomCarouselProductImages extends Responsive {
           options: CarouselOptions(
             height: getWidth(context),
             aspectRatio: 16 / 9,
-            viewportFraction: 0.8,
+            viewportFraction: viewportFraction ?? 0.8,
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
@@ -47,7 +48,7 @@ class CustomCarouselProductImages extends Responsive {
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
-            enlargeFactor: 0.3,
+            enlargeFactor: 0.4,
             onPageChanged: onPageChange,
             scrollDirection: Axis.horizontal,
           ),

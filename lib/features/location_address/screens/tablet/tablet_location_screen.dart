@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:test1/data/models/location_address.dart';
+import 'package:test1/common/widgets/custom_grid_view.dart';
 import 'package:test1/features/location_address/location_address_controller.dart';
 import 'package:test1/features/location_address/widgets/custom_address_tile.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
+import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
@@ -20,10 +21,11 @@ class TabletLocationScreen extends Responsive {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: const Text("Addresses"),
+                title: Text("Addresses", style: Theme.of(context).textTheme.headlineMedium),
                 leading: InkWell(
                   onTap: () => Get.back(),
                   child: Icon(
+                    size: 40,
                     Iconsax.arrow_left_24,
                     color: darkLightColor(context),
                   ),
@@ -31,11 +33,18 @@ class TabletLocationScreen extends Responsive {
               )
             ];
           },
-          body: ListView.builder(
-              itemCount: 3,
-              padding: EdgeInsets.zero,
-              itemBuilder: (BuildContext context, int index) =>
-                  CustomAddressTile(onDelete: (){}, address: LocationAddress(id: 1, fullName: "Mohamed ezriouil", title: "Home", fullAddress: "Hay salam G10 N123", nearby: "Bomba", city: "Agadir", state: "Sous massa", country: "Morocco", zipCode: "80000"))),
+          body: Padding(
+            padding: const EdgeInsets.all(CustomSizes.SPACE_BETWEEN_ITEMS),
+            child: Obx(()=> CustomGridView(
+                  itemsHeight: 150,
+                    itemBuilder: (BuildContext context, int index) =>
+                        CustomAddressTile(
+                            onDelete: () {},
+                            address: controller.locationAddresses[index]),
+                    count: controller.locationAddresses.length),
+            ),
+          ),
+
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

@@ -22,6 +22,7 @@ class MobileHomeScreen extends Responsive {
   @override
   Widget execute(BuildContext context) {
     final HomeController controller = Get.put(HomeController());
+    controller.deviceType = DeviceType.MOBILE;
     const radius24 = Radius.circular(CustomSizes.SPACE_DEFAULT);
     return Scaffold(
         body: NestedScrollView(
@@ -67,7 +68,7 @@ class MobileHomeScreen extends Responsive {
                 children: [
                   Container(
                     width: getWidth(context),
-                    height: 205,
+                    height: 210,
                     decoration: const BoxDecoration(
                         color: CustomColors.GREY_DARK,
                         borderRadius: BorderRadius.only(
@@ -83,10 +84,7 @@ class MobileHomeScreen extends Responsive {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: () {
-                                  controller.onNavigateToShopScreen(
-                                      deviceType: DeviceType.MOBILE);
-                                },
+                                onTap: controller.onNavigateToShopScreen,
                                 child: Container(
                                   height: 58,
                                   width: getWidth(context),
@@ -130,10 +128,7 @@ class MobileHomeScreen extends Responsive {
                               itemCount: controller.categories.length,
                               itemBuilder: (BuildContext context, int index) =>
                                   InkWell(
-                                    onTap: () {
-                                      controller.onNavigateToShopScreen(
-                                          deviceType: DeviceType.MOBILE);
-                                    },
+                                    onTap: controller.onNavigateToShopScreen,
                                     child: Column(
                                       children: [
                                         Container(
@@ -222,6 +217,7 @@ class MobileHomeScreen extends Responsive {
                             // - - - - - - - - - - - - - - - - - - LOADING STATE TRUE - - - - - - - - - - - - - - - - - -  //
                             controller.isLoading.isTrue
                                 ? CustomShimmerEffect(
+                              itemsHeight: 320,
                                     child: CustomProductVertical(
                                         product: Product(),
                                         onClick: (_) {},
@@ -245,7 +241,7 @@ class MobileHomeScreen extends Responsive {
                                             height: getHeight(context),
                                             width: getWidth(context),
                                             child: const CustomEmpty(
-                                                text: "No Notifications !"),
+                                                text: "No Products Available !"),
                                           )
 
                                         // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
@@ -266,9 +262,6 @@ class MobileHomeScreen extends Responsive {
                                                   onClick: (int id) {
                                                     controller
                                                         .onNavigateToProductScreen(
-                                                            deviceType:
-                                                                DeviceType
-                                                                    .MOBILE,
                                                             id: id);
                                                   },
                                                   product: controller
@@ -286,7 +279,3 @@ class MobileHomeScreen extends Responsive {
             )));
   }
 }
-
-/*
-
- */

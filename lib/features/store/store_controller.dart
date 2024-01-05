@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:test1/data/models/product.dart';
 import 'package:test1/data/repositories/remote_repositories/product_repository.dart';
 import 'package:test1/features/product/screens/mobile_product_screen.dart';
+import 'package:test1/features/product/screens/tablet_product_screen.dart';
 import 'package:test1/features/store/widgets/custom_filter_bottom_sheet.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/constants/custom_icon_strings.dart';
@@ -134,8 +135,7 @@ class StoreController extends GetxController {
     switch (deviceType) {
       case DeviceType.MOBILE:
         Get.to(() => const MobileProductScreen(), arguments: id);
-      case DeviceType.TABLE:
-      /*Get.off(const MobileStoreScreen(), arguments: true);*/
+      case DeviceType.TABLE:Get.to(() => const TabletProductScreen(), arguments: id);
       case DeviceType.WEB:
       /*Get.off(const MobileStoreScreen(), arguments: true);*/
     }

@@ -5,7 +5,7 @@ class CustomGridView extends Responsive {
   final Widget Function(BuildContext context, int index) itemBuilder;
   final int itemsInRow, count;
   final ScrollController? controller;
-  final double itemsHeight, spaceBetweenColumns, spaceBetweenRows;
+  final double? itemsHeight, spaceBetweenColumns, spaceBetweenRows;
 
   const CustomGridView(
       {super.key,
@@ -13,9 +13,9 @@ class CustomGridView extends Responsive {
       this.itemsInRow = 2,
       required this.count,
         this.controller,
-      this.itemsHeight = 300.0,
-      this.spaceBetweenColumns = 4.0,
-      this.spaceBetweenRows = 2.0});
+      this.itemsHeight,
+      this.spaceBetweenColumns,
+      this.spaceBetweenRows});
 
   @override
   Widget execute(BuildContext context) {
@@ -25,9 +25,9 @@ class CustomGridView extends Responsive {
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: itemsInRow,
-            mainAxisExtent: itemsHeight,
-            mainAxisSpacing: spaceBetweenColumns,
-            crossAxisSpacing: spaceBetweenRows),
+            mainAxisExtent: itemsHeight ?? 290,
+            mainAxisSpacing: spaceBetweenColumns ??  4.0,
+            crossAxisSpacing: spaceBetweenRows ?? 2.0),
         itemBuilder: itemBuilder);
   }
 }

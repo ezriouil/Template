@@ -16,9 +16,7 @@ class ProfileController extends GetxController {
   late final TextEditingController phoneController;
 
   late final RxInt ordersConfirmed, ordersWaiting, ordersCanceled;
-  late final RxBool showFloatingActionButton;
 
-  late final ScrollController scrollController;
   late final GlobalKey<FormState> formState;
 
   // - - - - - - - - - - - - - - - - - - INIT STATES - - - - - - - - - - - - - - - - - -  //
@@ -31,30 +29,17 @@ class ProfileController extends GetxController {
     userNameController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
-    scrollController = ScrollController();
+
     ordersConfirmed = 0.obs;
     ordersWaiting = 0.obs;
     ordersCanceled = 0.obs;
-    showFloatingActionButton = false.obs;
+
     formState = GlobalKey<FormState>();
     init();
-    manageScrollController();
   }
 
   // - - - - - - - - - - - - - - - - - - INIT - - - - - - - - - - - - - - - - - -  //
   init() async {}
-
-  // - - - - - - - - - - - - - - - - - - SCROLL CONTROLLER - - - - - - - - - - - - - - - - - -  //
-  manageScrollController() async {
-    scrollController.addListener(() {
-      double showOffset = 3.0;
-      if (scrollController.offset > showOffset) {
-        showFloatingActionButton.value = true;
-      } else {
-        showFloatingActionButton.value = false;
-      }
-    });
-  }
 
   // - - - - - - - - - - - - - - - - - - UPDATE PROFILE INFO - - - - - - - - - - - - - - - - - -  //
   onUpdateProfile() async {}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_elevated_button.dart';
@@ -41,7 +40,6 @@ class MobileProfileScreen extends Responsive {
           ),
         ),
         body: SingleChildScrollView(
-          controller: controller.scrollController,
           child: Column(
             children: [
               // - - - - - - - - - - - - - - - - - - IMAGE + STATISTICS - - - - - - - - - - - - - - - - - -  //
@@ -253,22 +251,6 @@ class MobileProfileScreen extends Responsive {
                     )),
               ),
             ],
-          ),
-        ),
-        floatingActionButton: Obx(
-          () => AnimatedOpacity(
-            duration: const Duration(milliseconds: 500),
-            opacity: controller.showFloatingActionButton.value ? 1.0 : 0.0,
-            child: FloatingActionButton(
-              onPressed: () {
-                controller.scrollController.animateTo(0,
-                    duration: const Duration(milliseconds: 800),
-                    curve: Curves.fastOutSlowIn);
-              },
-              elevation: 16.0,
-              backgroundColor: primaryColor(context),
-              child: const Icon(Iconsax.arrow_up_24, color: CustomColors.WHITE),
-            ),
           ),
         ));
   }

@@ -9,6 +9,7 @@ class CustomSettingTile extends Responsive {
   final IconData? icon;
   final Widget? trailing;
   final GestureTapCallback onClick;
+  final bool useMobileSize, useTabletSize, useWebSize;
 
   const CustomSettingTile(
       {super.key,
@@ -17,6 +18,9 @@ class CustomSettingTile extends Responsive {
       required this.subTitle,
       this.titleStyle,
       this.subTitleStyle,
+      this.useMobileSize = true,
+      this.useTabletSize = false,
+      this.useWebSize = false,
       this.trailing,
       required this.onClick,
       this.icon});
@@ -28,11 +32,25 @@ class CustomSettingTile extends Responsive {
       child: Row(
         children: [
           imgUrl == null
-              ? Icon(icon, size: 32, color: primaryColor(context))
+              ? Icon(icon,
+                  size: useMobileSize
+                      ? 32
+                      : useTabletSize
+                          ? 40
+                          : 70,
+                  color: primaryColor(context))
               : CustomImageNetwork(
                   src: imgUrl,
-                  width: 50,
-                  height: 50,
+                  width: useMobileSize
+                      ? 50
+                      : useTabletSize
+                          ? 100
+                          : 130,
+                  height: useMobileSize
+                      ? 50
+                      : useTabletSize
+                          ? 100
+                          : 130,
                   radius: BorderRadius.circular(50)),
           const SizedBox(width: CustomSizes.SPACE_BETWEEN_ITEMS),
           Expanded(
@@ -41,10 +59,22 @@ class CustomSettingTile extends Responsive {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title!,
-                    style: titleStyle ?? Theme.of(context).textTheme.bodyLarge),
+                    style: titleStyle ??
+                        Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontSize: useMobileSize
+                                ? 14
+                                : useTabletSize
+                                    ? 16
+                                    : 18)),
                 Text(
                   subTitle!,
-                  style: subTitleStyle ?? Theme.of(context).textTheme.bodySmall,
+                  style: subTitleStyle ??
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: useMobileSize
+                              ? 12
+                              : useTabletSize
+                                  ? 14
+                                  : 16),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

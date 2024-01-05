@@ -14,10 +14,9 @@ void main() async {
   await GetStorage.init();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  final bool? applyDarkTheme = GetStorage().read("ENABLE_DARK_MODE");
   FlutterNativeSplash.remove();
   runApp(GetMaterialApp(
-      themeMode: applyDarkTheme == null ? ThemeMode.system :  applyDarkTheme == true ? ThemeMode.dark : ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: ThemeApp.lightTheme,
       darkTheme: ThemeApp.darkTheme,
       debugShowCheckedModeBanner: false,

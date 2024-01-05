@@ -114,8 +114,8 @@ class ForgetPasswordController extends GetxController {
 
   @override
   void dispose() {
-    super.dispose();
     emailController.dispose();
     formState.currentState?.dispose();
+    super.dispose();
   }
 }

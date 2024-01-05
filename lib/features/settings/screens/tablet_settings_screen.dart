@@ -9,14 +9,14 @@ import 'package:test1/utils/constants/custom_sizes.dart';
 import 'package:test1/utils/device/device_utility.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
-class MobileSettingsScreen extends Responsive {
-  const MobileSettingsScreen({super.key});
+class TabletSettingsScreen extends Responsive {
+  const TabletSettingsScreen({super.key});
 
   @override
   Widget execute(BuildContext context) {
     // - - - - - - - - - - - - - - - - - - INJECT THE CONTROLLER DEPENDENCE - - - - - - - - - - - - - - - - - -  //
     final SettingsController controller = Get.put(SettingsController());
-    controller.deviceType = DeviceType.MOBILE;
+    controller.deviceType = DeviceType.TABLE;
 
     // - - - - - - - - - - - - - - - - - - CONSTANT REUSABLE- - - - - - - - - - - - - - - - - -  //
     const radius12 = Radius.circular(12.0);
@@ -33,7 +33,7 @@ class MobileSettingsScreen extends Responsive {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(color: CustomColors.WHITE)),
+                        ?.copyWith(fontSize: 40, color: CustomColors.WHITE)),
                 automaticallyImplyLeading: false,
                 centerTitle: false,
                 backgroundColor: primaryColor(context))
@@ -53,20 +53,22 @@ class MobileSettingsScreen extends Responsive {
                       vertical: CustomSizes.SPACE_BETWEEN_ITEMS / 2,
                       horizontal: CustomSizes.SPACE_BETWEEN_ITEMS / 1.5),
                   child: CustomSettingTile(
+                    useMobileSize: false,
+                    useTabletSize: true,
                     imgUrl:
                         "https://avatars.githubusercontent.com/u/130238246?s=400&u=da527d8650bf8833bf66c213e70d09b8aaa025b7&v=4",
                     title: "Mohamed ezriouil",
                     titleStyle: Theme.of(context)
                         .textTheme
                         .bodyLarge
-                        ?.copyWith(color: CustomColors.WHITE),
+                        ?.copyWith(fontSize: 34, color: CustomColors.WHITE),
                     subTitle: "Mohamedezriouil@gmail.com",
                     subTitleStyle: Theme.of(context)
                         .textTheme
                         .bodySmall
-                        ?.copyWith(color: CustomColors.WHITE),
-                    trailing:
-                        const Icon(Iconsax.edit, color: CustomColors.WHITE),
+                        ?.copyWith(fontSize: 18, color: CustomColors.WHITE),
+                    trailing: const Icon(Iconsax.edit,
+                        color: CustomColors.WHITE, size: 34),
                     onClick: controller.navigateToProfileScreen,
                   ),
                 ),
@@ -93,7 +95,10 @@ class MobileSettingsScreen extends Responsive {
 
                       // - - - - - - - - - - - - - - - - - - ACCOUNT SETTINGS TITLE - - - - - - - - - - - - - - - - - -  //
                       Text("Account Settings",
-                          style: Theme.of(context).textTheme.titleLarge),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(fontSize: 24)),
 
                       // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
                       const SizedBox(height: CustomSizes.SPACE_DEFAULT),
@@ -101,9 +106,11 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - ADDRESS TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.safe_home,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "My Addresses",
                         subTitle: "Set shopping delivery address",
-                        onClick:controller.navigateToAddressesScreen,
+                        onClick: controller.navigateToAddressesScreen,
                       ),
 
                       // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
@@ -112,6 +119,8 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - ADDRESS TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.shopping_cart,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "My Cart",
                         subTitle: "Add, remove products and move to checkout",
                         onClick: controller.navigateToCartScreen,
@@ -123,6 +132,8 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - ADDRESS TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.box,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "My Orders",
                         subTitle: "In progress and completed orders",
                         onClick: controller.navigateToOrdersScreen,
@@ -134,9 +145,11 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - COUPON TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.ticket_discount,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "My Coupons",
                         subTitle: "List of all discounts coupons",
-                        onClick:controller.navigateToCouponScreen,
+                        onClick: controller.navigateToCouponScreen,
                       ),
 
                       // - - - - - - - - - - - - - - - - - - SPACER - - - - - - - - - - - - - - - - - -  //
@@ -145,6 +158,8 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - NOTIFICATION TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.notification,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "Notifications",
                         subTitle: "Set any kind of notification message",
                         onClick: controller.navigateToNotificationScreen,
@@ -156,6 +171,8 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - ACCOUNT PRIVACY TILE - - - - - - - - - - - - - - - - - -  //
                       CustomSettingTile(
                         icon: Iconsax.security_card,
+                        useMobileSize: false,
+                        useTabletSize: true,
                         title: "Account Privacy",
                         subTitle: "Mango data usage and connected account",
                         onClick: controller.navigateToAccountPrivacyScreen,
@@ -175,6 +192,8 @@ class MobileSettingsScreen extends Responsive {
                       Obx(
                         () => CustomSettingTile(
                           icon: Iconsax.security_safe,
+                          useMobileSize: false,
+                          useTabletSize: true,
                           title: "Account Privacy",
                           subTitle: "Mango data usage and connected account",
                           trailing: Switch(
@@ -192,6 +211,8 @@ class MobileSettingsScreen extends Responsive {
                       Obx(
                         () => CustomSettingTile(
                           icon: Iconsax.image,
+                          useMobileSize: false,
+                          useTabletSize: true,
                           title: "HD Images Quality",
                           subTitle: "Set image quality to be seen",
                           trailing: Switch(
@@ -209,6 +230,8 @@ class MobileSettingsScreen extends Responsive {
                       Obx(
                         () => CustomSettingTile(
                           icon: Iconsax.global,
+                          useMobileSize: false,
+                          useTabletSize: true,
                           title: "Upgrade UI",
                           subTitle: "Set it true to see new ui",
                           trailing: Switch(
@@ -225,6 +248,8 @@ class MobileSettingsScreen extends Responsive {
                       Obx(
                         () => CustomSettingTile(
                           icon: Iconsax.colorfilter,
+                          useMobileSize: false,
+                          useTabletSize: true,
                           title: "Change Theme Color",
                           subTitle: "We have dark and light theme for you",
                           trailing: Switch(
@@ -240,6 +265,7 @@ class MobileSettingsScreen extends Responsive {
                       // - - - - - - - - - - - - - - - - - - LOGOUT BUTTON - - - - - - - - - - - - - - - - - -  //
                       CustomOutlinedButton(
                           text: "Logout",
+                          height: CustomSizes.TABLET_OUTLINED_BUTTON,
                           onClick: controller.logout,
                           width: getWidth(context)),
                     ],

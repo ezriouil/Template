@@ -5,7 +5,7 @@ import 'package:test1/utils/responsive/responsive.dart';
 class CustomElevatedButton extends Responsive {
   final String text;
   final GestureTapCallback onClick;
-  final double width;
+  final double? width, height;
   final bool withDefaultPadding;
   final ButtonStyle? style;
 
@@ -13,14 +13,16 @@ class CustomElevatedButton extends Responsive {
       {super.key,
       required this.text,
       required this.onClick,
-      required this.width,
+        this.width,
+        this.height,
       this.style,
       this.withDefaultPadding = true});
 
   @override
   Widget execute(BuildContext context) {
     return SizedBox(
-        width: getWidth(context),
+        width: width ?? getWidth(context),
+        height: height ?? 70,
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal:

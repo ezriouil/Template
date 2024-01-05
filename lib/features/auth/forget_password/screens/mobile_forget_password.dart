@@ -16,8 +16,7 @@ class MobileForgetPassword extends Responsive {
   @override
   Widget execute(BuildContext context) {
     // - - - - - - - - - - - - - - - - - - INSTANCE FROM THE CONTROLLER - - - - - - - - - - - - - - - - - -  //
-    final ForgetPasswordController controller =
-        Get.put(ForgetPasswordController());
+    final ForgetPasswordController controller = Get.put(ForgetPasswordController());
     controller.deviceType = DeviceType.MOBILE;
 
     return Scaffold(

@@ -45,7 +45,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                       controller: controller.titleController,
                       validator: (value) => Validator.validateEmptyField(
                           CustomTextStrings.ADDRESS_TITILE, value),
-                      width: getWidth(context),
                       withDefaultPadding: false),
 
                   // - - - - - - - - - - - - - - - - - - USER NAME - - - - - - - - - - - - - - - - - -  //
@@ -55,7 +54,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                       controller: controller.userNameController,
                       validator: (value) => Validator.validateEmptyField(
                           CustomTextStrings.USER_NAME, value),
-                      width: getWidth(context),
                       withDefaultPadding: false),
 
                   // - - - - - - - - - - - - - - - - - - FULL ADDRESS - - - - - - - - - - - - - - - - - -  //
@@ -66,7 +64,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                       controller: controller.fullAddressController,
                       validator: (value) => Validator.validateEmptyField(
                           CustomTextStrings.FULL_ADDRESS, value),
-                      width: getWidth(context),
                       textInputType: TextInputType.text,
                       withDefaultPadding: false),
 
@@ -77,7 +74,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                       hint: CustomTextStrings.Nearby,
                       controller: controller.nearbyController,
                       validator: null,
-                      width: getWidth(context),
                       textInputType: TextInputType.text,
                       withDefaultPadding: false),
 
@@ -92,7 +88,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                           controller: controller.cityController,
                           validator: (value) => Validator.validateEmptyField(
                               CustomTextStrings.CITY, value),
-                          width: getWidth(context),
                           textInputType: TextInputType.text,
                           withDefaultPadding: false),
                     ),
@@ -108,7 +103,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                           hint: CustomTextStrings.ZIP_CODE,
                           controller: controller.zipCodeController,
                           validator: null,
-                          width: getWidth(context),
                           textInputType: TextInputType.number,
                           withDefaultPadding: false),
                     ),
@@ -121,7 +115,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                           hint: CustomTextStrings.COUNTRY,
                           controller: controller.countryController,
                           validator: null,
-                          width: getWidth(context),
                           textInputType: TextInputType.text,
                           withDefaultPadding: false),
                     ),
@@ -135,7 +128,6 @@ class MobileAddNewLocationAddressScreen extends Responsive {
                           hint: CustomTextStrings.CITY_STATE,
                           controller: controller.stateCityController,
                           validator: null,
-                          width: getWidth(context),
                           textInputType: TextInputType.text,
                           withDefaultPadding: false),
                     ),

@@ -3,23 +3,23 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:test1/common/widgets/custom_empty.dart';
 import 'package:test1/common/widgets/custom_grid_view.dart';
-import 'package:test1/features/notification/notification_controller.dart';
-import 'package:test1/features/notification/widgets/custom_notification.dart';
+import 'package:test1/features/coupon/coupon_controller.dart';
+import 'package:test1/features/coupon/widgets/custom_coupon.dart';
 import 'package:test1/utils/constants/custom_colors.dart';
 import 'package:test1/utils/responsive/responsive.dart';
 
-class TabletNotificationScreen extends Responsive {
-  const TabletNotificationScreen({super.key});
+class TabletCouponScreen extends Responsive {
+  const TabletCouponScreen({super.key});
 
   @override
   Widget execute(BuildContext context) {
     // - - - - - - - - - - - - - - - - - - CONTROLLER - - - - - - - - - - - - - - - - - -  //
 
-    final NotificationController controller = Get.put(NotificationController());
+    final CouponController controller = Get.put(CouponController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications",
-            style: Theme.of(context).textTheme.headlineMedium),
+        title:
+            Text("Coupons", style: Theme.of(context).textTheme.headlineMedium),
         leading: InkWell(
           onTap: () => Get.back(),
           child: Icon(
@@ -56,28 +56,24 @@ class TabletNotificationScreen extends Responsive {
                             text: "Error 404 !",
                             icon: Iconsax.message_remove,
                           ))
-                      : controller.notifications.isEmpty
+                      : controller.coupon.isEmpty
 
                           // - - - - - - - - - - - - - - - - - - LIST EMPTY - - - - - - - - - - - - - - - - - -  //
 
                           ? SizedBox(
                               height: getHeight(context),
                               width: getWidth(context),
-                              child:
-                                  const CustomEmpty(text: "No Notifications !"),
+                              child: const CustomEmpty(text: "No Coupons !"),
                             )
 
                           // - - - - - - - - - - - - - - - - - - SHOW DATA - - - - - - - - - - - - - - - - - -  //
                           : CustomGridView(
                               controller: controller.scrollController,
-                              itemsHeight: 110,
-                              count: controller.notifications.length,
+                              itemsHeight: 140,
+                              count: controller.coupon.length,
                               itemBuilder: (BuildContext context, int index) =>
-                                  CustomNotification(
-                                      notification:
-                                          controller.notifications[index],
-                                      onClick: controller
-                                          .onDeleteNotificationById)))),
+                                  CustomCoupon(
+                                      coupon: controller.coupon[index])))),
       floatingActionButton: Obx(
         () => AnimatedOpacity(
           duration: const Duration(milliseconds: 500),

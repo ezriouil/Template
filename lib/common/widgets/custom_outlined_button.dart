@@ -6,7 +6,7 @@ import 'package:test1/utils/responsive/responsive.dart';
 class CustomOutlinedButton extends Responsive {
   final String text;
   final GestureTapCallback onClick;
-  final double width;
+  final double? width, height;
   final bool withDefaultPadding;
   final bool transparentBorder;
 
@@ -14,14 +14,16 @@ class CustomOutlinedButton extends Responsive {
       {super.key,
       required this.text,
       required this.onClick,
-      required this.width,
+        this.width,
+       this.height,
       this.withDefaultPadding = true,
       this.transparentBorder = false});
 
   @override
   Widget execute(BuildContext context) {
     return SizedBox(
-        width: getWidth(context),
+      height: height ?? 70,
+        width: width ?? getWidth(context),
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal:

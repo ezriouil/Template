@@ -92,6 +92,7 @@ class MobileProductScreen extends Responsive {
                         // - - - - - - - - - - - - - - - - - - CAROUSEL IMAGES - - - - - - - - - - - - - - - - - -  //
                         CustomCarouselProductImages(
                             controller: controller.pageController,
+                            viewportFraction: 0.6,
                             images:
                                 controller.product.value.productListImages(),
                             onPageChange: (index, _) {
