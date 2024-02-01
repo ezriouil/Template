@@ -1,4 +1,5 @@
 
+LIGHT THEME
 
 ![WhatsApp Image 2024-02-01 at 15 29 35 (1)](https://github.com/ezriouil/Template/assets/130238246/964facb7-42bb-4918-b4a7-f0bd6c7e0807)
 ![WhatsApp Image 2024-02-01 at 15 29 34](https://github.com/ezriouil/Template/assets/130238246/3182ba47-4378-4bc4-a34b-318442da1ecf)
@@ -17,3 +18,26 @@
 ![WhatsApp Image 2024-02-01 at 15 29 30 (2)](https://github.com/ezriouil/Template/assets/130238246/63b66b36-d747-43c2-822f-bf4bf09ac24f)
 ![WhatsApp Image 2024-02-01 at 15 29 30 (1)](https://github.com/ezriouil/Template/assets/130238246/cda45a6d-0723-4152-a400-700857b06888)
 ![WhatsApp Image 2024-02-01 at 15 29 29](https://github.com/ezriouil/Template/assets/130238246/d6e08b4f-a7c3-48d7-b674-6df2b1b44a89)
+
+
+DAEK THEME
+
+![WhatsApp Image 2024-02-01 at 16 27 01](https://github.com/ezriouil/Template/assets/130238246/57b00f5a-98c1-4670-bbb7-3a863b4efc0a)
+![WhatsApp Image 2024-02-01 at 16 27 00](https://github.com/ezriouil/Template/assets/130238246/56d08c10-716c-46a8-9c65-9736f90d7842)
+![WhatsApp Image 2024-02-01 at 16 27 00 (2)](https://github.com/ezriouil/Template/assets/130238246/fd121328-657b-495e-8dbe-9e866d5237fd)
+![WhatsApp Image 2024-02-01 at 16 27 00 (1)](https://github.com/ezriouil/Template/assets/130238246/fdd43965-8186-4b81-9d26-ac11155dfd5e)
+![WhatsApp Image 2024-02-01 at 16 25 00](https://github.com/ezriouil/Template/assets/130238246/c990bbf0-71ff-4588-98fa-b8656c33e337)
+![WhatsApp Image 2024-02-01 at 16 25 00 (4)](https://github.com/ezriouil/Template/assets/130238246/0581ecee-a5e3-4499-9dba-5e769e85b9ed)
+![WhatsApp Image 2024-02-01 at 16 25 00 (3)](https://github.com/ezriouil/Template/assets/130238246/75bac8b5-e862-4edb-9ab7-5321b16c7e34)
+![WhatsApp Image 2024-02-01 at 16 25 00 (2)](https://github.com/ezriouil/Template/assets/130238246/2e3e5767-fc10-4c57-8a2b-5579426984e4)
+![WhatsApp Image 2024-02-01 at 16 25 00 (1)](https://github.com/ezriouil/Template/assets/130238246/2acac8d0-f011-4786-8664-8bc669ab6f4f)
+![WhatsApp Image 2024-02-01 at 15 29 37](https://github.com/ezriouil/Template/assets/130238246/f4872b9b-51b1-489c-a6b1-31e2f11ba114)
+![WhatsApp Image 2024-02-01 at 15 29 37 (4)](https://github.com/ezriouil/Template/assets/130238246/13ffae98-d2a8-4f5e-bb0e-9aa40cd73f66)
+![WhatsApp Image 2024-02-01 at 15 29 37 (3)](https://github.com/ezriouil/Template/assets/130238246/3411f796-e854-49dc-84cb-453cc8954083)
+![WhatsApp Image 2024-02-01 at 15 29 37 (2)](https://github.com/ezriouil/Template/assets/130238246/270fe419-4abf-47ff-a64d-aa65cc799022)
+![WhatsApp Image 2024-02-01 at 15 29 37 (1)](https://github.com/ezriouil/Template/assets/130238246/c8fdc85b-80a4-4472-a898-82f921417c21)
+![WhatsApp Image 2024-02-01 at 15 29 36](https://github.com/ezriouil/Template/assets/130238246/6dccf76a-9391-40c1-8bad-427b6fc88e89)
+![WhatsApp Image 2024-02-01 at 15 29 35 (5)](https://github.com/ezriouil/Template/assets/130238246/6d9297b9-2d7a-4d0e-bd6b-04561c3aa0fb)
+![WhatsApp Image 2024-02-01 at 15 29 35 (4)](https://github.com/ezriouil/Template/assets/130238246/21de173b-cf6d-4a06-960d-cb6aa806c4ec)
+![WhatsApp Image 2024-02-01 at 15 29 35 (3)](https://github.com/ezriouil/Template/assets/130238246/c9f33af9-d383-4697-b126-03c9fc1c8fa2)
+![WhatsApp Image 2024-02-01 at 15 29 35 (2)](https://github.com/ezriouil/Template/assets/130238246/3a04263a-5677-4787-833e-a67681af2340)
